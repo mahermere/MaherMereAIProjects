@@ -1,0 +1,391 @@
+// Connecting to Unity Using Query Metering
+// For situations where the Unity API needs to be consumed publicly, Query Metering might be necessary. This allows external users to connect without consuming a Client license. This method should only be used in situations where the Unity API is being consumed by users external to the organization and when a Query Metering license has been purchased with the appropriate query blocks. There are two ways to connect using Query Metering: Connected and Disconnected Mode
+
+//   Note
+
+// As of OnBase 18, an ADO.NET connection string is used instead of the ODBC configuration. This is found in the web.config file of the application server.
+
+// XML
+// 1
+// 2
+// 3
+// 4
+// 5
+// <connectionStrings>
+//   <!-- ADO.NET connection string
+//   Fill in the [parameters]. Provider name is the database type.-->
+//   <add name="[DataSourceName]" connectionString="Data Source=[server\instance];database=[databaseName];User Id=[user name];Password=[password]" providerName="[providerName]"/>
+// </connectionStrings>
+// Parameters
+// The CreateOnBaseAuthenticationProperties method accepts four (4) parameters.
+
+// url
+// This parameter represent the address of the OnBase Application server or the OnBase Web server.
+
+// username
+// This parameter represents a valid OnBase user.
+
+// password
+// This parameter represents a valid OnBase user's password.
+
+// datasource
+// This parameter represents a valid ODBC or ADO.NET configuration name.
+
+// Also known as a stateful connection, this is the standard way of connecting to OnBase. It manages a single Session between the client and server. In fact, it is as simple as setting the LicenseType property to QueryMetering on the AuthenticationProperties.
+
+// Example
+// C#
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// 9
+// 10
+// 11
+// 12
+// 13
+// 14
+// 15
+// 16
+// 17
+// 18
+// 19
+// 20
+// 21
+// 22
+// 23
+// 24
+// 25
+// 26
+// 27
+// 28
+// 29
+// 30
+// 31
+// 32
+// 33
+// 34
+// 35
+// 36
+// 37
+// 38
+// 39
+// 40
+// 41
+// 42
+// 43
+// 44
+// 45
+// 46
+// 47
+// 48
+// 49
+// 50
+// 51
+// 52
+// 53
+// 54
+// 55
+// 56
+// 57
+// 58
+// 59
+// 60
+// 61
+// 62
+// 63
+// 64
+// using System;
+// using System.Net;
+// using Hyland.Unity;
+
+// namespace UnityAPISamples
+// {
+//     public class Program
+//     {
+//         private const string appServerURL = "https://localhost/AppServer/Service.asmx";
+//         private const string username = "MANAGER";
+//         private const string password = "password";
+//         private const string dataSource = "OnBase";
+
+//         private static Application Connect()
+//         {
+//             Application app = null;
+
+//             OnBaseAuthenticationProperties authProps = Application.CreateOnBaseAuthenticationProperties(appServerURL, username, password, dataSource);
+//             authProps.LicenseType = LicenseType.QueryMetering;
+
+//             Console.Out.WriteLine("Attempting to make a connection...");
+
+//             try
+//             {
+//                 app = Application.Connect(authProps);
+//             }
+//             catch (MaxLicensesException)
+//             {
+//                 Console.Out.WriteLine("Error: All available licenses have been consumed.");
+//             }
+//             catch (SystemLockedOutException)
+//             {
+//                 Console.Out.WriteLine("Error: The system is currently in lockout mode.");
+//             }
+//             catch (InvalidLoginException)
+//             {
+//                 Console.Out.WriteLine("Error: Invalid Login Credentials.");
+//             }
+//             catch (UserAccountLockedException)
+//             {
+//                 Console.Out.WriteLine("Error: This account has been temporarily locked.");
+//             }
+//             catch (AuthenticationFailedException)
+//             {
+//                 Console.Out.WriteLine("Error: NT Authentication Failed.");
+//             }
+//             catch (MaxConcurrentLicensesException)
+//             {
+//                 Console.Out.WriteLine("Error: All concurrent licenses for this user group have been consumed.");
+//             }
+//             catch (InvalidLicensingException)
+//             {
+//                 Console.Out.WriteLine("Error: Invalid Licensing.");
+//             }
+
+//             if (app != null)
+//             {
+//                 Console.Out.WriteLine("Connection Successful. Connection ID: " + app.SessionID);
+//             }
+
+//             return app;
+//         }
+//     }
+// }
+// In This Article
+
+// Parameters
+
+// For high volume situations, it may be necessary to utilize a disconnected, or stateless session. In this context, a session is not managed by the client, but a pool of sessions are managed in the server. The lifecycle of a session pool goes as follows.
+
+// The first request using disconnected mode comes into the server. The server connects the minimum number of sessions configured in the web.config.
+
+// Every subsequent request comes in and consumes a different session in the pool.
+
+// If the minimum number of sessions are in use when a request comes in, new sessions will be connected for each request until the maximum number of sessions is connected.
+
+// Once the maximum number of sessions are all in use, a request will wait for a session to be released back to the pool before consuming it and doing its work.
+
+// It might take some trial and error to set the correct minimum and maximum number of sessions. The default is 0 minimum and 10 maximum.
+
+//   Caution
+
+// There are a number of overloads on the Connect method that were deprecated in OnBase 11, it is highly recommended to use the overload Connect(AuthenticationProperties).
+
+// C#
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// 9
+// 10
+// 11
+// 12
+// 13
+// 14
+// 15
+// 16
+// 17
+// 18
+// 19
+// 20
+// 21
+// 22
+// 23
+// 24
+// 25
+// 26
+// 27
+// 28
+// 29
+// 30
+// 31
+// 32
+// 33
+// 34
+// 35
+// 36
+// 37
+// 38
+// 39
+// 40
+// 41
+// 42
+// 43
+// 44
+// 45
+// 46
+// 47
+// 48
+// 49
+// 50
+// 51
+// 52
+// 53
+// 54
+// 55
+// 56
+// 57
+// 58
+// 59
+// 60
+// 61
+// 62
+// 63
+// 64
+// using System;
+// using System.Net;
+// using Hyland.Unity;
+
+// namespace UnityAPISamples
+// {
+//     public class Program
+//     {
+//         private const string appServerURL = "https://localhost/AppServer/Service.asmx";
+//         private const string username = "MANAGER";
+//         private const string password = "password";
+//         private const string dataSource = "OnBase";
+
+//         private static Application Connect()
+//         {
+//             Application app = null;
+
+//             OnBaseAuthenticationProperties authProps = Application.CreateOnBaseAuthenticationProperties(appServerURL, username, password, dataSource);
+//             authProps.DisconnectedMode = true;
+
+//             Console.Out.WriteLine("Attempting to make a connection...");
+
+//             try
+//             {
+//                 app = Application.Connect(authProps);
+//             }
+//             catch (MaxLicensesException)
+//             {
+//                 Console.Out.WriteLine("Error: All available licenses have been consumed.");
+//             }
+//             catch (SystemLockedOutException)
+//             {
+//                 Console.Out.WriteLine("Error: The system is currently in lockout mode.");
+//             }
+//             catch (InvalidLoginException)
+//             {
+//                 Console.Out.WriteLine("Error: Invalid Login Credentials.");
+//             }
+//             catch (UserAccountLockedException)
+//             {
+//                 Console.Out.WriteLine("Error: This account has been temporarily locked.");
+//             }
+//             catch (AuthenticationFailedException)
+//             {
+//                 Console.Out.WriteLine("Error: NT Authentication Failed.");
+//             }
+//             catch (MaxConcurrentLicensesException)
+//             {
+//                 Console.Out.WriteLine("Error: All concurrent licenses for this user group have been consumed.");
+//             }
+//             catch (InvalidLicensingException)
+//             {
+//                 Console.Out.WriteLine("Error: Invalid Licensing.");
+//             }
+
+//             if (app != null)
+//             {
+//                 Console.Out.WriteLine("Connection Successful. Connection ID: " + app.SessionID);
+//             }
+
+//             return app;
+//         }
+//     }
+// }
+// Configuring the Application Server
+// Using disconnected mode requires setting up the session pool setting in the Application Server’s web.config file. The poolSettings node is located in the Hyland.Services section of the web.config and should look like the following:
+
+// XML
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// 9
+// 10
+// 11
+// 12
+// 13
+// 14
+// 15
+// 16
+// 17
+// 18
+// 19
+// 20
+// 21
+// 22
+// 23
+// 24
+// 25
+// 26
+// 27
+// <Hyland.Services>
+// <!-- POOL SETTINGS
+//   Controls the size of the session pools when using disconnected web services.
+
+//   minSessions (default 0) - This parameter dictates the minimum number of OnBase sessions
+//   available in the session pool.
+
+//   maxSessions (default 10) - This parameter dictates the maximum number of OnBase sessions
+//   available in the session pool.  Requests from the pool that exceed this value will block
+//   until another session is placed back into the pool.
+// -->
+// <poolSettings minSessions="0" maxSessions="10">
+//   <!-- Parameters that should be used in the session pool.
+//      parameter
+//       (attributes: 
+//       name = "[licenseType]"
+//       value = "[queryMeter]" use query metering)
+//   -->
+//   <parameters>
+//     <parameter name="licenseType" value="queryMeter"/>
+//   </parameters>
+//   <!-- Allows specification of a Service Login for use in Session Pools.  -->
+//   <!--
+//     <serviceLogin username="[serviceUserName]" password="[servicePassword]" />
+//   -->
+
+// </poolSettings>
+
+// DisconnectedMode Support
+// DisconnectedMode is only supported under certain license types. Additionally, when using DisconnectedMode certain functionality within the API may be unsupported.
+
+// License Structure
+// Due to the Stateless emulation of DisconnectedMode, only the following license structures are supported.
+
+// Enterprise Concurrent License
+
+// QueryMetering (Core Queries Per Hour)
+
+// Unity API Features
+// Due to limitations within the Session Cache within DisconnectedMode, the following features are not supported within this Stateless Structure. Please review each case with proposed workarounds.
+
+// using (QueryResult queryResults = docQuery.ExecuteQueryResults(maxDocuments)) { }
+// Due to the behind-the-scenes paging functionality, the ExecuteQueryResults method will not display expected results when multiple pages of documents are returned. It is recommended to utilize List<Document> docList = docQuery.Execute:Document>docQuery.Execute(maxDocuments). In cases where the Execute method cannot be used (i.e.: DisplayColumns or Sort is needed), queries should be constraint to only return a single page (which is set as a default to 100 documents).
+
+// using (DocumentLock docLock = document.Lock()) { }
+// Due to the storage of locks, it is possible that Document Locks can be lost when using DisconnectedMode. In cases where Locks must be obtained, it is recommended to add the document to Workflow for processing.

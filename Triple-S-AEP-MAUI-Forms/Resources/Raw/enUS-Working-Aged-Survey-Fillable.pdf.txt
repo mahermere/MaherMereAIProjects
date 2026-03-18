@@ -1,0 +1,47 @@
+Fields for C:\Users\maher\source\repos\Triple-S-AEP-MAUI-Forms\Resources\Raw\enUS-Working-Aged-Survey-Fillable.pdf
+Field: MedicareNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: CurrentlyWorking, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: EmployerHealthInsurance, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+  Option 2: Value = NA
+Field: SpouseEmployerHealthInsurance, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+  Option 2: Value = NA
+Field: HealthInsuranceEmployer_Name, Type: PdfLoadedTextBoxField, Value: 
+Field: HealthInsuranceEmployer_Address, Type: PdfLoadedTextBoxField, Value: 
+Field: HealthInsuranceEmployer_InsuranceName, Type: PdfLoadedTextBoxField, Value: 
+Field: HealthInsuranceEmployer_PolicyholderName, Type: PdfLoadedTextBoxField, Value: 
+Field: HealthInsuranceEmployer_GroupNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: HealthInsuranceEmployer_Contract, Type: PdfLoadedTextBoxField, Value: 
+Field: HealthInsuranceEmployer_Morethan20Employees, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+  Option 2: Value = NA
+Field: HealthInsuranceEmployer_PlanonDisenroll, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = ThreeMonths
+  Option 1: Value = SixMonths
+  Option 2: Value = OneYear
+  Option 3: Value = NotYet
+  Option 4: Value = NA
+Field: BusinessOwner, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: BusinessOwner_BusinessHealthInsurance, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+  Option 2: Value = NA
+Field: BusinessOwner_CompanyName, Type: PdfLoadedTextBoxField, Value: 
+Field: BusinessOwner_CompanyAddress, Type: PdfLoadedTextBoxField, Value: 
+Field: BusinessOwner_HealthcareInsuranceName, Type: PdfLoadedTextBoxField, Value: 
+Field: BusinessOwner_HealthInsuranceGroupNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: BusinessOwner_HealthInsuranceContractNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: RejectedFromEmployerGroupHealthCare, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: BeneficiaryFirstName, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryMiddleInitial, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryLastName, Type: PdfLoadedTextBoxField, Value: 

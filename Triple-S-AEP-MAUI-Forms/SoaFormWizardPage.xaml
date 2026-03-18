@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Triple_S_AEP_MAUI_Forms.SoaFormWizardPage"
+             Title="Scope of Sales Appointment">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="12">
+            <Label Text="Scope of Sales Appointment Confirmation"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#0057A3" />
+
+            <Label Text="Prospect / Authorized Representative Information"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Margin="0,8,0,0" />
+
+            <Entry x:Name="SoaNumberEntry" Placeholder="Internal control #" />
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Entry x:Name="BeneficiaryFirstNameEntry" Grid.Column="0" Placeholder="Beneficiary First Name" />
+                <Entry x:Name="BeneficiaryMiddleInitialEntry" Grid.Column="1" Placeholder="MI" MaxLength="1" />
+                <Entry x:Name="BeneficiaryLastNameEntry" Grid.Column="2" Placeholder="Beneficiary Last Name" />
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Entry x:Name="AuthorizedRepFirstNameEntry" Grid.Column="0" Placeholder="Authorized Rep First Name" />
+                <Entry x:Name="AuthorizedRepMiddleInitialEntry" Grid.Column="1" Placeholder="MI" MaxLength="1" />
+                <Entry x:Name="AuthorizedRepLastNameEntry" Grid.Column="2" Placeholder="Authorized Rep Last Name" />
+            </Grid>
+
+            <Entry x:Name="BeneficiaryPhoneEntry" Placeholder="Phone Number" Keyboard="Telephone" />
+            <Entry x:Name="BeneficiaryAltPhoneEntry" Placeholder="Alternate Phone Number" Keyboard="Telephone" />
+            <Entry x:Name="BeneficiaryAddress1Entry" Placeholder="Address Line 1" />
+            <Entry x:Name="BeneficiaryAddress2Entry" Placeholder="Address Line 2" />
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Entry x:Name="BeneficiaryCityEntry" Grid.Column="0" Placeholder="City" />
+                <Entry x:Name="BeneficiaryStateEntry" Grid.Column="1" Placeholder="State" />
+                <Entry x:Name="BeneficiaryZipCodeEntry" Grid.Column="2" Placeholder="Zip" Keyboard="Numeric" />
+            </Grid>
+
+            <Entry x:Name="AuthorizedRepRelationshipEntry" Placeholder="Relationship to Beneficiary" />
+            <Entry x:Name="BeneficiaryEmailEntry" Placeholder="Email (optional)" Keyboard="Email" />
+            <Entry x:Name="CampaignNumberEntry" Placeholder="Campaign Number" />
+            <Entry x:Name="CampaignNameEntry" Placeholder="Campaign Name" />
+            <Entry x:Name="ProductTypeEntry" Placeholder="Product Type" />
+            <Entry x:Name="InitialContactMethodEntry" Placeholder="Initial Contact Method" />
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="BeneficiaryWalkedInCheckBox" />
+                <Label Text="Check here if beneficiary walked in" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label Text="Current Plan (optional)"
+                   FontAttributes="Bold"
+                   Margin="0,8,0,0" />
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="CurrentPlanMmmCheckBox" />
+                <Label Text="MMM" VerticalOptions="Center" />
+                <CheckBox x:Name="CurrentPlanMcsCheckBox" />
+                <Label Text="MCS" VerticalOptions="Center" />
+                <CheckBox x:Name="CurrentPlanHumanaCheckBox" />
+                <Label Text="Humana" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="CurrentPlanUsPlanCheckBox" />
+                <Label Text="US Plan" VerticalOptions="Center" />
+                <CheckBox x:Name="CurrentPlanVeteranCheckBox" />
+                <Label Text="Veteran" VerticalOptions="Center" />
+                <Entry x:Name="CurrentPlanOtherEntry" Placeholder="Other" WidthRequest="160" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="NewToMedicareCheckBox" />
+                <Label Text="New to Medicare (Age-In)" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <DatePicker x:Name="BeneficiaryDobPicker" />
+
+            <Label Text="Products to discuss"
+                   FontAttributes="Bold"
+                   Margin="0,8,0,0" />
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="MedicarePartCCheckBox" />
+                <Label Text="Medicare Advantage Plans (Part C)" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="MedicareMedigapCheckBox" />
+                <Label Text="Medicare Supplement Products (Medigap)" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="MedicareAncillaryProductsCheckBox" />
+                <Label Text="Ancillary Products" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="MedicareDirectoCheckBox" />
+                <Label Text="Triple-S Directo" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label Text="Additional notes" FontAttributes="Bold" Margin="0,8,0,0" />
+            <Editor x:Name="AdditionalNotesEditor" AutoSize="TextChanges" Placeholder="Additional notes" />
+
+            <Label Text="Signature Section"
+                   FontAttributes="Bold"
+                   Margin="0,8,0,0" />
+
+            <Label Text="Beneficiary Signature" />
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Capture" Clicked="OnCaptureBeneficiarySignatureClicked" />
+                <Button x:Name="ClearBeneficiarySignatureButton" Text="Clear" IsVisible="False" Clicked="OnClearBeneficiarySignatureClicked" />
+            </HorizontalStackLayout>
+            <Image x:Name="BeneficiarySignaturePreview" IsVisible="False" HeightRequest="90" Aspect="AspectFit" />
+            <DatePicker x:Name="BeneficiarySignedDatePicker" />
+
+            <Label Text="Authorized Representative Signature" />
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Capture" Clicked="OnCaptureAuthorizedRepSignatureClicked" />
+                <Button x:Name="ClearAuthorizedRepSignatureButton" Text="Clear" IsVisible="False" Clicked="OnClearAuthorizedRepSignatureClicked" />
+            </HorizontalStackLayout>
+            <Image x:Name="AuthorizedRepSignaturePreview" IsVisible="False" HeightRequest="90" Aspect="AspectFit" />
+            <DatePicker x:Name="AuthorizedRepSignedDatePicker" />
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="BeneSignatureElectronicCheckBox" />
+                <Label Text="Signed electronically" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="BeneficiaryAcceptedTandCCheckBox" />
+                <Label Text="Beneficiary accepted terms and conditions" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <Entry x:Name="BeneficiaPhoneUidEntry" Placeholder="Call recording info / UID" />
+
+            <Label Text="To be completed by Agent"
+                   FontAttributes="Bold"
+                   Margin="0,8,0,0" />
+            <Entry x:Name="AgentNameEntry" Placeholder="Agent Name" />
+            <Entry x:Name="AgentPhoneNumberEntry" Placeholder="Agent Phone Number" Keyboard="Telephone" />
+            <Entry x:Name="AgentNpnEntry" Placeholder="Agent ID / NPN" />
+            <DatePicker x:Name="SoaDatePicker" />
+            <Entry x:Name="SalesPromoterNameEntry" Placeholder="Sales Promoter Name" />
+            <Entry x:Name="SalesPromoterIdEntry" Placeholder="Sales Promoter ID" />
+
+            <Button Text="Submit SOA"
+                    HeightRequest="48"
+                    BackgroundColor="#0057A3"
+                    TextColor="White"
+                    Clicked="OnSubmitClicked"
+                    Margin="0,12,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

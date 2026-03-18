@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Triple_S_AEP_MAUI_Forms.WorkingAgedSurveyPage"
+             Title="Working Aged Survey">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="12">
+            <Label Text="Working Aged Survey"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#0057A3" />
+
+            <Entry x:Name="MedicareNumberEntry" Placeholder="Medicare Number" />
+
+            <Label Text="Are you currently working?" />
+            <HorizontalStackLayout Spacing="20">
+                <RadioButton x:Name="CurrentlyWorkingYes" GroupName="CurrentlyWorking" Content="Yes" />
+                <RadioButton x:Name="CurrentlyWorkingNo" GroupName="CurrentlyWorking" Content="No" />
+            </HorizontalStackLayout>
+
+            <Label Text="Do you have employer health insurance?" />
+            <HorizontalStackLayout Spacing="20">
+                <RadioButton x:Name="EmployerInsuranceYes" GroupName="EmployerInsurance" Content="Yes" />
+                <RadioButton x:Name="EmployerInsuranceNo" GroupName="EmployerInsurance" Content="No" />
+                <RadioButton x:Name="EmployerInsuranceNa" GroupName="EmployerInsurance" Content="N/A" />
+            </HorizontalStackLayout>
+
+            <Label Text="Does your spouse have employer health insurance?" />
+            <HorizontalStackLayout Spacing="20">
+                <RadioButton x:Name="SpouseEmployerInsuranceYes" GroupName="SpouseEmployerInsurance" Content="Yes" />
+                <RadioButton x:Name="SpouseEmployerInsuranceNo" GroupName="SpouseEmployerInsurance" Content="No" />
+                <RadioButton x:Name="SpouseEmployerInsuranceNa" GroupName="SpouseEmployerInsurance" Content="N/A" />
+            </HorizontalStackLayout>
+
+            <Entry x:Name="EmployerNameEntry" Placeholder="Employer Name" />
+            <Entry x:Name="EmployerAddressEntry" Placeholder="Employer Address" />
+            <Entry x:Name="InsuranceNameEntry" Placeholder="Health Insurance Name" />
+            <Entry x:Name="PolicyholderNameEntry" Placeholder="Policyholder Name" />
+            <Entry x:Name="EmployerGroupNumberEntry" Placeholder="Group Number" />
+            <Entry x:Name="EmployerContractEntry" Placeholder="Contract Number" />
+
+            <Label Text="Employer has more than 20 employees?" />
+            <HorizontalStackLayout Spacing="20">
+                <RadioButton x:Name="MoreThan20Yes" GroupName="MoreThan20" Content="Yes" />
+                <RadioButton x:Name="MoreThan20No" GroupName="MoreThan20" Content="No" />
+                <RadioButton x:Name="MoreThan20Na" GroupName="MoreThan20" Content="N/A" />
+            </HorizontalStackLayout>
+
+            <Label Text="When do you plan to disenroll?" />
+            <VerticalStackLayout Spacing="4">
+                <RadioButton x:Name="DisenrollThreeMonths" GroupName="DisenrollPlan" Content="Within 3 months" />
+                <RadioButton x:Name="DisenrollSixMonths" GroupName="DisenrollPlan" Content="Within 6 months" />
+                <RadioButton x:Name="DisenrollOneYear" GroupName="DisenrollPlan" Content="Within 1 year" />
+                <RadioButton x:Name="DisenrollNotYet" GroupName="DisenrollPlan" Content="Not yet" />
+                <RadioButton x:Name="DisenrollNa" GroupName="DisenrollPlan" Content="N/A" />
+            </VerticalStackLayout>
+
+            <Label Text="Are you a business owner?" />
+            <HorizontalStackLayout Spacing="20">
+                <RadioButton x:Name="BusinessOwnerYes" GroupName="BusinessOwner" Content="Yes" />
+                <RadioButton x:Name="BusinessOwnerNo" GroupName="BusinessOwner" Content="No" />
+            </HorizontalStackLayout>
+
+            <Label Text="Does your business offer health insurance?" />
+            <HorizontalStackLayout Spacing="20">
+                <RadioButton x:Name="BusinessInsuranceYes" GroupName="BusinessInsurance" Content="Yes" />
+                <RadioButton x:Name="BusinessInsuranceNo" GroupName="BusinessInsurance" Content="No" />
+                <RadioButton x:Name="BusinessInsuranceNa" GroupName="BusinessInsurance" Content="N/A" />
+            </HorizontalStackLayout>
+
+            <Entry x:Name="CompanyNameEntry" Placeholder="Company Name" />
+            <Entry x:Name="CompanyAddressEntry" Placeholder="Company Address" />
+            <Entry x:Name="CompanyInsuranceNameEntry" Placeholder="Company Insurance Name" />
+            <Entry x:Name="CompanyGroupNumberEntry" Placeholder="Company Group Number" />
+            <Entry x:Name="CompanyContractNumberEntry" Placeholder="Company Contract Number" />
+
+            <Label Text="Rejected from employer group healthcare?" />
+            <HorizontalStackLayout Spacing="20">
+                <RadioButton x:Name="RejectedYes" GroupName="Rejected" Content="Yes" />
+                <RadioButton x:Name="RejectedNo" GroupName="Rejected" Content="No" />
+            </HorizontalStackLayout>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Entry x:Name="BeneficiaryFirstNameEntry" Grid.Column="0" Placeholder="Beneficiary First Name" />
+                <Entry x:Name="BeneficiaryMiddleInitialEntry" Grid.Column="1" Placeholder="MI" MaxLength="1" />
+                <Entry x:Name="BeneficiaryLastNameEntry" Grid.Column="2" Placeholder="Beneficiary Last Name" />
+            </Grid>
+
+            <HorizontalStackLayout Spacing="10" Margin="0,12,0,0">
+                <Button Text="Cancel"
+                        Clicked="OnCancelClicked"
+                        BackgroundColor="#E53E3E"
+                        TextColor="White"
+                        HorizontalOptions="FillAndExpand" />
+                <Button Text="Submit Survey"
+                        Clicked="OnSubmitClicked"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#0057A3"
+                        TextColor="White" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Triple_S_Maui_AEP.Controls"
+    xmlns:viewModels="clr-namespace:Triple_S_Maui_AEP.ViewModels"
+    x:Class="Triple_S_Maui_AEP.Views.SOAWizardPage"
+    x:DataType="viewModels:SOAWizardViewModel"
+    BackgroundColor="#FAFAFA"
+    Title="SOA Wizard">
+    <ScrollView>
+        <VerticalStackLayout Padding="24,24,24,24" Spacing="16">
+            <Border BackgroundColor="#1976D2" StrokeShape="RoundRectangle 12" Padding="24">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="PageTitle" Text="SOA Wizard" TextColor="White" FontSize="24" FontAttributes="Bold"/>
+                    <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                        <Label x:Name="StepLabel" Text="Step" TextColor="#BBDEFB" FontSize="12"/>
+                        <Label Text="{Binding CurrentStep}" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                        <Label Text="of" TextColor="#BBDEFB" FontSize="12"/>
+                        <Label Text="{Binding TotalSteps}" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Language Toggle -->
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Start" Margin="0,8,0,0">
+                <Label x:Name="LanguageLabel" Text="Language:" VerticalOptions="Center" FontSize="12"/>
+                <Picker x:Name="LanguagePicker" WidthRequest="120" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="SOANumberLabel" Text="SOA #" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Entry Text="{Binding SOANumber}" IsReadOnly="True" FontSize="14"/>
+
+            <VerticalStackLayout Spacing="12" x:Name="Step1Layout">
+                <Label x:Name="Step1TitleLabel" Text="Beneficiary Information" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <Label x:Name="EmployeeFirstNameLabel" Text="Employee First Name" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <Entry x:Name="EmployeeFirstNameEntry" Text="{Binding BeneficiaryFirstName}" Placeholder="Enter first name" FontSize="14"/>
+                <Label x:Name="EmployeeLastNameLabel" Text="Employee Last Name" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <Entry x:Name="EmployeeLastNameEntry" Text="{Binding BeneficiaryLastName}" Placeholder="Enter last name" FontSize="14"/>
+                <Label x:Name="DOBLabel" Text="Date of Birth" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <DatePicker x:Name="DOBPicker" Date="{Binding BeneficiaryDOB}" Format="MM/dd/yyyy"/>
+                <Label x:Name="MedicareNumberLabel" Text="Medicare Number" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <Entry x:Name="MedicareNumberEntry" Text="{Binding MedicareNumber}" Placeholder="Enter Medicare number" FontSize="14"/>
+                <Label x:Name="PhoneNumberLabel" Text="Phone Number" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <Entry x:Name="PhoneNumberEntry" Text="{Binding PhoneNumber}" Placeholder="Enter phone number" FontSize="14" Keyboard="Telephone"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="12" x:Name="Step2Layout" IsVisible="False">
+                <Label x:Name="Step2TitleLabel" Text="Coverage Scope" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding ProductInformationProvided}" VerticalOptions="Center"/>
+                    <Label x:Name="ProductInformationProvidedLabel" Text="Product information provided" VerticalOptions="Center" FontSize="13"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding MedicareAdvantageSelected}" VerticalOptions="Center"/>
+                    <Label x:Name="MedicareAdvantageLabel" Text="Medicare Advantage" VerticalOptions="Center" FontSize="13"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding PartDSelected}" VerticalOptions="Center"/>
+                    <Label x:Name="PartDLabel" Text="Part D" VerticalOptions="Center" FontSize="13"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding SupplementalSelected}" VerticalOptions="Center"/>
+                    <Label x:Name="SupplementalLabel" Text="Supplemental" VerticalOptions="Center" FontSize="13"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding DentalVisionSelected}" VerticalOptions="Center"/>
+                    <Label x:Name="DentalVisionLabel" Text="Dental/Vision" VerticalOptions="Center" FontSize="13"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding HearingAidSelected}" VerticalOptions="Center"/>
+                    <Label x:Name="HearingAidLabel" Text="Hearing Aid" VerticalOptions="Center" FontSize="13"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding WellnessSelected}" VerticalOptions="Center"/>
+                    <Label x:Name="WellnessLabel" Text="Wellness" VerticalOptions="Center" FontSize="13"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="12" x:Name="Step3Layout" IsVisible="False">
+                <Label x:Name="Step3TitleLabel" Text="Meeting Details" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <Label x:Name="MeetingDateLabel" Text="Meeting Date" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <DatePicker x:Name="MeetingDatePicker" Date="{Binding MeetingDate}" Format="MM/dd/yyyy"/>
+                <Label x:Name="MeetingLocationLabel" Text="Meeting Location" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <Entry x:Name="MeetingLocationEntry" Text="{Binding MeetingLocation}" Placeholder="Enter meeting location" FontSize="14"/>
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox x:Name="ComplianceCheckbox" IsChecked="{Binding ComplianceDocumentsProvided}" VerticalOptions="Center"/>
+                    <Label x:Name="ComplianceDocumentsLabel" Text="Compliance documents provided" VerticalOptions="Center" FontSize="13"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="12" x:Name="Step4Layout" IsVisible="False">
+                <Label x:Name="Step4TitleLabel" Text="Signatures" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50"/>
+
+                <!-- Beneficiary Signature Section -->
+                <Frame BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="8" Padding="16" HasShadow="False">
+                    <VerticalStackLayout Spacing="10">
+                        <Label x:Name="EmployeeSignatureLabel" Text="Beneficiary Signature" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        <Label x:Name="BeneficiarySignatureHintLabel" Text="Tap button to capture signature" FontSize="12" TextColor="#7F8C8D"/>
+                        
+                        <!-- Signature Capture Button -->
+                        <Button Text="📝 Capture Beneficiary Signature"
+                                Clicked="OnCaptureBeneficiarySignatureClicked"
+                                BackgroundColor="#1976D2"
+                                TextColor="White"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                HeightRequest="50"
+                                CornerRadius="8"
+                                Margin="0,8,0,0"/>
+                        
+                        <!-- Signature Status -->
+                        <HorizontalStackLayout Spacing="8" Margin="0,8,0,0">
+                            <Label x:Name="BeneficiarySignatureStatus" 
+                                   Text="❌ Not Captured" 
+                                   FontSize="13"
+                                   TextColor="#C62828"
+                                   VerticalOptions="Center"/>
+                            <CheckBox x:Name="EmployeeXMarkCheckbox" VerticalOptions="Center" CheckedChanged="OnEmployeeXMarkToggled"/>
+                            <Label x:Name="UseXMarkLabel" Text="Use X Mark" VerticalOptions="Center" FontSize="12"/>
+                        </HorizontalStackLayout>
+                        
+                        <!-- Signature Preview -->
+                        <Border BackgroundColor="#F5F5F5" StrokeShape="RoundRectangle 8" Stroke="#E0E0E0" Padding="8" IsVisible="False" x:Name="BeneficiarySignaturePreviewBorder">
+                            <Image x:Name="BeneficiarySignaturePreview" 
+                                   HeightRequest="100"
+                                   Aspect="AspectFit"
+                                   BackgroundColor="White"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Agent Signature Section -->
+                <Frame BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="8" Padding="16" HasShadow="False" Margin="0,8,0,0">
+                    <VerticalStackLayout Spacing="10">
+                        <Label x:Name="AgentSignatureLabel" Text="Agent Signature" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        <Label x:Name="AgentSignatureHintLabel" Text="Tap button to capture signature" FontSize="12" TextColor="#7F8C8D"/>
+                        
+                        <!-- Signature Capture Button -->
+                        <Button Text="📝 Capture Agent Signature"
+                                Clicked="OnCaptureAgentSignatureClicked"
+                                BackgroundColor="#388E3C"
+                                TextColor="White"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                HeightRequest="50"
+                                CornerRadius="8"
+                                Margin="0,8,0,0"/>
+                        
+                        <!-- Signature Status -->
+                        <Label x:Name="AgentSignatureStatus" 
+                               Text="❌ Not Captured" 
+                               FontSize="13"
+                               TextColor="#C62828"
+                               Margin="0,8,0,0"/>
+                        
+                        <!-- Signature Preview -->
+                        <Border BackgroundColor="#F5F5F5" StrokeShape="RoundRectangle 8" Stroke="#E0E0E0" Padding="8" IsVisible="False" x:Name="AgentSignaturePreviewBorder">
+                            <Image x:Name="AgentSignaturePreview" 
+                                   HeightRequest="100"
+                                   Aspect="AspectFit"
+                                   BackgroundColor="White"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <Label x:Name="ErrorMessageLabel" TextColor="#C62828" FontSize="12" IsVisible="False"/>
+
+            <HorizontalStackLayout Spacing="12" Margin="0,24,0,0">
+                <Button x:Name="PreviousButton" Text="Previous" BackgroundColor="#9E9E9E" TextColor="White" FontAttributes="Bold" HeightRequest="48" HorizontalOptions="FillAndExpand" Clicked="OnPreviousClicked"/>
+                <Button x:Name="NextButton" Text="Next" BackgroundColor="#1976D2" TextColor="White" FontAttributes="Bold" HeightRequest="48" HorizontalOptions="FillAndExpand" Clicked="OnNextClicked" IsVisible="True"/>
+                <Button x:Name="SubmitButton" Text="Submit" BackgroundColor="#388E3C" TextColor="White" FontAttributes="Bold" HeightRequest="48" HorizontalOptions="FillAndExpand" Clicked="OnSubmitClicked" IsVisible="False"/>
+            </HorizontalStackLayout>
+
+            <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#D32F2F" TextColor="White" FontAttributes="Bold" HeightRequest="44" Clicked="OnCancelClicked" Margin="0,8,0,0"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

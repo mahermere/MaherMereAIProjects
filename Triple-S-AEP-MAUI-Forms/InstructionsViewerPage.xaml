@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Triple_S_AEP_MAUI_Forms.InstructionsViewerPage"
+             Title="Instructions Viewer">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="10">
+        <Label Grid.Row="0"
+               Text="Use pinch or +/- to zoom, then drag to pan the instructions image."
+               FontSize="13"
+               TextColor="#4A5568" />
+
+        <HorizontalStackLayout Grid.Row="1" Spacing="10">
+            <Button Text="-" WidthRequest="44" Clicked="OnZoomOutClicked" />
+            <Button Text="Reset" Clicked="OnResetZoomClicked" />
+            <Button Text="+" WidthRequest="44" Clicked="OnZoomInClicked" />
+            <Button x:Name="PreviousImageButton" Text="Prev" Clicked="OnPreviousImageClicked" IsVisible="False" />
+            <Button x:Name="NextImageButton" Text="Next" Clicked="OnNextImageClicked" IsVisible="False" />
+            <Button Text="Print" Clicked="OnPrintClicked" />
+            <Button Text="Email" Clicked="OnEmailClicked" />
+            <Button Text="Close" HorizontalOptions="EndAndExpand" Clicked="OnCloseClicked" />
+        </HorizontalStackLayout>
+
+        <ScrollView x:Name="ImageViewport"
+                    Grid.Row="2"
+                    Orientation="Both"
+                    SizeChanged="OnImageViewportSizeChanged">
+            <Grid>
+                <Image x:Name="InstructionImage"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill">
+                    <Image.GestureRecognizers>
+                        <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+                        <PanGestureRecognizer PanUpdated="OnPanUpdated" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

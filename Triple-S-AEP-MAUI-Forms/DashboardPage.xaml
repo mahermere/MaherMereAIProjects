@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Triple_S_AEP_MAUI_Forms.Models"
+             x:Class="Triple_S_AEP_MAUI_Forms.DashboardPage"
+             Title="Enrollment Dashboard">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+        <Label Text="Enrollment Dashboard"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="#0057A3" />
+
+        <HorizontalStackLayout Spacing="12" Margin="0,8,0,0">
+            <Frame BorderColor="#0057A3" CornerRadius="8" Padding="12" HasShadow="True" HorizontalOptions="FillAndExpand">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Total Records"
+                           FontSize="12"
+                           TextColor="#4A5568" />
+                    <Label x:Name="TotalRecordsLabel"
+                           Text="0"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#0057A3" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BorderColor="#38A169" CornerRadius="8" Padding="12" HasShadow="True" HorizontalOptions="FillAndExpand">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Today"
+                           FontSize="12"
+                           TextColor="#4A5568" />
+                    <Label x:Name="TodayRecordsLabel"
+                           Text="0"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#38A169" />
+                </VerticalStackLayout>
+            </Frame>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Spacing="12" Margin="0,8,0,0">
+            <Button Text="View All Records"
+                    Clicked="OnViewAllRecordsClicked"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="#0057A3"
+                    TextColor="White" />
+
+            <Button Text="Clear Database"
+                    Clicked="OnClearDatabaseClicked"
+                    HorizontalOptions="Start"
+                    BackgroundColor="#E53E3E"
+                    TextColor="White" />
+        </HorizontalStackLayout>
+
+        <DatePicker x:Name="DateFilterPicker"
+                    DateSelected="OnDateSelected"
+                    Margin="0,8,0,0" />
+
+        <Label Text="Records by Date"
+               FontSize="16"
+               FontAttributes="Bold"
+               Margin="0,12,0,0" />
+
+        <CollectionView x:Name="RecordsCollectionView"
+                        SelectionMode="Single"
+                        Margin="0,8,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:EnrollmentRecord">
+                    <Frame BorderColor="#D0D5DD" CornerRadius="8" Padding="12" Margin="0,6,0,0">
+                        <VerticalStackLayout Spacing="6">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="{Binding DisplayName, StringFormat='Beneficiary: {0}'}"
+                                       FontAttributes="Bold"
+                                       FontSize="14"
+                                       HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding CreatedDate, StringFormat='{0:M/d/yyyy}'}"
+                                       FontSize="12"
+                                       TextColor="#718096" />
+                            </HorizontalStackLayout>
+
+                            <Label Text="{Binding SOANumber, StringFormat='SOA: {0}'}"
+                                   FontSize="12"
+                                   TextColor="#4A5568" />
+
+                            <HorizontalStackLayout Spacing="6">
+                                <Label Text="Enrollment:"
+                                       FontSize="11"
+                                       FontAttributes="Bold" />
+                                <Label x:Name="EnrollmentStatusLabel"
+                                       Text="{Binding EnrollmentUploadStatus}"
+                                       FontSize="11" />
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Spacing="6">
+                                <Label Text="SOA:"
+                                       FontSize="11"
+                                       FontAttributes="Bold" />
+                                <Label x:Name="SoaStatusLabel"
+                                       Text="{Binding SoaUploadStatus}"
+                                       FontSize="11" />
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Spacing="6">
+                                <Label Text="Survey:"
+                                       FontSize="11"
+                                       FontAttributes="Bold" />
+                                <Label x:Name="SurveyStatusLabel"
+                                       Text="{Binding WorkingAgeSurveyUploadStatus}"
+                                       FontSize="11" />
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Spacing="8" Margin="0,8,0,0">
+                                <Button Text="View Files"
+                                        Clicked="OnViewFilesClicked"
+                                        FontSize="11"
+                                        Padding="8,4"
+                                        HorizontalOptions="Start"
+                                        BackgroundColor="#0057A3"
+                                        TextColor="White" />
+                                <Button Text="Upload to DMS"
+                                        Clicked="OnUploadToDmsClicked"
+                                        FontSize="11"
+                                        Padding="8,4"
+                                        HorizontalOptions="Start"
+                                        BackgroundColor="#38A169"
+                                        TextColor="White" />
+                                <Button Text="Delete"
+                                        Clicked="OnDeleteRecordClicked"
+                                        FontSize="11"
+                                        Padding="8,4"
+                                        HorizontalOptions="Start"
+                                        BackgroundColor="#E53E3E"
+                                        TextColor="White" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Back to Main"
+                Clicked="OnBackClicked"
+                HorizontalOptions="FillAndExpand"
+                Margin="0,12,0,0"
+                BackgroundColor="#718096"
+                TextColor="White" />
+    </VerticalStackLayout>
+
+</ContentPage>

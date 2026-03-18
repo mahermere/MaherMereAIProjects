@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Triple_S_Maui_AEP.ViewModels"
+             x:Class="Triple_S_Maui_AEP.Views.TripleSEnrollmentWizardPage"
+             x:DataType="viewModels:TripleSEnrollmentWizardViewModel"
+             Title="Triple-S Enrollment Wizard"
+             BackgroundColor="#FAFAFA">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+            <Border BackgroundColor="#1976D2" StrokeShape="RoundRectangle 12" Padding="16">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Triple-S Enrollment Request Wizard" FontAttributes="Bold" FontSize="22" TextColor="White" />
+                    <Label Text="{Binding StepTitle}" FontSize="14" TextColor="#E3F2FD" />
+                    <HorizontalStackLayout Spacing="4">
+                        <Label Text="Step" TextColor="#E3F2FD" />
+                        <Label Text="{Binding CurrentStep}" TextColor="White" FontAttributes="Bold" />
+                        <Label Text="of" TextColor="#E3F2FD" />
+                        <Label Text="{Binding TotalSteps}" TextColor="White" FontAttributes="Bold" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="{Binding ValidationMessage}" TextColor="#D32F2F" FontAttributes="Bold" />
+
+            <VerticalStackLayout IsVisible="{Binding IsStep1Visible}" Spacing="8">
+                <Label Text="Section 1 (Required): Plan and Beneficiary" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <Entry Placeholder="Scope of Appointment # *" Text="{Binding ScopeOfAppointmentNumber}" />
+                <Picker Title="Selected Plan *" SelectedItem="{Binding SelectedPlanName}">
+                    <Picker.Items>
+                        <x:String>Óptimo Plus (PPO)</x:String>
+                        <x:String>Brillante (HMO-POS)</x:String>
+                        <x:String>Enlace Plus (HMO)</x:String>
+                        <x:String>Ahorro Plus (HMO)</x:String>
+                        <x:String>ContigoEnMente (HMO-SNP)</x:String>
+                        <x:String>Contigo Plus (HMO-SNP)</x:String>
+                        <x:String>Platino Plus (HMO-SNP)</x:String>
+                        <x:String>Platino Advance (HMO-SNP)</x:String>
+                        <x:String>Platino Blindao (HMO-SNP)</x:String>
+                        <x:String>Platino Enlace (HMO-SNP)</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Entry Placeholder="Group Coverage (if applicable)" Text="{Binding GroupCoverage}" />
+                <Picker Title="Group Plan Type" SelectedItem="{Binding GroupPlanType}">
+                    <Picker.Items>
+                        <x:String>HMO</x:String>
+                        <x:String>PPO</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Entry Placeholder="Group Monthly Premium" Text="{Binding GroupMonthlyPremium}" />
+                <DatePicker Date="{Binding GroupEffectiveDate}" Format="MM/dd/yyyy" />
+                <Entry Placeholder="SSN (group plans only)" Text="{Binding GroupSocialSecurityNumber}" />
+                <Entry Placeholder="First Name *" Text="{Binding FirstName}" />
+                <Entry Placeholder="Last Name *" Text="{Binding LastName}" />
+                <Entry Placeholder="Middle Initial (optional)" Text="{Binding MiddleInitial}" MaxLength="1" />
+                <DatePicker Date="{Binding BirthDate}" Format="MM/dd/yyyy" />
+                <Picker Title="Sex *" SelectedItem="{Binding Sex}">
+                    <Picker.Items>
+                        <x:String>F</x:String>
+                        <x:String>M</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Entry Placeholder="Home Phone *" Text="{Binding HomePhone}" Keyboard="Telephone" />
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding HomePhoneIsCell}" />
+                    <Label Text="Home Phone is Cellular" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <Entry Placeholder="Alternate Phone" Text="{Binding AlternatePhone}" Keyboard="Telephone" />
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding AlternatePhoneIsCell}" />
+                    <Label Text="Alternate Phone is Cellular" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep2Visible}" Spacing="8">
+                <Label Text="Section 1 (Required): Address and Medicare" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <Entry Placeholder="Permanent Address Line 1 *" Text="{Binding PermanentAddressLine1}" />
+                <Entry Placeholder="Permanent Address Line 2" Text="{Binding PermanentAddressLine2}" />
+                <Entry Placeholder="City *" Text="{Binding PermanentCity}" />
+                <Entry Placeholder="State *" Text="{Binding PermanentState}" />
+                <Entry Placeholder="ZIP *" Text="{Binding PermanentZipCode}" Keyboard="Numeric" />
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding MailingAddressDifferent}" />
+                    <Label Text="Mailing address is different" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <VerticalStackLayout IsVisible="{Binding IsMailingAddressVisible}" Spacing="8">
+                    <Entry Placeholder="Mailing Address Line 1 *" Text="{Binding MailingAddressLine1}" />
+                    <Entry Placeholder="Mailing Address Line 2" Text="{Binding MailingAddressLine2}" />
+                    <Entry Placeholder="Mailing City *" Text="{Binding MailingCity}" />
+                    <Entry Placeholder="Mailing State *" Text="{Binding MailingState}" />
+                    <Entry Placeholder="Mailing ZIP *" Text="{Binding MailingZipCode}" Keyboard="Numeric" />
+                </VerticalStackLayout>
+                <Entry Placeholder="Medicare Number *" Text="{Binding MedicareNumber}" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep3Visible}" Spacing="8">
+                <Label Text="Section 1 (Required): Coverage Questions" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <Picker Title="Other Rx Coverage? *" SelectedItem="{Binding OtherRxCoverageAnswer}">
+                    <Picker.Items>
+                        <x:String>Yes</x:String>
+                        <x:String>No</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <VerticalStackLayout IsVisible="{Binding IsOtherCoverageDetailsVisible}" Spacing="8">
+                    <Entry Placeholder="Other Coverage Name" Text="{Binding OtherCoverageName}" />
+                    <Entry Placeholder="Other Coverage Member Number" Text="{Binding OtherCoverageMemberNumber}" />
+                    <Entry Placeholder="Other Coverage Group Number" Text="{Binding OtherCoverageGroupNumber}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout IsVisible="{Binding IsPlatinoPlanSelected}" Spacing="8">
+                    <Picker Title="Medicaid Program? (Platino plans)" SelectedItem="{Binding MedicaidProgramAnswer}">
+                        <Picker.Items>
+                            <x:String>Yes</x:String>
+                            <x:String>No</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Entry Placeholder="Medicaid Number (MPI)" Text="{Binding MedicaidNumber}" IsVisible="{Binding IsMedicaidNumberVisible}" />
+                </VerticalStackLayout>
+
+                <Picker Title="Contigo Plus Chronic Condition" SelectedItem="{Binding ContigoPlusChronicCondition}" IsVisible="{Binding IsContigoPlusConditionVisible}">
+                    <Picker.Items>
+                        <x:String>Diabetes Mellitus</x:String>
+                        <x:String>Cardiovascular Disorder</x:String>
+                        <x:String>Chronic Heart Failure</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Picker Title="ContigoEnMente dementia symptoms?" SelectedItem="{Binding ContigoEnMenteDementiaAnswer}" IsVisible="{Binding IsContigoEnMenteQuestionVisible}">
+                    <Picker.Items>
+                        <x:String>Yes</x:String>
+                        <x:String>No</x:String>
+                    </Picker.Items>
+                </Picker>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep4Visible}" Spacing="8">
+                <Label Text="Section 1 (Required): Signature and Authorization" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding AckPartAandB}" /><Label Text="I will keep Medicare Part A and Part B" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding AckSingleMAPlan}" /><Label Text="I understand only one MA plan can be active" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding AckInfoCorrect}" /><Label Text="I certify the information is correct" VerticalOptions="Center" /></HorizontalStackLayout>
+                <Entry Placeholder="Applicant Signature Name *" Text="{Binding ApplicantSignatureName}" />
+                <DatePicker Date="{Binding SignatureDate}" Format="MM/dd/yyyy" />
+                <Label Text="Authorized Representative (if applicable)" FontAttributes="Bold" />
+                <Entry Placeholder="Authorized Rep Name" Text="{Binding AuthorizedRepName}" />
+                <Entry Placeholder="Authorized Rep Address" Text="{Binding AuthorizedRepAddress}" />
+                <Entry Placeholder="Authorized Rep Phone" Text="{Binding AuthorizedRepPhone}" />
+                <Entry Placeholder="Relationship to Enrollee" Text="{Binding AuthorizedRepRelationship}" />
+                
+                <Label Text="Enrollment Method (if applicable)" FontAttributes="Bold" Margin="0,12,0,0" />
+                <Label Text="Electronic Enrollment (In-Person):" FontSize="14" Margin="0,8,0,0" />
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding EnrollNowChecked}" />
+                    <Label Text="Checking 'Enroll Now' is my signature" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <DatePicker Date="{Binding EnrollNowDate}" Format="MM/dd/yyyy" IsVisible="{Binding IsEnrollNowChecked}" />
+                
+                <Label Text="Phone Enrollment:" FontSize="14" Margin="0,12,0,0" />
+                <Entry Placeholder="Call Number (UCID)" Text="{Binding PhoneEnrollmentCallNumber}" />
+                <Entry Placeholder="Witness Signature" Text="{Binding PhoneEnrollmentWitnessSignature}" />
+                <DatePicker Date="{Binding PhoneEnrollmentWitnessDate}" Format="MM/dd/yyyy" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep5Visible}" Spacing="8">
+                <Label Text="Section 2 (Optional): Preferences and Communications" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                
+                <Entry Placeholder="Preferred Spoken Language" Text="{Binding PreferredSpokenLanguage}" />
+                <Label Text="Preferred Accessible Format:" FontAttributes="Bold" />
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding FormatBraille}" /><Label Text="Braille" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding FormatLargeText}" /><Label Text="Large Print" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding FormatAudioCD}" /><Label Text="Audio CD" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding FormatDataCD}" /><Label Text="Data CD" VerticalOptions="Center" /></HorizontalStackLayout>
+                
+                <Picker Title="Do you work?" SelectedItem="{Binding WorkStatusAnswer}">
+                    <Picker.Items><x:String>Yes</x:String><x:String>No</x:String></Picker.Items>
+                </Picker>
+                <Picker Title="Does spouse work?" SelectedItem="{Binding SpouseWorkStatusAnswer}">
+                    <Picker.Items><x:String>Yes</x:String><x:String>No</x:String></Picker.Items>
+                </Picker>
+                
+                <Entry Placeholder="PCP Name" Text="{Binding PcpName}" />
+                <Entry Placeholder="PCP Phone" Text="{Binding PcpPhone}" />
+                
+                <Label Text="Email materials (select as needed):" FontAttributes="Bold" />
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding WantsProviderDirectoryByEmail}" /><Label Text="Provider Directory" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding WantsAnnualNoticeByEmail}" /><Label Text="Annual Notice of Changes" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding WantsEvidenceOfCoverageByEmail}" /><Label Text="Evidence of Coverage" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding WantsSummaryOfBenefitsByEmail}" /><Label Text="Summary of Benefits" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding WantsFormularyByEmail}" /><Label Text="Prescription Drug Formulary" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding WantsPromotionalByEmail}" /><Label Text="Promotional materials" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding WantsEnrollmentConfirmationByEmail}" /><Label Text="Electronic Enrollment Confirmation" VerticalOptions="Center" /></HorizontalStackLayout>
+                
+                <Picker Title="Text consent?" SelectedItem="{Binding TextConsentAnswer}">
+                    <Picker.Items><x:String>Yes</x:String><x:String>No</x:String></Picker.Items>
+                </Picker>
+                <Entry Placeholder="Text Number" Text="{Binding TextConsentNumber}" IsVisible="{Binding IsTextNumberVisible}" Keyboard="Telephone" />
+                
+                <Picker Title="Email consent?" SelectedItem="{Binding EmailConsentAnswer}">
+                    <Picker.Items><x:String>Yes</x:String><x:String>No</x:String></Picker.Items>
+                </Picker>
+                <Entry Placeholder="Email Address" Text="{Binding EmailConsentAddress}" Keyboard="Email" IsVisible="{Binding IsEmailAddressVisible}" />
+                
+                <Label Text="Emergency Contact:" FontAttributes="Bold" Margin="0,12,0,0" />
+                <Entry Placeholder="Emergency Contact Name" Text="{Binding EmergencyContactName}" />
+                <Entry Placeholder="Emergency Contact Phone" Text="{Binding EmergencyContactPhone}" Keyboard="Telephone" />
+                <Entry Placeholder="Relationship to Enrollee" Text="{Binding EmergencyContactRelationship}" />
+                
+                <Label Text="Retiree Information (Group Plans Only):" FontAttributes="Bold" Margin="0,12,0,0" />
+                <Picker Title="Are you the retiree?" SelectedItem="{Binding IsRetireeAnswer}">
+                    <Picker.Items><x:String>Yes</x:String><x:String>No</x:String><x:String>N/A</x:String></Picker.Items>
+                </Picker>
+                <VerticalStackLayout IsVisible="{Binding IsRetirementDetailsVisible}" Spacing="8">
+                    <DatePicker Date="{Binding RetirementDate}" Format="MM/dd/yyyy" IsVisible="{Binding IsRetirementDateVisible}" />
+                    <Entry Placeholder="Retiree Name" Text="{Binding RetireeName}" IsVisible="{Binding IsRetireeNameVisible}" />
+                </VerticalStackLayout>
+                
+                <Label Text="Spouse/Dependents Coverage (Group Plans Only):" FontAttributes="Bold" Margin="0,12,0,0" />
+                <Picker Title="Covering spouse or dependents?" SelectedItem="{Binding CoversSpouseOrDependentsAnswer}">
+                    <Picker.Items><x:String>Yes</x:String><x:String>No</x:String><x:String>N/A</x:String></Picker.Items>
+                </Picker>
+                <VerticalStackLayout IsVisible="{Binding IsSpouseDependentDetailsVisible}" Spacing="8">
+                    <Entry Placeholder="Spouse Name" Text="{Binding SpouseName}" />
+                    <Entry Placeholder="Dependent Names" Text="{Binding DependentNames}" />
+                </VerticalStackLayout>
+                
+                <Label Text="Long-Term Care Residence:" FontAttributes="Bold" Margin="0,12,0,0" />
+                <Picker Title="Are you a LTC resident?" SelectedItem="{Binding IsLongTermCareResidentAnswer}">
+                    <Picker.Items><x:String>Yes</x:String><x:String>No</x:String></Picker.Items>
+                </Picker>
+                <VerticalStackLayout IsVisible="{Binding IsLtcDetailsVisible}" Spacing="8">
+                    <Entry Placeholder="Institution Name" Text="{Binding LtcInstitutionName}" />
+                    <Entry Placeholder="Administrator Name" Text="{Binding LtcAdministratorName}" />
+                    <Entry Placeholder="Institution Phone" Text="{Binding LtcPhone}" Keyboard="Telephone" />
+                </VerticalStackLayout>
+                
+                <Label Text="Current Medical Plan:" FontAttributes="Bold" Margin="0,12,0,0" />
+                <Picker Title="Current Health Plan" SelectedItem="{Binding CurrentHealthPlan}">
+                    <Picker.Items>
+                        <x:String>MMM</x:String>
+                        <x:String>Humana</x:String>
+                        <x:String>MCS</x:String>
+                        <x:String>Medicare Original</x:String>
+                        <x:String>USA Plan</x:String>
+                        <x:String>Other</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Entry Placeholder="Other Health Plan Name" Text="{Binding OtherHealthPlanName}" IsVisible="{Binding IsOtherHealthPlanNameVisible}" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep6Visible}" Spacing="8">
+                <Label Text="Section 2 (Transition Form): New Member Services" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <Entry Placeholder="Last Names *" Text="{Binding TransitionLastNames}" />
+                <Entry Placeholder="Name *" Text="{Binding TransitionName}" />
+                <Entry Placeholder="Initial" Text="{Binding TransitionInitial}" MaxLength="1" />
+                <DatePicker Date="{Binding TransitionDateOfBirth}" Format="MM/dd/yyyy" />
+                <Entry Placeholder="Telephone 1 *" Text="{Binding TransitionTelephone1}" Keyboard="Telephone" />
+                <Entry Placeholder="Telephone 2" Text="{Binding TransitionTelephone2}" Keyboard="Telephone" />
+                <Entry Placeholder="Benefit Plan *" Text="{Binding TransitionBenefitPlan}" />
+                <DatePicker Date="{Binding TransitionEffectivityDate}" Format="MM/dd/yyyy" />
+                <Entry Placeholder="SHIC # (Medicare Number) *" Text="{Binding TransitionShicMedicareNumber}" />
+                <Picker Title="Equipment / Supply / Services" SelectedItem="{Binding TransitionEquipmentServices}">
+                    <Picker.Items>
+                        <x:String>Hospital Bed</x:String>
+                        <x:String>Wheelchair</x:String>
+                        <x:String>Glucometer</x:String>
+                        <x:String>Insulin Pump</x:String>
+                        <x:String>Nebulizer</x:String>
+                        <x:String>Therapy Drugs (Respiratory)</x:String>
+                        <x:String>Tube Feeding (formula or by mouth)</x:String>
+                        <x:String>Ostomy/Urostomy</x:String>
+                        <x:String>Ulcer healing</x:String>
+                        <x:String>Nursing and Therapy Services</x:String>
+                        <x:String>Oxygen</x:String>
+                        <x:String>CPAP</x:String>
+                        <x:String>Drug injections / IV</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Entry Placeholder="Provider / Company" Text="{Binding TransitionProviderCompany}" IsVisible="{Binding IsTransitionEquipmentDetailsVisible}" />
+                <Entry Placeholder="Effectivity (month/year)" Text="{Binding TransitionEquipmentEffectivity}" IsVisible="{Binding IsTransitionEquipmentDetailsVisible}" />
+                <Picker Title="Previous Health Plan" SelectedItem="{Binding TransitionPreviousHealthPlan}" IsVisible="{Binding IsTransitionEquipmentDetailsVisible}">
+                    <Picker.Items>
+                        <x:String>MMM</x:String>
+                        <x:String>Humana</x:String>
+                        <x:String>MCS</x:String>
+                        <x:String>Medicare Original</x:String>
+                        <x:String>USA Plan</x:String>
+                        <x:String>Other</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Editor Placeholder="Comments" Text="{Binding TransitionComments}" AutoSize="TextChanges" IsVisible="{Binding IsTransitionEquipmentDetailsVisible}" />
+                <Entry Placeholder="Information Provided By *" Text="{Binding TransitionInformationProvidedBy}" />
+                <Entry Placeholder="Plan Representative *" Text="{Binding TransitionPlanRepresentative}" />
+                <Entry Placeholder="Region *" Text="{Binding TransitionRegion}" />
+                <DatePicker Date="{Binding TransitionFormDate}" Format="MM/dd/yyyy" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep7Visible}" Spacing="8">
+                <Label Text="Section 2 (Optional): Premium Payment" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <Picker Title="Payment Option" SelectedItem="{Binding PaymentOption}">
+                    <Picker.Items>
+                        <x:String>Coupon Book</x:String>
+                        <x:String>EFT</x:String>
+                        <x:String>Credit Card</x:String>
+                        <x:String>Auto Deduction</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <VerticalStackLayout IsVisible="{Binding IsEftFieldsVisible}" Spacing="8">
+                    <Label Text="EFT" FontAttributes="Bold" />
+                    <Entry Placeholder="Account Holder Name" Text="{Binding EftAccountHolderName}" />
+                    <Entry Placeholder="Routing Number" Text="{Binding EftRoutingNumber}" Keyboard="Numeric" />
+                    <Entry Placeholder="Account Number" Text="{Binding EftAccountNumber}" Keyboard="Numeric" />
+                    <Picker Title="Account Type" SelectedItem="{Binding EftAccountType}">
+                        <Picker.Items><x:String>Checking</x:String><x:String>Savings</x:String></Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout IsVisible="{Binding IsCreditCardFieldsVisible}" Spacing="8">
+                    <Label Text="Credit Card" FontAttributes="Bold" />
+                    <Picker Title="Card Type" SelectedItem="{Binding CreditCardType}">
+                        <Picker.Items><x:String>Visa</x:String><x:String>Master Card</x:String></Picker.Items>
+                    </Picker>
+                    <Entry Placeholder="Card Holder Name" Text="{Binding CreditCardHolderName}" />
+                    <Entry Placeholder="Card Number" Text="{Binding CreditCardNumber}" Keyboard="Numeric" />
+                    <Entry Placeholder="Expiration MM/YYYY" Text="{Binding CreditCardExpiration}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout IsVisible="{Binding IsAutoDeductionFieldsVisible}" Spacing="8">
+                    <Label Text="Auto Deduction" FontAttributes="Bold" />
+                    <Picker Title="Benefit Source" SelectedItem="{Binding AutoDeductionBenefitSource}">
+                        <Picker.Items><x:String>Social Security</x:String><x:String>RRB</x:String></Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep8Visible}" Spacing="8">
+                <Label Text="Section 2 (Optional): Documents Received" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ReceivedInitialPackage}" /><Label Text="Initial Package" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ReceivedStarRatingsNotice}" /><Label Text="Medicare Star Ratings Notice" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ReceivedWebAvailabilityNotice}" /><Label Text="Web Availability Notice" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ReceivedEnrollmentConfirmation}" /><Label Text="Enrollment Confirmation" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ReceivedEnrollmentFormCopy}" /><Label Text="Enrollment Form Copy" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ReceivedAttestationOfEligibility}" /><Label Text="Attestation of Eligibility" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ReceivedPrecertificationChronicDiseases}" /><Label Text="Precertification Chronic Diseases" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ReceivedPhiAuthorization}" /><Label Text="PHI Authorization" VerticalOptions="Center" /></HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep9Visible}" Spacing="8">
+                <Label Text="Section 2 (Optional): Helper Information" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <Entry Placeholder="Helper Name" Text="{Binding HelperName}" />
+                <Entry Placeholder="Helper Relationship" Text="{Binding HelperRelationship}" />
+                <Entry Placeholder="Helper Signature" Text="{Binding HelperSignature}" />
+                <Entry Placeholder="Helper NPN (Agents/Brokers)" Text="{Binding HelperNpn}" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep10Visible}" Spacing="8">
+                <Label Text="Official Use Only" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <Entry Placeholder="Receipt Date" Text="{Binding OfficialReceiptDate}" />
+                <Entry Placeholder="Plan ID" Text="{Binding OfficialPlanId}" />
+                <Entry Placeholder="Effective Date of Coverage" Text="{Binding OfficialCoverageEffectiveDate}" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding IsStep11Visible}" Spacing="8">
+                <Label Text="Review and Validation" FontSize="18" FontAttributes="Bold" TextColor="#1976D2" />
+                <Label Text="Confirm Section 1 required fields are complete before submitting." />
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ConfirmSection1Complete}" /><Label Text="I confirm Section 1 is complete" VerticalOptions="Center" /></HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding ConfirmSection2Reviewed}" /><Label Text="I reviewed Section 2 optional fields" VerticalOptions="Center" /></HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8" Margin="0,12,0,16">
+                <Button Text="Back" Command="{Binding BackCommand}" IsEnabled="{Binding CanGoBack}" Grid.Column="0" />
+                <Button Text="Next" Command="{Binding NextCommand}" IsEnabled="{Binding CanGoNext}" Grid.Column="1" />
+                <Button Text="Submit" Command="{Binding SubmitCommand}" IsVisible="{Binding IsOnFinalStep}" IsEnabled="{Binding IsOnFinalStep}" Grid.Column="2" BackgroundColor="#2E7D32" TextColor="White" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

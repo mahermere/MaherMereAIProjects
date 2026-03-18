@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:TripleS.SOA.AEP.UI.Services"
+             xmlns:viewmodels="clr-namespace:TripleS.SOA.AEP.UI.ViewModels"
+             x:Class="TripleS.SOA.AEP.UI.Views.DashboardWindow"
+             BackgroundColor="#FAFAFA"
+             Title="Agent Portal"
+             >
+    <ScrollView>
+        <VerticalStackLayout Padding="16,20,16,20" Spacing="16">
+            <!-- Language Toggle -->
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
+                <Label x:Name="LanguageLabel" Text="Language:" VerticalOptions="Center"/>
+                <Picker x:Name="LanguagePicker" WidthRequest="120" />
+            </HorizontalStackLayout>
+            <!-- Header -->
+            <Border BackgroundColor="#0066B3" StrokeShape="RoundRectangle 12" Padding="16">
+                <VerticalStackLayout Spacing="2">
+                    <Label x:Name="HeaderTitleLabel" Text="Triple-S SOA/AEP" TextColor="White" FontSize="20" FontAttributes="Bold" />
+                    <Label x:Name="HeaderSubtitleLabel" Text="Agent Portal - Sales &amp; Broker Activities" TextColor="#E3F2FD" FontSize="11" />
+                    <Label x:Name="AgentNameText" Text="Agent: Juan Perez (NPN: 123456789)" TextColor="#B3E5FC" FontSize="10" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Quick Actions -->
+            <Label x:Name="QuickActionsLabel" Text="Quick Actions" FontSize="14" FontAttributes="Bold" TextColor="#2C3E50" />
+            <Button x:Name="NewSOAButton" Text="Start New SOA" Clicked="NewSOAButton_Click" BackgroundColor="#1976D2" TextColor="White" />
+            <Button x:Name="NewEnrollmentButton" Text="Start New Enrollment" Clicked="NewEnrollmentButton_Click" BackgroundColor="#388E3C" TextColor="White" />
+
+            <!-- Today's Activity Summary (no PHI) -->
+            <Border BackgroundColor="#F5F5F5" StrokeShape="RoundRectangle 8" Padding="12">
+                <VerticalStackLayout>
+                    <Label Text="Today's Activity" FontSize="13" FontAttributes="Bold" TextColor="#1976D2" />
+                    <Label x:Name="SOACountLabel" Text="SOAs Created Today: 0" FontSize="12" TextColor="#2C3E50" />
+                    <Label x:Name="EnrollmentCountLabel" Text="Enrollments Created Today: 0" FontSize="12" TextColor="#2C3E50" />
+                </VerticalStackLayout>
+            </Border>
+            <!-- SOA List -->
+            <Label Text="SOA List" FontSize="14" FontAttributes="Bold" TextColor="#1976D2" />
+            <CollectionView x:Name="SOAListView"
+                            ItemsSource="{Binding SOARecords}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="services:SOANumberService+SOARecord">
+                        <Border Stroke="#1976D2" StrokeShape="RoundRectangle 8" Margin="4" Padding="8">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding SOANumber}" FontAttributes="Bold" FontSize="13" TextColor="#2C3E50" />
+                                <Label Text="First Name: {Binding FirstName}" FontSize="12" TextColor="#388E3C" />
+                                <Label Text="Last Name: {Binding LastName}" FontSize="12" TextColor="#388E3C" />
+                                <Label Text="DateCreated, StringFormat='yyyy-MM-dd'}" FontSize="12" TextColor="#1976D2" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!-- Exit Button -->
+            <Button x:Name="ExitButton" Text="Exit" Clicked="OnExitClicked" BackgroundColor="#D32F2F" TextColor="White" FontAttributes="Bold" HeightRequest="44" />
+            <!-- Add more controls as needed -->
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Triple-S-DMS</name>
+    </assembly>
+    <members>
+        <member name="M:TripleSService.Controllers.DocumentsController.SearchDocuments(System.String,System.Nullable{TripleSService.Services.DocumentStatus},System.Int32)">
+            <summary>
+            Search for documents using specific criteria. For security and performance reasons,
+            retrieving all documents is not allowed in disconnected mode.
+            </summary>
+            <param name="documentType">Optional document type filter</param>
+            <param name="status">Optional document status filter</param>
+            <param name="maxResults">Maximum number of results to return (capped at 100)</param>
+            <returns>A list of documents matching the search criteria</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.GetDocument(System.String)">
+            <summary>
+            Gets a specific document by ID from Hyland
+            </summary>
+            <param name="id">The document ID</param>
+            <returns>The requested document</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.CreateDocument(TripleSService.Services.CreateDocumentRequest)">
+            <summary>
+            Creates a new document in Hyland
+            </summary>
+            <param name="request">Document creation request</param>
+            <returns>The created document</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.UpdateDocument(System.String,TripleSService.Services.UpdateDocumentRequest)">
+            <summary>
+            Updates an existing document in Hyland
+            </summary>
+            <param name="id">The document ID</param>
+            <param name="request">Document update request</param>
+            <returns>The updated document</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.DeleteDocument(System.String)">
+            <summary>
+            Soft deletes a document in Hyland
+            </summary>
+            <param name="id">The document ID</param>
+            <returns>Success status</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.SearchDocuments(TripleSService.Services.DocumentSearchRequest)">
+            <summary>
+            Searches documents in Hyland based on criteria
+            </summary>
+            <param name="searchRequest">Search criteria</param>
+            <returns>A list of matching documents</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.ArchiveDocument(System.String)">
+            <summary>
+            Archives a document in Hyland
+            </summary>
+            <param name="id">The document ID</param>
+            <returns>Success status</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.GetDocumentContent(System.String)">
+            <summary>
+            Downloads the content of a document from Hyland
+            </summary>
+            <param name="id">The document ID</param>
+            <returns>The document content as a file</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.GetQueryMeteringStatus">
+            <summary>
+            Gets the current query metering status
+            </summary>
+            <returns>Query metering status information</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentsController.ConfigureQueryMetering(TripleSService.Controllers.ConfigureQueryMeteringRequest)">
+            <summary>
+            Configures query metering limits
+            </summary>
+            <param name="request">Query metering configuration</param>
+            <returns>Success status</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.SearchByDocumentId(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Int32,TripleSService.Services.DocumentRetrievalOptions)">
+            <summary>
+            Search documents by ID or ID range using Hyland Unity API patterns
+            </summary>
+            <param name="id">Single document ID to retrieve</param>
+            <param name="idFrom">Starting document ID for range search</param>
+            <param name="idTo">Ending document ID for range search</param>
+            <param name="maxResults">Maximum number of results (max 100)</param>
+            <param name="retrievalOptions">Document retrieval options for performance optimization</param>
+            <returns>List of documents matching the ID criteria</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.SearchByDocumentTypeAndDateRange(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,TripleSService.Services.DocumentRetrievalOptions)">
+            <summary>
+            Search documents by Document Type and Date Range using Hyland Unity API patterns
+            </summary>
+            <param name="documentType">Document type name (required)</param>
+            <param name="dateStoredFrom">Start date for document storage date range</param>
+            <param name="dateStoredTo">End date for document storage date range</param>
+            <param name="documentDateFrom">Start date for document date range</param>
+            <param name="documentDateTo">End date for document date range</param>
+            <param name="maxResults">Maximum number of results (max 100)</param>
+            <param name="retrievalOptions">Document retrieval options for performance optimization</param>
+            <returns>List of documents matching the criteria</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.SearchByCustomQueryAndKeywords(TripleSService.Services.DocumentSearchRequest)">
+            <summary>
+            Search documents using Custom Queries, Keywords, and Date Range using Hyland Unity API patterns
+            </summary>
+            <param name="request">Advanced search request with custom query, keywords, and date filters</param>
+            <returns>List of documents matching the custom query criteria</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.GetAvailableCustomQueries">
+            <summary>
+            Get available custom queries for the current user
+            </summary>
+            <returns>List of available custom queries</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.GetDocumentStatusEnum">
+            <summary>
+            Get document status enumeration values and ordinals
+            </summary>
+            <returns>Document status enum names and ordinal positions</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.GetSearchMethodsEnum">
+            <summary>
+            Get search method enumeration values and ordinals
+            </summary>
+            <returns>Search method enum names and ordinal positions</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.GetRetrievalOptionsEnum">
+            <summary>
+            Get retrieval options enumeration values and ordinals
+            </summary>
+            <returns>Retrieval options enum names and ordinal positions</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.GetKeywordDataTypesEnum">
+            <summary>
+            Get keyword data type enumeration values and ordinals
+            </summary>
+            <returns>Keyword data type enum names and ordinal positions</returns>
+        </member>
+        <member name="M:TripleSService.Controllers.DocumentSearchController.GetSearchOperatorsEnum">
+            <summary>
+            Get search operator enumeration values and ordinals
+            </summary>
+            <returns>Search operator enum names and ordinal positions</returns>
+        </member>
+    </members>
+</doc>

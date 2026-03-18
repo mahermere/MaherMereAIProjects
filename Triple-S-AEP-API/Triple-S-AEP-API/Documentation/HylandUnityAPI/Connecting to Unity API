@@ -1,0 +1,23 @@
+Connecting the Unity API
+Once the project is created and the proper references have been made, the first thing to do in order to leverage the API is to make a connection. At a minimum, there are two pieces of information required to make a connection to the Unity API, a URL (can be Application Server, Web Server, or Application Gateway Server), and an OnBase Datasource (that must be installed on the Server).
+
+There are a number of ways to connect to OnBase in general, and the Unity API supports the majority of them. They will be covered in detail in the following pages.
+
+OnBase Authentication
+
+Domain Authentication
+
+Query Metering
+
+Hyland IdP Authentication
+
+Single Sign-On
+
+Institutional IDs
+
+Unity Automation Toolkit
+When implementing an Automation Interface, there is no need to perform any sort of connection since one has already been established in whatever client will be executing the script. Because of this, an already-connected Application will be provided in every interface method. It should be noted that this Application instance is only guaranteed to work within the context of the individual script and should not be passed to anything external to the script.
+
+In This Article
+
+Unity Automation Too

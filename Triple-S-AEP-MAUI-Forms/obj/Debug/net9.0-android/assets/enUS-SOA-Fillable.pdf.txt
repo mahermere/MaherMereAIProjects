@@ -1,0 +1,53 @@
+Fields for C:\Users\maher\source\repos\Triple-S-AEP-MAUI-Forms\Resources\Raw\enUS-SOA-Fillable.pdf
+Field: SOANumber, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryFirstName, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryMiddleInitial, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryLastName, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepFirstName, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepLastName, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepMiddleInitial, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryAltPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryAddress1, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryAddress2, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryCity, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryState, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryZipCode, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepRelationship, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryEmail, Type: PdfLoadedTextBoxField, Value: 
+Field: CampaignNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: InitialContactMethod, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryWalkedIn, Type: PdfLoadedCheckBoxField, Value: False
+Field: CampaignName, Type: PdfLoadedTextBoxField, Value: 
+Field: text_21unus, Type: PdfLoadedTextBoxField, Value: 
+Field: checkbox_22toml, Type: PdfLoadedCheckBoxField, Value: False
+Field: radio_group_23dooo, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Value_qxrq
+Field: radio_group_24eaaj, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Value_qeoa
+Field: radio_group_25zkwj, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Value_lpgu
+Field: radio_group_26cchk, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Value_ptjg
+Field: radio_group_27zlzt, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Value_cmbb
+Field: text_29oxzt, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryDOB, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiarySignature, Type: PdfLoadedSignatureField, Value: 
+Field: AuthorizedRepSignature, Type: PdfLoadedSignatureField, Value: 
+Field: BeneficiarySignedDate, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepSignedDate, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneSignatureElectronic, Type: PdfLoadedCheckBoxField, Value: False
+Field: BeneficiaryAcceptedTandC, Type: PdfLoadedCheckBoxField, Value: False
+Field: BeneficiaPhoneUID, Type: PdfLoadedTextBoxField, Value: 
+Field: AgentName, Type: PdfLoadedTextBoxField, Value: 
+Field: AgentPhoneNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: AgentNPN, Type: PdfLoadedTextBoxField, Value: 
+Field: SOADate, Type: PdfLoadedTextBoxField, Value: 
+Field: SalesPromoterName, Type: PdfLoadedTextBoxField, Value: 
+Field: SalesPromoterID, Type: PdfLoadedTextBoxField, Value: 
+Field: MedicarePartC, Type: PdfLoadedCheckBoxField, Value: False
+Field: MedicareMedigap, Type: PdfLoadedCheckBoxField, Value: False
+Field: MedicareAncillaryProducts, Type: PdfLoadedCheckBoxField, Value: False
+Field: MedicareDirecto, Type: PdfLoadedCheckBoxField, Value: False
+Field: Additionalnotes, Type: PdfLoadedTextBoxField, Value: 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripleS.SOA.AEP.UI.Views.AgentLoginWindow"
+             BackgroundColor="#FAFAFA"
+             Title="Agent Login">
+    <ScrollView>
+        <VerticalStackLayout Padding="24,48,24,24" Spacing="16">
+            <!-- Header -->
+            <Border BackgroundColor="#1976D2" StrokeShape="RoundRectangle 12" Padding="24">
+                <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                    <Label Text="Triple-S" TextColor="White" FontSize="28" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label Text="ESTAMOS CONTIGO" TextColor="#E3F2FD" FontSize="12" HorizontalTextAlignment="Center"/>
+                    <Label Text="Agent Login Portal" TextColor="#BBDEFB" FontSize="11" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Welcome Message -->
+            <Label Text="Agent Portal Access" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Label Text="Enter your credentials to access SOA and enrollment tools." FontSize="12" TextColor="#7F8C8D"/>
+
+            <!-- NPN Field -->
+            <Label Text="NPN Number" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Entry x:Name="NPNTextBox" Placeholder="Enter NPN" Keyboard="Numeric" FontSize="14"/>
+
+            <!-- Password Field -->
+            <Label Text="Password" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Entry x:Name="PasswordBox" Placeholder="Enter password" IsPassword="True" FontSize="14"/>
+
+            <!-- Error Message -->
+            <Border x:Name="ErrorBorder" IsVisible="False" BackgroundColor="#FF5252" StrokeShape="RoundRectangle 6" Padding="8">
+                <Label x:Name="ErrorMessage" Text="" TextColor="White" FontSize="12" />
+            </Border>
+
+            <!-- Login Button -->
+            <Button Text="Login" x:Name="LoginButton" BackgroundColor="#1976D2" TextColor="White" FontAttributes="Bold" HeightRequest="48" Clicked="OnLoginClicked"/>
+
+            <!-- Footer -->
+            <Label Text="Forgot Password?" TextColor="#1976D2" FontSize="12" HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

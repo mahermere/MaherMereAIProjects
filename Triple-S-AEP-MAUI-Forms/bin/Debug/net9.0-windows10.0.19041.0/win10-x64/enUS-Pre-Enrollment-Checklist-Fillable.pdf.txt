@@ -1,0 +1,12 @@
+Fields for C:\Users\maher\source\repos\Triple-S-AEP-MAUI-Forms\Resources\Raw\enUS-Pre-Enrollment-Checklist-Fillable.pdf
+Field: UnderStanding_EOC, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_Providers, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_Pharmacy, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_Formulary, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_PayPartB, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_NextYearCostMayChange, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_OutofNetworkProviders, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_OutofNetworkProvidersMustAgree, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_CSNP, Type: PdfLoadedCheckBoxField, Value: False
+Field: UnderStanding_PlatinoPlans, Type: PdfLoadedCheckBoxField, Value: False
+Field: Understanding_CoverageChangeStart, Type: PdfLoadedCheckBoxField, Value: False

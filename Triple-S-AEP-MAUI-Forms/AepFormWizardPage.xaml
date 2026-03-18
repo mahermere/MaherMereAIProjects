@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Triple_S_AEP_MAUI_Forms.AepFormWizardPage"
+             Title="Triple-S AEP Wizard">
+
+    <ScrollView x:Name="FormScrollView">
+        <VerticalStackLayout Padding="24" Spacing="14">
+            <Label x:Name="StepHeaderLabel"
+                   Text="Step 1 of 8"
+                   FontSize="14"
+                   TextColor="#4A5568" />
+
+            <Label x:Name="StepTitleLabel"
+                   Text="Review Instructions"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="#0057A3" />
+
+            <Button x:Name="OpenCurrentStepImageButton"
+                    IsVisible="False"
+                    Text="Open Step Image"
+                    BackgroundColor="#0057A3"
+                    TextColor="White"
+                    Clicked="OnOpenCurrentStepImageClicked" />
+
+            <VerticalStackLayout x:Name="Step1Layout" Spacing="12">
+                <Label Text="Would you like to review an image of the instructions page?"
+                       FontSize="16" />
+
+                <HorizontalStackLayout Spacing="20">
+                    <RadioButton GroupName="ReviewInstructions"
+                                 Content="Yes"
+                                 CheckedChanged="OnReviewInstructionsChanged" />
+                    <RadioButton GroupName="ReviewInstructions"
+                                 Content="No"
+                                 IsChecked="True"
+                                 CheckedChanged="OnReviewInstructionsChanged" />
+                </HorizontalStackLayout>
+
+                <Button x:Name="OpenInstructionsViewerButton"
+                        IsVisible="False"
+                        Text="Open Instructions Viewer"
+                        BackgroundColor="#0057A3"
+                        TextColor="White"
+                        Clicked="OnOpenInstructionsViewerClicked" />
+
+                <Label Text="Scope of Authority (SOA)"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       Margin="0,12,0,0" />
+
+                <Label Text="Link an existing SOA or create a new one:"
+                       FontSize="12"
+                       TextColor="#4A5568" />
+
+                <Button Text="Select/Link SOA Record"
+                        Clicked="OnSelectSoaRecordClicked"
+                        BackgroundColor="#38A169"
+                        TextColor="White"
+                        HorizontalOptions="FillAndExpand" />
+
+                <Border x:Name="LinkedSoaFrame"
+                        Stroke="#38A169"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12"
+                        IsVisible="False">
+                    <Label x:Name="LinkedSoaLabel"
+                           Text="SOA Linked"
+                           FontSize="12"
+                           TextColor="#38A169" />
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Step2Layout" IsVisible="False" Spacing="14">
+                <Label Text="Section 1"
+                       FontSize="20"
+                       FontAttributes="Bold" />
+
+                <Label Text="All fields on this section are required (unless marked optional)."
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <Label Text="Scope of Appointment #" />
+                <Entry x:Name="ScopeOfAppointmentEntry" Placeholder="Enter appointment number" />
+
+                <Label Text="Select the plan you want to join"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,6,0,0" />
+
+                <Label Text="All plans have Prescription Drug Coverage (Part D)"
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <VerticalStackLayout Spacing="6">
+                    <RadioButton x:Name="OptimoPlusPlan" GroupName="PlanSelection" Content="Optimo Plus (PPO)" />
+                    <RadioButton x:Name="BrillantePlan" GroupName="PlanSelection" Content="Brillante (HMO-POS)" />
+                    <RadioButton x:Name="EnlacePlusPlan" GroupName="PlanSelection" Content="Enlace Plus (HMO)" />
+                    <RadioButton x:Name="AhorroPlusPlan" GroupName="PlanSelection" Content="Ahorro Plus (HMO)" />
+                    <RadioButton x:Name="ContigoEnMentePlan" GroupName="PlanSelection" Content="ContigoEnMente (HMO-SNP)" />
+                    <RadioButton x:Name="ContigoPlusPlan" GroupName="PlanSelection" Content="Contigo Plus (HMO-SNP)" />
+                    <RadioButton x:Name="PlatinoPlusPlan" GroupName="PlanSelection" Content="Platino Plus (HMO-SNP)" />
+                    <RadioButton x:Name="PlatinoAdvancePlan" GroupName="PlanSelection" Content="Platino Advance (HMO-SNP)" />
+                    <RadioButton x:Name="PlatinoBlindaoPlan" GroupName="PlanSelection" Content="Platino Blindao (HMO-SNP)" />
+                    <RadioButton x:Name="PlatinoEnlacePlan" GroupName="PlanSelection" Content="Platino Enlace (HMO-SNP)" />
+                </VerticalStackLayout>
+
+                <Label Text="$0 monthly premium for all plans"
+                       FontAttributes="Bold" />
+
+                <Label Text="Group plan enrollment (if applicable)"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,10,0,0" />
+
+                <Entry x:Name="GroupCoverageEntry" Placeholder="Coverage" />
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Choose:" VerticalOptions="Center" />
+                    <RadioButton x:Name="GroupHmoOption" GroupName="GroupPlanType" Content="HMO" />
+                    <RadioButton x:Name="GroupPpoOption" GroupName="GroupPlanType" Content="PPO" />
+                </HorizontalStackLayout>
+
+                <Entry x:Name="GroupMonthlyPremiumEntry" Placeholder="Monthly Premium" Keyboard="Numeric" />
+                <DatePicker x:Name="GroupEffectiveDatePicker" />
+                <Entry x:Name="GroupSsnEntry" Placeholder="Social Security Number (group plans only)" Keyboard="Numeric" />
+
+                <Label Text="Beneficiary Information"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,10,0,0" />
+
+                <Entry x:Name="FirstNameEntry" Placeholder="First Name" />
+                <Entry x:Name="LastNameEntry" Placeholder="Last Names" />
+                <Entry x:Name="MiddleInitialEntry" Placeholder="Middle Initial (Optional)" MaxLength="1" />
+
+                <DatePicker x:Name="BirthDatePicker" />
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Sex:" VerticalOptions="Center" />
+                    <RadioButton x:Name="FemaleOption" GroupName="Sex" Content="F" />
+                    <RadioButton x:Name="MaleOption" GroupName="Sex" Content="M" />
+                </HorizontalStackLayout>
+
+                <Entry x:Name="HomePhoneEntry" Placeholder="Home Phone Number" Keyboard="Telephone" />
+                <HorizontalStackLayout Spacing="10">
+                    <CheckBox x:Name="HomeCellularCheckBox" />
+                    <Label Text="Check here if cellular" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <Entry x:Name="AlternatePhoneEntry" Placeholder="Alternate Phone Number" Keyboard="Telephone" />
+                <HorizontalStackLayout Spacing="10">
+                    <CheckBox x:Name="AlternateCellularCheckBox" />
+                    <Label Text="Check here if cellular" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Step3Layout" IsVisible="False" Spacing="12">
+                <Label Text="Permanent Residence Address"
+                       FontSize="16"
+                       FontAttributes="Bold" />
+                <Entry x:Name="ResidenceStreetEntry" Placeholder="Street Address 1" />
+                <Entry x:Name="ResidenceStreet2Entry" Placeholder="Street Address 2" />
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                    <Entry x:Name="ResidenceCityEntry" Grid.Column="0" Placeholder="City" />
+                    <Entry x:Name="ResidenceStateEntry" Grid.Column="1" Placeholder="State" />
+                    <Entry x:Name="ResidenceZipEntry" Grid.Column="2" Placeholder="Zip Code" Keyboard="Numeric" />
+                </Grid>
+
+                <Label Text="Mailing Address (if different)"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Entry x:Name="MailingStreetEntry" Placeholder="Street Address 1" />
+                <Entry x:Name="MailingStreet2Entry" Placeholder="Street Address 2" />
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                    <Entry x:Name="MailingCityEntry" Grid.Column="0" Placeholder="City" />
+                    <Entry x:Name="MailingStateEntry" Grid.Column="1" Placeholder="State" />
+                    <Entry x:Name="MailingZipEntry" Grid.Column="2" Placeholder="Zip Code" Keyboard="Numeric" />
+                </Grid>
+
+                <Label Text="Your Medicare Information"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Entry x:Name="MedicareNumberEntry" Placeholder="Medicare Number" />
+
+                <Label Text="Answer these important questions"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+
+                <Label Text="Will you have other prescription drug coverage in addition to Triple-S Advantage?" />
+                <HorizontalStackLayout Spacing="20">
+                    <RadioButton x:Name="OtherCoverageYes" GroupName="OtherCoverage" Content="Yes" />
+                    <RadioButton x:Name="OtherCoverageNo" GroupName="OtherCoverage" Content="No" />
+                </HorizontalStackLayout>
+
+                <Entry x:Name="OtherCoverageNameEntry" Placeholder="Name of other coverage" />
+                <Entry x:Name="OtherCoverageMemberNumberEntry" Placeholder="Member number for this coverage" />
+                <Entry x:Name="OtherCoverageGroupNumberEntry" Placeholder="Group number for this coverage" />
+
+                <Label Text="If you choose any Platino plan, are you enrolled in your State's Medicaid Program?"
+                       Margin="0,8,0,0" />
+                <HorizontalStackLayout Spacing="20">
+                    <RadioButton x:Name="MedicaidYes" GroupName="Medicaid" Content="Yes" />
+                    <RadioButton x:Name="MedicaidNo" GroupName="Medicaid" Content="No" />
+                </HorizontalStackLayout>
+                <Entry x:Name="MedicaidMpiEntry" Placeholder="Medicaid number (MPI)" />
+
+                <Label Text="If enrolling in Contigo Plus, select diagnosed chronic condition"
+                       Margin="0,8,0,0" />
+                <VerticalStackLayout Spacing="4">
+                    <RadioButton x:Name="ConditionDiabetes" GroupName="ContigoPlusCondition" Content="Diabetes Mellitus" />
+                    <RadioButton x:Name="ConditionCardio" GroupName="ContigoPlusCondition" Content="Cardiovascular Disorder" />
+                    <RadioButton x:Name="ConditionHeartFailure" GroupName="ContigoPlusCondition" Content="Chronic Heart Failure" />
+                </VerticalStackLayout>
+
+                <Label Text="If enrolling in ContigoEnMente, diagnosed with any symptoms of dementia?"
+                       Margin="0,8,0,0" />
+                <HorizontalStackLayout Spacing="20">
+                    <RadioButton x:Name="DementiaYes" GroupName="Dementia" Content="Yes" />
+                    <RadioButton x:Name="DementiaNo" GroupName="Dementia" Content="No" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Step4Layout" IsVisible="False" Spacing="12">
+                <Label Text="IMPORTANT: Read and sign below"
+                       FontSize="18"
+                       FontAttributes="Bold" />
+
+                <Label Text="By completing this enrollment application, I agree to the following:"
+                       FontAttributes="Bold" />
+
+                <Label Text="1. I must keep both Hospital (Part A) and Medical (Part B) to stay in Triple-S Advantage." />
+                <Label Text="2. I acknowledge Triple-S Advantage may share enrollment information with Medicare." />
+                <Label Text="3. I understand I can be enrolled in only one MA plan at a time." />
+                <Label Text="4. I understand plan benefits and services covered by Triple-S Advantage." />
+                <Label Text="5. The information in this form is correct to the best of my knowledge." />
+                <Label Text="6. My signature confirms I read and understood this application." />
+
+                <Label Text="Applicant Signature"
+                       FontAttributes="Bold"
+                       Margin="0,6,0,0" />
+                <Entry x:Name="ApplicantSignatureEntry" Placeholder="Signature" />
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="Capture Signature"
+                            Clicked="OnCaptureApplicantSignatureClicked" />
+                    <Button x:Name="ClearApplicantSignatureButton"
+                            Text="Clear"
+                            IsVisible="False"
+                            Clicked="OnClearApplicantSignatureClicked" />
+                </HorizontalStackLayout>
+                <Image x:Name="ApplicantSignaturePreview"
+                       IsVisible="False"
+                       HeightRequest="90"
+                       Aspect="AspectFit" />
+                <DatePicker x:Name="ApplicantSignatureDatePicker" />
+
+                <Label Text="Only for electronic enrollment application completed in person"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Entry x:Name="EnrollNowSignatureEntry" Placeholder="Enroll Now signature" />
+                <DatePicker x:Name="EnrollNowDatePicker" />
+
+                <Label Text="Only for enrollment application completed by phone"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Entry x:Name="UcidCallNumberEntry" Placeholder="Call number (UCID)" />
+                <DatePicker x:Name="PhoneEnrollmentDatePicker" />
+
+                <Label Text="Witness"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Entry x:Name="WitnessEntry" Placeholder="Witness" />
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="Capture Signature"
+                            Clicked="OnCaptureWitnessSignatureClicked" />
+                    <Button x:Name="ClearWitnessSignatureButton"
+                            Text="Clear"
+                            IsVisible="False"
+                            Clicked="OnClearWitnessSignatureClicked" />
+                </HorizontalStackLayout>
+                <Image x:Name="WitnessSignaturePreview"
+                       IsVisible="False"
+                       HeightRequest="90"
+                       Aspect="AspectFit" />
+                <DatePicker x:Name="WitnessDatePicker" />
+
+                <Label Text="If you are the authorized/legal representative, complete the fields below"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Entry x:Name="RepresentativeNameEntry" Placeholder="Name" />
+                <Entry x:Name="RepresentativeAddressEntry" Placeholder="Address" />
+                <Entry x:Name="RepresentativePhoneEntry" Placeholder="Phone Number" Keyboard="Telephone" />
+                <Entry x:Name="RepresentativeRelationshipEntry" Placeholder="Relationship to Enrollee" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Step5Layout" IsVisible="False" Spacing="12">
+                <Label Text="SECTION 2"
+                       FontSize="20"
+                       FontAttributes="Bold" />
+
+                <Label Text="All fields in this section are optional"
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <Label Text="Answering these questions is your choice. You can't be denied coverage because you don't fill them out."
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <Label Text="Language preference"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Label Text="Select one if you want us to send you information in a language other than English:" />
+                <HorizontalStackLayout Spacing="20">
+                    <RadioButton x:Name="SpanishLanguage" GroupName="Language" Content="Spanish" />
+                    <Entry x:Name="OtherLanguageEntry" Placeholder="Other (indicate)" />
+                </HorizontalStackLayout>
+
+                <Label Text="Accessible format"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Label Text="Select one if you want us to send you information in an accessible format:" />
+                <VerticalStackLayout Spacing="4">
+                    <RadioButton x:Name="BrailleFormat" GroupName="Format" Content="Braille" />
+                    <RadioButton x:Name="LargePrintFormat" GroupName="Format" Content="Large Print" />
+                    <RadioButton x:Name="AudioCdFormat" GroupName="Format" Content="Audio CD" />
+                    <RadioButton x:Name="DataCdFormat" GroupName="Format" Content="Data CD" />
+                </VerticalStackLayout>
+
+                <Label Text="Work status"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Do you work?" VerticalOptions="Center" />
+                    <RadioButton x:Name="WorkYes" GroupName="Work" Content="Yes" />
+                    <RadioButton x:Name="WorkNo" GroupName="Work" Content="No" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Does your spouse work?" VerticalOptions="Center" />
+                    <RadioButton x:Name="SpouseWorkYes" GroupName="SpouseWork" Content="Yes" />
+                    <RadioButton x:Name="SpouseWorkNo" GroupName="SpouseWork" Content="No" />
+                </HorizontalStackLayout>
+
+                <Label Text="For HMO Plans - Primary Care Physician"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Entry x:Name="PcpNameEntry" Placeholder="Choose PCP name from Providers Directory" />
+                <Entry x:Name="PcpPhoneEntry" Placeholder="Phone Number" Keyboard="Telephone" />
+                <Label Text="If you do not choose a PCP, one will be assigned to you automatically."
+                       FontSize="12"
+                       TextColor="#4A5568" />
+
+                <Label Text="Materials via e-mail"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Label Text="I want to get the following materials and information via e-mail (select one or more):" />
+                <VerticalStackLayout Spacing="4">
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="EmailProviderDirectory" />
+                        <Label Text="Provider Directory" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="EmailAnnualNotice" />
+                        <Label Text="Annual Notice of Changes" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="EmailEvidenceOfCoverage" />
+                        <Label Text="Evidence of Coverage" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="EmailSummaryOfBenefits" />
+                        <Label Text="Summary of Benefits" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="EmailDrugFormulary" />
+                        <Label Text="Prescription Drug Formulary" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="EmailPromotionalMaterials" />
+                        <Label Text="Promotional materials" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="EmailEnrollmentConfirmation" />
+                        <Label Text="Electronic Enrollment Confirmation" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <Label Text="Contact authorization"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Label Text="Do you agree to be contacted using the contact information provided by you or by means authorized by law?" />
+                
+                <VerticalStackLayout Spacing="12">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Text message:" FontAttributes="Bold" />
+                        <HorizontalStackLayout Spacing="20">
+                            <RadioButton x:Name="TextYes" GroupName="TextContact" Content="Yes" />
+                            <RadioButton x:Name="TextNo" GroupName="TextContact" Content="No" />
+                        </HorizontalStackLayout>
+                        <Entry x:Name="TextNumberEntry" Placeholder="Number" Keyboard="Telephone" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Email:" FontAttributes="Bold" />
+                        <HorizontalStackLayout Spacing="20">
+                            <RadioButton x:Name="EmailContactYes" GroupName="EmailContact" Content="Yes" />
+                            <RadioButton x:Name="EmailContactNo" GroupName="EmailContact" Content="No" />
+                        </HorizontalStackLayout>
+                        <Entry x:Name="EmailAddressEntry" Placeholder="Address" Keyboard="Email" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Step6Layout" IsVisible="False" Spacing="12">
+                <Label Text="Communication opt-out notice"
+                       FontSize="13"
+                       TextColor="#4A5568" />
+                <Label Text="For opting out of receiving communications via e-mail or text messages, you can communicate anytime with our Member Services Center at 1-888-620-1919, Monday through Sunday from 8:00 a.m. to 8:00 p.m. TTY (Hearing Impaired) should call 1-866-620-2520."
+                       FontSize="12"
+                       TextColor="#4A5568" />
+
+                <Label Text="Emergency Contact"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <Entry x:Name="EmergencyContactEntry" Placeholder="Emergency Contact" />
+                <Entry x:Name="EmergencyPhoneEntry" Placeholder="Phone Number" Keyboard="Telephone" />
+                <Entry x:Name="EmergencyRelationshipEntry" Placeholder="Relationship to you" />
+
+                <Label Text="Retiree information (Only for employer groups)"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Are you the retiree?" VerticalOptions="Center" />
+                    <RadioButton x:Name="RetireeYes" GroupName="Retiree" Content="Yes" />
+                    <RadioButton x:Name="RetireeNo" GroupName="Retiree" Content="No" />
+                </HorizontalStackLayout>
+                <DatePicker x:Name="RetirementDatePicker" />
+                <Entry x:Name="RetireeNameEntry" Placeholder="If no, name of retiree" />
+
+                <Label Text="Covering spouse or dependents (Only for employer groups)"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <HorizontalStackLayout Spacing="20">
+                    <RadioButton x:Name="CoveringYes" GroupName="CoveringDependents" Content="Yes" />
+                    <RadioButton x:Name="CoveringNo" GroupName="CoveringDependents" Content="No" />
+                    <RadioButton x:Name="CoveringNotApplicable" GroupName="CoveringDependents" Content="Not applicable" />
+                </HorizontalStackLayout>
+                <Entry x:Name="SpouseNameEntry" Placeholder="If Yes, name of spouse" />
+                <Entry x:Name="DependentsNamesEntry" Placeholder="Name(s) of dependent(s)" />
+
+                <Label Text="Long-term care facility"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <HorizontalStackLayout Spacing="20">
+                    <Label Text="Are you a resident in a long-term care facility?" VerticalOptions="Center" />
+                    <RadioButton x:Name="LongTermCareYes" GroupName="LongTermCare" Content="Yes" />
+                    <RadioButton x:Name="LongTermCareNo" GroupName="LongTermCare" Content="No" />
+                </HorizontalStackLayout>
+                <Entry x:Name="InstitutionNameEntry" Placeholder="Name of Institution" />
+                <Entry x:Name="AdministratorNameEntry" Placeholder="Administrator's name" />
+                <Entry x:Name="InstitutionPhoneEntry" Placeholder="Institution or administrator's phone number" Keyboard="Telephone" />
+
+                <Label Text="Current Health Plan"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+                <VerticalStackLayout Spacing="4">
+                    <RadioButton x:Name="CurrentPlanMmm" GroupName="CurrentHealthPlan" Content="MMM" />
+                    <RadioButton x:Name="CurrentPlanHumana" GroupName="CurrentHealthPlan" Content="Humana" />
+                    <RadioButton x:Name="CurrentPlanMcs" GroupName="CurrentHealthPlan" Content="MCS" />
+                    <RadioButton x:Name="CurrentPlanMedicareOriginal" GroupName="CurrentHealthPlan" Content="Medicare Original" />
+                    <RadioButton x:Name="CurrentPlanUsaPlan" GroupName="CurrentHealthPlan" Content="USA Plan" />
+                    <Entry x:Name="CurrentPlanOtherEntry" Placeholder="Other" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Step7Layout" IsVisible="False" Spacing="12">
+                <Label Text="Paying your Plan Premium:"
+                       FontSize="18"
+                       FontAttributes="Bold" />
+
+                <Label Text="You can pay your monthly plan premium by mail, Electronic Funds Transfer (EFT), or credit card each month. You can also choose to pay your premium by having it automatically taken out of your Social Security or Railroad Retirement Board (RRB) benefit check each month."
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <Label Text="If you have to pay a Part D-Income Related Monthly Adjustment Amount (Part D-IRMAA), you must pay this extra amount in addition to your plan premium. DON'T pay Triple-S Advantage, Inc. the Part D-IRMAA."
+                       FontSize="13"
+                       TextColor="#4A5568"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+
+                <Label Text="Please select a premium and/or late enrollment penalty payment option:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,0" />
+
+                <Label Text="If you don't select a payment option, you will get a coupon book."
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <VerticalStackLayout Spacing="10">
+                    <RadioButton x:Name="PaymentCouponBook" GroupName="PaymentOption" Content="Get a coupon book" />
+
+                    <RadioButton x:Name="PaymentEft" GroupName="PaymentOption" Content="Electronic Funds Transfer (EFT) from your bank account each month" />
+                    <VerticalStackLayout Margin="30,0,0,0" Spacing="8">
+                        <Label Text="Please enclose a VOIDED check or provide the following:" FontSize="12" />
+                        <Entry x:Name="EftAccountHolderEntry" Placeholder="Account holder's name" />
+                        <Entry x:Name="EftRoutingNumberEntry" Placeholder="Bank routing number" Keyboard="Numeric" />
+                        <Entry x:Name="EftAccountNumberEntry" Placeholder="Bank account number" Keyboard="Numeric" />
+                        <HorizontalStackLayout Spacing="20">
+                            <Label Text="Account type:" VerticalOptions="Center" />
+                            <RadioButton x:Name="EftChecking" GroupName="EftAccountType" Content="Checking" />
+                            <RadioButton x:Name="EftSavings" GroupName="EftAccountType" Content="Savings" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <RadioButton x:Name="PaymentCreditCard" GroupName="PaymentOption" Content="Credit Card" Margin="0,8,0,0" />
+                    <VerticalStackLayout Margin="30,0,0,0" Spacing="8">
+                        <Label Text="Please provide the following information:" FontSize="12" />
+                        <HorizontalStackLayout Spacing="20">
+                            <Label Text="Type of card:" VerticalOptions="Center" />
+                            <RadioButton x:Name="CreditCardVisa" GroupName="CreditCardType" Content="Visa" />
+                            <RadioButton x:Name="CreditCardMasterCard" GroupName="CreditCardType" Content="Master Card" />
+                        </HorizontalStackLayout>
+                        <Entry x:Name="CreditCardHolderEntry" Placeholder="Name of account holder as it appears on card" />
+                        <Entry x:Name="CreditCardNumberEntry" Placeholder="Card number" Keyboard="Numeric" />
+                        <DatePicker x:Name="CreditCardExpirationPicker" />
+                    </VerticalStackLayout>
+
+                    <RadioButton x:Name="PaymentAutoDeduction" GroupName="PaymentOption" Content="Automatic deduction from your monthly Social Security or Railroad Retirement Board (RRB) benefit check" Margin="0,8,0,0" />
+                    <HorizontalStackLayout Margin="30,0,0,0" Spacing="20">
+                        <Label Text="I get monthly benefits from:" VerticalOptions="Center" />
+                        <RadioButton x:Name="BenefitsSocialSecurity" GroupName="BenefitsSource" Content="Social Security" />
+                        <RadioButton x:Name="BenefitsRrb" GroupName="BenefitsSource" Content="RRB" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Step8Layout" IsVisible="False" Spacing="12">
+                <Label Text="Social Security/RRB Deduction Information"
+                       FontSize="13"
+                       TextColor="#4A5568"
+                       Margin="0,0,0,8" />
+                <Label Text="The Social Security/RRB deduction may take two or more months to begin after Social Security or RRB approves the deduction. In most cases, if Social Security or RRB accepts your request for automatic deduction, the first deduction from your Social Security or RRB benefit check will include all premiums due from your enrollment effective date up to the point withholding begins. If Social Security or RRB does not approve your request for automatic deduction, we will send you a paper bill for your monthly premiums."
+                       FontSize="12"
+                       TextColor="#4A5568" />
+
+                <Label Text="Important information about Special Supplemental Benefits for the Chronically Ill:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,12,0,8" />
+
+                <Label Text="Some of our plans offer Special Supplemental Benefits for the Chronically Ill (SSBCI), this means that to be eligible to receive these benefits, the member must comply with all the following:"
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <VerticalStackLayout Margin="20,0,0,0" Spacing="4">
+                    <Label Text="• Have one or more comorbid and medically complex chronic conditions that are life-threatening or significantly limit the member's overall health or function;" FontSize="12" />
+                    <Label Text="• Have a high risk of hospitalization or other adverse health outcomes; and" FontSize="12" />
+                    <Label Text="• Require intensive care coordination." FontSize="12" />
+                </VerticalStackLayout>
+
+                <Label Text="If you elected coverage that includes Special Supplemental Benefits for the Chronically Ill (SSBCI), please note that in order to receive these benefits you must meet all of the requirements set forth above, and that Triple-S will perform a clinical verification in order to validate your eligibility. If after the clinical validation you do not meet the requirements, you will be eligible to receive all other benefits in your plan package except for the Special Supplemental Benefits for the Chronically Ill (SSBCI)."
+                       FontSize="12"
+                       TextColor="#4A5568"
+                       Margin="0,8,0,0" />
+
+                <Label Text="I certify to have received the following documents from the Triple-S Advantage representative:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,12,0,8" />
+
+                <VerticalStackLayout Spacing="8">
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="DocInitialPackage" />
+                        <Label Text="Initial Package (Summary of Benefits, Pre-Enrollment Checklist)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="DocMedicareStarRatings" />
+                        <Label Text="Medicare Star Ratings Notice" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="DocWebAvailability" />
+                        <Label Text="Notice of web availability of Evidence of Coverage, Drug Formulary and Provider and Pharmacy Directory" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="DocEnrollmentConfirmation" />
+                        <Label Text="Enrollment Confirmation (if applicable)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="DocEnrollmentFormCopy" />
+                        <Label Text="Enrollment Form Copy (if applicable)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="DocAttestationEligibility" />
+                        <Label Text="Attestation of Eligibility for an Enrollment Period (if applicable)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="DocPrecertificationChronic" />
+                        <Label Text="Precertification of Chronic Diseases (if applicable)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="DocAuthorizationDisclose" />
+                        <Label Text="Authorization to Disclose Protected Health Information (PHI form) (if applicable)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="Step9Layout" IsVisible="False" Spacing="12">
+                <Label Text="Notice of web availability"
+                       FontSize="16"
+                       FontAttributes="Bold" />
+                <Label Text="The following only applies if the Notice of web availability of Evidence of Coverage, Drug Formulary and Provider and Pharmacy Directory was not provided:"
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <VerticalStackLayout Spacing="8">
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="NoticeEvidenceOfCoverage" />
+                        <Label Text="Evidence of Coverage and Durable Medical Equipment Formulary (if applicable)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="NoticeProviderDirectory" />
+                        <Label Text="Provider and Pharmacy Directory (if applicable)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="NoticeDrugFormulary" />
+                        <Label Text="Drug Formulary (if applicable)" VerticalOptions="Center" FontSize="13" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <Label Text="For individuals helping enrollee with completing this form only:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,12,0,8" />
+
+                <Label Text="Complete this section if you're an individual (i.e. agents, brokers, SHIP counselors, family members, or other third parties) helping an enrollee fill out this form."
+                       FontSize="13"
+                       TextColor="#4A5568" />
+
+                <Entry x:Name="HelperNameEntry" Placeholder="Name" />
+                <Entry x:Name="HelperRelationshipEntry" Placeholder="Relationship to enrollee" />
+                <Entry x:Name="HelperSignatureEntry" Placeholder="Signature" />
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="Capture Signature"
+                            Clicked="OnCaptureHelperSignatureClicked" />
+                    <Button x:Name="ClearHelperSignatureButton"
+                            Text="Clear"
+                            IsVisible="False"
+                            Clicked="OnClearHelperSignatureClicked" />
+                </HorizontalStackLayout>
+                <Image x:Name="HelperSignaturePreview"
+                       IsVisible="False"
+                       HeightRequest="90"
+                       Aspect="AspectFit" />
+                <Entry x:Name="HelperNpnEntry" Placeholder="National Producer Number (Agents/Brokers only)" />
+
+                <Label Text="Official Use Only:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,12,0,8" />
+
+                <DatePicker x:Name="OfficialReceiptDatePicker" />
+                <Entry x:Name="OfficialPlanIdEntry" Placeholder="Plan ID #" />
+                <DatePicker x:Name="OfficialEffectiveDatePicker" />
+
+                <Label Text="PRIVACY ACT STATEMENT"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,12,0,8" />
+
+                <Label Text="The Centers for Medicare &amp; Medicaid Services (CMS) collects information from Medicare plans to track beneficiary enrollment in Medicare Advantage (MA) Plans, improve care, and for the payment of Medicare benefits. Sections 1851 of the Social Security Act and 42 CFR §§ 422.50 and 422.60 authorize the collection of this information. CMS may use, disclose and exchange enrollment data from Medicare beneficiaries as specified in the System of Records Notice (SORN) 'Medicare Advantage Prescription Drug (MAPx)', System No. 09-70-0588. Your response to this form is voluntary. However, failure to respond may affect enrollment in the plan."
+                       FontSize="12"
+                       TextColor="#4A5568" />
+
+                <Label Text="Triple-S Advantage, Inc. is an independent licensee of BlueCross BlueShield Association. Platino plans are available to anyone who has both Medical Assistance from the State and Medicare."
+                       FontSize="12"
+                       TextColor="#4A5568"
+                       Margin="0,8,0,0" />
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout Margin="0,10,0,0" Spacing="10">
+                <Button x:Name="BackButton"
+                        Text="Back"
+                        IsEnabled="False"
+                        Clicked="OnBackClicked"
+                        HorizontalOptions="FillAndExpand" />
+
+                <Button x:Name="NextButton"
+                        Text="Next"
+                        Clicked="OnNextClicked"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="#0057A3"
+                        TextColor="White" />
+                
+                <Button Text="Close"
+                        Clicked="OnCloseClicked"
+                        BackgroundColor="#E53E3E"
+                        TextColor="White"
+                        HorizontalOptions="Start" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

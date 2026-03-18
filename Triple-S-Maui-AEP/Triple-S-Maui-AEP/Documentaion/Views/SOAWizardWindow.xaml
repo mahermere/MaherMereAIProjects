@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:resx="clr-namespace:TripleSPOC.Resources.Localization;assembly=TripleSPOC"
+             x:Class="TripleS.SOA.AEP.UI.Views.SOAWizardWindow"
+             Title="SOA Wizard">
+    <ScrollView VerticalScrollBarVisibility="Always">
+        <VerticalStackLayout Padding="20">
+        <Label x:Name="TitleLabel" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+        <BoxView HeightRequest="2" BackgroundColor="#1976D2" Margin="0,10,0,10" />
+        <!-- Step 1: Beneficiary Info -->
+        <StackLayout x:Name="Step1Panel">
+            <Label x:Name="Step1Label" FontSize="16" FontAttributes="Bold" />
+            <Label x:Name="FirstNameLabel1" />
+            <Entry x:Name="FirstNameBox1" />
+            <Label x:Name="LastNameLabel1" />
+            <Entry x:Name="LastNameBox1" />
+            <Label x:Name="DOBLabel1" />
+            <DatePicker x:Name="DOBPicker1" Format="MM/dd/yyyy" />
+            <Label x:Name="MedicareLabel1" />
+            <Entry x:Name="MedicareBox1" />
+            <Label x:Name="PhoneLabel1" />
+            <Entry x:Name="PhoneBox1" />
+        </StackLayout>
+        <!-- Step 2: Appointment Details (initially hidden) -->
+        <StackLayout x:Name="Step2Panel" IsVisible="False">
+            <Label x:Name="Step2Label" FontSize="16" FontAttributes="Bold" />
+            <Label x:Name="AppointmentDateLabel2" />
+            <DatePicker x:Name="AppointmentDatePicker2" Format="MM/dd/yyyy" />
+            <Label x:Name="AppointmentTimeLabel2" />
+            <TimePicker x:Name="AppointmentTimePicker2" />
+            <Label x:Name="AgentNameLabel2" />
+            <Entry x:Name="AgentNameBox2" />
+            <Label x:Name="ContactMethodLabel2" />
+            <Picker x:Name="ContactMethodPicker2" />
+        </StackLayout>
+        <!-- Step 3: Scope of Appointment (initially hidden) -->
+        <StackLayout x:Name="Step3Panel" IsVisible="False">
+            <Label x:Name="Step3Label" FontSize="16" FontAttributes="Bold" />
+            <Label x:Name="SelectPlansLabel3" />
+            <Label x:Name="AdvantageCheckLabel3" />
+            <CheckBox x:Name="CBAdvantage3" />
+            <Label x:Name="AdvantageLabel3" />
+            <Label x:Name="DrugCheckLabel3" />
+            <CheckBox x:Name="CBDrug3" />
+            <Label x:Name="DrugLabel3" />
+            <Label x:Name="SupplementCheckLabel3" />
+            <CheckBox x:Name="CBSupplement3" />
+            <Label x:Name="SupplementLabel3" />
+            <Label x:Name="DentalCheckLabel3" />
+            <CheckBox x:Name="CBDental3" />
+            <Label x:Name="DentalLabel3" />
+            <BoxView HeightRequest="10" />
+            <Label x:Name="SignatureLabel3" />
+            <toolkit:DrawingView x:Name="SignaturePad3" HeightRequest="120" BackgroundColor="#EEE" Margin="0,5,0,5" />
+            <Button x:Name="ClearSignatureButton3" Margin="0,5,0,5" />
+        </StackLayout>
+        <!-- Step 4: Attestation & Submission (initially hidden) -->
+        <StackLayout x:Name="Step4Panel" IsVisible="False">
+            <Label x:Name="Step4Label" FontSize="16" FontAttributes="Bold" />
+            <Label x:Name="AttestCheckLabel4" />
+            <CheckBox x:Name="AttestCheckbox4" />
+            <Label x:Name="AttestLabel4" />
+        </StackLayout>
+        <!-- Navigation Buttons -->
+        <HorizontalStackLayout Spacing="12" Margin="0,20,0,0">
+            <Button x:Name="BackButton" />
+            <Button x:Name="NextButton" />
+        </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

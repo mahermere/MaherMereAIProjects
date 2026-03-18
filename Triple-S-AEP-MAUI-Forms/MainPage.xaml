@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Triple_S_AEP_MAUI_Forms.MainPage"
+             Title="Main">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+            <Label Text="Welcome to Triple-S"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#0057A3" />
+
+            <Label Text="Agent Dashboard"
+                   FontSize="16"
+                   TextColor="#4A5568" />
+
+            <Label Text="What would you like to do?"
+                   Margin="0,12,0,0"
+                   FontSize="16" />
+
+            <Button x:Name="CreateAepFormButton"
+                    Text="Create Triple-S AEP Form"
+                    HeightRequest="48"
+                    BackgroundColor="#0057A3"
+                    TextColor="White"
+                    Clicked="OnCreateAepFormClicked" />
+
+            <Button x:Name="CreateSoaFormButton"
+                    Text="Create Scope of Authority (SOA) Form"
+                    HeightRequest="48"
+                    BackgroundColor="#0057A3"
+                    TextColor="White"
+                    Clicked="OnCreateSoaFormClicked" />
+
+            <Button x:Name="DashboardButton"
+                    Text="View Enrollment Dashboard"
+                    HeightRequest="48"
+                    BackgroundColor="#38A169"
+                    TextColor="White"
+                    Clicked="OnDashboardClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

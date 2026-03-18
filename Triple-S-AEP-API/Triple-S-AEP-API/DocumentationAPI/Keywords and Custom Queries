@@ -1,0 +1,364 @@
+<!-- Document Query response.
+
+Query with Keywords
+When creating document query and using keywords to narrow the search it is important to know about searching for NULL or keywords that have not been assigned a value on a document.
+
+The short answer, it is not possible. Why? Since OnBase is a database driven application, keywords and there values are associated with a particular document which is stored in the database. However, if a value has not been assigned to a Keyword associated to a Document then there would be no row in the database to identify that particular Keyword. So, when working with a document query it would not be possible to search for a NULL or keyword without an associated value as it would not exists in the database and therefore not provide anything to search.
+
+Although, finding documents that do not have a keyword associated is still possible. Using the ExecuteQueryResults method allow the ability to include additional parameters to the query returning keywords without an associated value. Please refer to *placeholde
+
+Keywords Overview
+Keywords are used in every OnBase solution, and are essential for efficient document management and retrieval. Keywords are an important part of how OnBase because they provide methods to effectively index, classify, differentiate, and retrieve documents.
+
+There are three classifications of OnBase Keywords and depending on your solution may contain all 1 or many classifications.
+
+Standalone
+
+Single Instance Keyword Group (SIKG)
+
+Multi-Instance Keyword Group (MIKG)
+
+Keyword Classification
+Standalone Keywords
+Standalone Keywords are the most commonly used. These individual keywords are not bound any other keywords and may have multiple instances of the keyword value on a single document.
+
+Single Instance Keyword Group
+This is a collection of Keyword Types assigned as a whole to a Document Type. Unlike Standalone Keywords, Keyword Types assigned to the group may not contain more than one instance.
+
+Multi-Instance Keyword Group
+This is a collection of Keyword Types assigned as a whole to a Document Type. Unlike SIKGs, this group of Keyword Types may be repeated on a document. Furthermore, a MIKG respects the relationships among the Keyword Types within the Keyword Type Group.
+
+Keyword Datasets
+Keyword Types can be configured in OnBase to use Dataset. A Dataset provides the user the ability to choose preset Keyword Values. In the OnBase Clients, this is presented as a select or drop-down textbox.
+
+Datasets
+Standalone Keyword Dataset
+Standalone Datasets are unique to the Keyword Type configured in OnBase Configuration. They are single purpose select or drop-down values.
+
+Cascading Keyword Dataset
+Cascading Datasets are configured with filtering waterfall relationship between 2 or more Keywords Types that are configured to use datasets.
+
+Each Keyword Type configured in the Cascading Dataset configuration will be used to filter the next set values for the next Keyword Type. For example, if there are three Keyword Types that are part of the cascade there would be a 'root' or top level Keyword Type. Once a value is selected, the root value is then used to filter out the next or child Keyword Type Dataset. Finally, when the second or first child value is selected, it is then used to filter the last Keyword Type Dataset.
+
+External Keyword Dataset
+External Datasets are an extension of the Standalone Datasets. It provides the ability retrieve values from external source outside of OnBase. Sources such as a third-party database or an accessible web service that connects to third-party system.
+
+If the standard OnBase Dataset functionality does not provide enough flexibility then it is possible use a Unity Script to acquire the data needed. Is functionality is done through the use of IExternalKeywordDataSetScript interface. This is one of the many Unity Script Interfaces
+
+Autofill Keyword Sets
+AutoFill Keyword Sets, commonly referred to as "Keysets," refer to a specific set of functionality within OnBase that allow the user to define relationships between a Primary Keyword and one or more Secondary Keywords. Keysets allow for the rapid lookup of Secondary Keywords associated with a provided Primary Keyword.
+
+Keysets vs. Keyset Records
+It is important to recognize the distinction between a Keyset and a Keyset Record. A Keyset is a particular association between a Primary Keyword Type and one or more Secondary Keyword Types, as configured in OnBase. Keysets themselves must be created within the OnBase Configuration module.
+
+A Keyset Record is a specific instance of a that particular Keyset.
+
+  Tip
+
+Remember that a Keyset is simply an association between Keyword Types and must be created in OnBase configuration. For Example: "Social Security Number" => "First Name", "Last Name", "Date of Birth"
+
+In this example, "Social Security Number" is the Primary Keyword Type. "First Name", "Last Name", and "Date of Birth" are all Secondary Keyword Types associated with each distinct social security number.
+
+An example of a Keyset Record for this Keyset could then be: "000-00-0000" => "Antonio", "Vivaldi", "03/04/1678"
+
+Using Keyset and Keyset Records
+Custom scripts and applications that use the OnBase Unity API are able to programmatically create new Keyset Records as well as access and manipulate those that already exist.
+
+  Note
+
+The user must have rights to Create, Update and Delete a Keyset. There are no user specific rights associated with Retrieve.
+
+Specifically, using the Unity API, a programmer is able to perform the following actions:
+
+Create a new Keyset Record
+
+Retrieve Keyset Records with a particular Primary Keyword value ("keyset expansion")
+
+Update one or all existing Keyset Records with a particular Primary Keyword value
+
+Delete an existing Keyset Record
+
+Tips for Working with Keyset Records
+Blank Keywords
+If you are updating a Keyset Record and one of the Keyword values needs to be removed or set to an empty value, you should use the CreateBlankKeyword method off the KeywordType object. This method will return an object of type Keyword with its IsBlank property set to true. When retrieving Keyword values, this property should be checked prior to retrieval, in order to avoid an exception being thrown.
+
+Primary Keywords
+Primary Keywords cannot be updated. An exception will be thrown if you attempt to do so.
+
+Keywords in Unity
+In the Unity programming model, the Keywords that belong to a given document are grouped together into Keyword Records which are used to classify and logically group the Keywords. When a developer needs to access, modify, or query against these Keywords, they will be interacting with one of three Unity Keyword Record classes, each of which has a distinct purpose within the Unity object model.
+
+Image 33
+Unity Keyword Records
+Keyword Records are containers that allow Keywords to be grouped together, and allow developers to easily identify whether/how Keywords are grouped together. The records are grouped into the following Record Types:
+
+Standalone Keyword Record Type
+Standalone Keywords are added to a document, one Keyword Record at a time. Unlike other Keyword Records, Keywords within this record are not grouped with other Keywords. This allows multiple instances of a given Keyword Type within this record. This is the same behavior exhibited by the OnBase Client. A Document object can also never have more than one Standalone Keyword Record. The Standalone Keyword Record will always have a KeywordRecordType of Standalone.
+
+Single-Instance Keyword Record Type
+In OnBase Configuration, administrators may group Keyword Types together into Keyword Type Groups to enhance performance. Keyword Types that belong to the Keyword Type Group may only be assigned one value. In other words, a given Keyword Type Group may only contain a single instance of the Keywords within the group. If the Keyword Type Group is then configured such that it does not allow multiple instances of the Keyword Type Group, it is referred to as a Single-Instance Keyword Record in the Unity API.
+
+In the Unity model, each Single-Instance Keyword Record corresponds to a Keyword Type Group, and contains a list of all Keywords assigned to the document that are part of that same Keyword Type Group. These records will have a KeywordRecordType.RecordType of SingleInstance. The KeywordRecordType.Name and KeywordRecordType.ID will correspond to the name and ID of the Keyword Type Group configured in OnBase.
+
+Multi-Instance Keyword Record Type
+Multi-Instance Keyword Type Groups are simply Keyword Type Groups that can have multiple instances of the group on a document. OnBase retains the grouping for each set of values on the document. In the Unity programming model, these Keywords are accessed via Multi-Instance Keyword Records.
+
+In the Unity model, each Multi-Instance Keyword Record corresponds to a grouping of Keyword values that belong to a given Multi-Instance Keyword Type Group. If there are multiple instances of Keywords in the Keyword Type Group on a document, each instance will belong to a separate Multi-Instance Keyword Record. These records will have a KeywordRecordType.RecordType of MultiInstance. The KeywordRecordType.Name and KeywordRecordType.ID will correspond to the name and ID of the Keyword Type Group configured in OnBase.
+
+The example below illustrates a Document Type called Customer Orders. The Customer Orders document contains:
+
+Order Number
+
+Order Total Amount
+
+Customer First Name and Last Name Keywords, grouped together into Single Instance Keyword Record, because the administrator configured a Keyword Type Group called "Customer Name" and applied it to the Customer Orders Document Type.
+
+Two Order Item Multi-Instance Keyword Records: each with item Description, Item Quantity, and Item Amount Keywords. Since the OnBase Administrator configured Order Item as a Multi-Instance Keyword Group, each set of Order Items entered is stored in its own distinct record.
+
+Image 34
+Unity Keyword Record Classes
+In the Unity API model, there are three different classes used for Keyword Records, that allow interaction with Keywords. Each of these objects represents a Keyword Record in a different state. Below is a description of the different Keyword Record classes, as well as when each of the different classes would be used.
+
+KeywordRecord
+A KeywordRecord represents a single Keyword Record on an existing document. This record is meant for the retrieval of Keyword data, and its properties are not editable. It is accessed from the KeywordRecords property of an existing Document object.
+
+EditableKeywordRecord
+Used when archiving documents or when adding or modifying a Keyword record on an existing document. Its properties are editable, and it can be created from a KeywordRecord object, or a KeywordRecordType object.
+
+QueryKeywordRecord
+Used when querying documents. It is used to limit the results of a query, based on the Keyword values and operators stored in the QueryKeywordRecord.
+
+
+CustomQuery Class
+A CustomQuery
+Definition
+Namespace: Hyland.Unity
+Assembly: Hyland.Unity (in Hyland.Unity.dll) Version: 26.1.0.237
+C#
+public sealed class CustomQuery : UnityObject
+Inheritance
+Object  
+  UnityObject  
+  CustomQuery
+Properties
+DocumentTypes	The DocumentTypes for this Custom Query
+Icon	Contains the icon that is to be used to represent this custom query.
+ID	The ID of the Custom Query
+Instructions	Asks the custom query for its user instructions
+KeywordTypes	The KeywordTypes for this Custom Query
+Name	The Name of the Custom Query
+Type	Returns the custom query's type.
+WorkflowFilterOnly	If TRUE, this custom query has been configured as a "Workflow Filter Only".
+Methods
+Equals	Determines whether the specified object is equal to the current object.
+(Inherited from Object)
+Finalize	Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.
+(Inherited from Object)
+GetHashCode	Serves as the default hash function.
+(Inherited from Object)
+GetType	Gets the Type of the current instance.
+(Inherited from Object)
+MemberwiseClone	Creates a shallow copy of the current Object.
+(Inherited from Object)
+ToString	Returns a string that represents the current object.
+(Inherited from Object)
+Extension Methods
+
+Accessing Keywords in Keyword Records
+In the Unity programming model, all Keywords are stored within a Keyword Record. See the Keywords in Unity section for more general information about Keyword Records.
+
+To find a Keyword value for an OnBase document, a developer must first retrieve to the Keyword Record that contains the Keyword. The Unity Document object contains a list of all Keyword Records stored for a given document.
+
+Developers can use a foreach loop to iterate through all Keyword Records on a document, and another foreach loop to iterate though the Keywords in each Keyword Record. Once a Keyword object has been retrieved, developers can retrieve the properties from that Keyword, such as the Keyword Type and Keyword value.
+
+  Note
+
+Standalone Keyword Records return only the Keywords with values. Unlike Single-Instance and Multi-Instance Keyword Record Types, blank Keywords are not returned for Standalone Keyword Records.
+
+C#
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+// loop thru all standalone, single instance, and multi instance keyword records
+foreach ( KeywordRecord keyRecord in document.KeywordRecords)
+{
+
+  // loop thru all keywords on each keyword record
+  foreach (Keyword keyword in keyRecord.Keywords)
+  { 
+
+    // get the keyword type name and keyword value
+    string name = keyword.KeywordType.Name;
+    switch ( keyword.KeywordType.DataType)
+    {
+      case KeywordDataType.AlphaNumeric:
+        string stringValue = keyword.AlphaNumericValue;
+        break;
+      case KeywordDataType.Currency:
+      case KeywordDataType.SpecificCurrency:
+        decimal currencyValue = keyword.CurrencyValue;
+        break;
+      case KeywordDataType.Date:
+      case KeywordDataType.DateTime:
+        DateTime datetimeValue = keyword.DateTimeValue;
+        break;  
+      case KeywordDataType.FloatingPoint:
+        double floatingPointValue = keyword.FloatingPointValue;
+        break;
+      case KeywordDataType.Numeric20:
+        decimal numeric20Value = keyword.Numeric20Value;
+        break;
+      case KeywordDataType.Numeric9:
+        long numeric9alue = keyword.Numeric9Value;
+        break;
+    }
+  }
+}
+Developers may utilize the FindAll method to search a KeywordRecordList for Keyword Records, or a KeywordList for Keywords that match the search value specified. This method will always return a list, which is a subset of the original list. This method takes one parameter, which can be any of the following types:
+
+Keyword Record Type
+
+C#
+1
+2
+3
+4
+5
+6
+7
+8
+// find the keyword record type for "Contact Information"
+KeywordRecordType searchRecordType = unityApp.Core.KeywordRecordTypes.Find("Contact Information");
+
+// loop thru keyword records which contain an "Amount" keyword
+foreach ( KeywordRecord keyRecord in document.KeywordRecords.FindAll(searchRecordType))
+{    
+  // process each keyword record here
+}
+Keyword Type
+
+C#
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+// find the keyword type for "Amount"
+KeywordType searchKeywordType = unityApp.Core.KeywordTypes.Find("Amount");
+
+// loop thru keyword records which contain an "Amount" keyword
+foreach ( KeywordRecord keyRecord in document.KeywordRecords.FindAll(searchKeywordType))
+{    
+  // loop though keywords with keyword type of "Amount"
+  foreach (Keyword keyword in keyRecord.Keywords.FindAll(searchKeywordType))
+  {  
+    // perform keyword work here 
+  }
+}
+Keyword Type and Value
+
+C#
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+// Create and Amount Keyword, with a value of 105.50
+KeywordType searchKeywordType = unityApp.Core.KeywordTypes.Find("Amount");
+Keyword searchKeyword = searchKeywordType.CreateKeyword(105.50);
+
+// loop thru keyword records which contain an "Amount" keyword = 105.50
+foreach ( KeywordRecord keyRecord in  document.KeywordRecords.FindAll(searchKeyword))
+{ 
+  // loop though "Amount" keywords which have a value = 105.50
+  foreach (Keyword keyword in keyRecord.Keywords.FindAll(searchKeyword))
+  {           
+    // perform keyword work here 
+  }
+}
+While the FindAll method used above finds all instances of Keyword Records and Keywords that meet the search criteria, the Find method returns the first instance of a Keyword Record/Keyword that meets the provided search criteria. The Find method takes one parameter which defines the search criteria. All types of search criteria listed above for the FindAll method are accepted.
+
+  Caution
+
+The Find method will return null if it cannot find the specified Keyword or Keyword Record. An if statement to check for null should always follow a Find in order to avoid an "Object not set to an instance of an object exception."
+
+C#
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+// Create an Amount Keyword, with a value of 105.50
+KeywordType searchKeywordType = unityApp.Core.KeywordTypes.Find("Amount");
+if (searchKeywordType !=null)
+{
+  // find first keyword record which contains an "Amount" keyword type
+  KeywordRecord keyRecord = document.KeywordRecords.Find(searchKeywordType);
+  if (keyRecord !=null)
+  {
+    // find first "Amount" keyword in keyword record
+    Keyword keyword = keyRecord.Keywords.Find(searchKeywordType);
+    if (keyword !=null)
+    {
+      //Do work
+    }
+  }
+} -->

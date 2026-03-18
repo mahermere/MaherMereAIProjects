@@ -1,0 +1,83 @@
+Fields for C:\Users\maher\source\repos\Triple-S-AEP-MAUI-Forms\Resources\Raw\enUS-New-Member-Services-Transition-Form-Fillable.pdf
+Field: BenefitPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: BenefitPlan_EffectiveDate_Month, Type: PdfLoadedTextBoxField, Value: 
+Field: BenefitPlan_EffectiveDate_Day, Type: PdfLoadedTextBoxField, Value: 
+Field: BenefitPlan_EffectiveDate_Year, Type: PdfLoadedTextBoxField, Value: 
+Field: MedicareNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_HospitalBED_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_HospitalBED_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_HospitalBED_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_HospitalBED_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Wheelchair_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Wheelchair_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Wheelchair_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Wheelchair_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Glucometer_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_InsulinPump_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Nebulizer_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_TherapyDrugs_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_TubeFeeding_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Ostomy_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Ulcerhealing_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_NursingandTherapy_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_OXYGEN_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_CPAP_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_DrugInjection_Provider, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Glucometer_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_InsulinPump_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Nebulizer_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_TherapyDrugs_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_TubeFeeding_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Ostomy_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Ulcerhealing_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_NursingandTherapy_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_OXYGEN_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_CPAP_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_DrugInjection_EffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Glucometer_ProviderComments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_InsulinPump_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Nebulizer_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_TherapyDrugs_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_TubeFeeding_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Ostomy_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_NursingandTherapy_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_OXYGEN_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_CPAP_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_DrugInjection_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Ulcerhealing_Comments, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Glucometer_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_InsulinPump_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Nebulizer_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_TherapyDrugs_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_TubeFeeding_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Ostomy_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Ulcerhealing_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_NursingandTherapy_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_OXYGEN_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_CPAP_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_DrugInjection_PreviousHealthPlan, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_InformationProvidedBy, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_PlanRepresentative, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Region, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_Date, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryLastName, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryFirstName, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryMiddleInitial, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryDOB_Month, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryDOB_Day, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryDOB_Year, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryAltPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: DME_HospitalBED_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_WheelChair_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_Glucometer_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_InsulinPump_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_Nebulizer_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_TherapyDrugs_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_TubeFeeding_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_Ostomy_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_Ulcerhealing_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_NursingandTherapy_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_OXYGEN_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_CPAP_CHK, Type: PdfLoadedCheckBoxField, Value: False
+Field: DME_DrugInjection_CHK, Type: PdfLoadedCheckBoxField, Value: False

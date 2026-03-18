@@ -1,0 +1,990 @@
+using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
+using Microsoft.Maui.Controls;      
+
+using System;
+using System.IO;
+#if ANDROID
+using Android.Content;
+using Android.App;
+using Android.Net;
+using Java.IO;
+#endif
+using System.Collections.Generic;
+using System.Linq;
+using TripleS.SOA.AEP.UI.ViewModels;
+using TripleS.Utilities;
+
+
+
+
+namespace TripleS.SOA.AEP.UI.Views
+{
+    public partial class EnrollmentWizardPage : ContentPage
+    {
+        // No longer using local soaRecords list; use SOANumberService.ActiveSOARecords
+        // ...rest of the EnrollmentWizardPage class code...
+        // Store personal info for the enrollment process
+        private TripleSPOC.Models.PersonalInfo personalInfo = new TripleSPOC.Models.PersonalInfo();
+        // Triple-S required plans (example names, update as needed)
+        private static readonly List<(string English, string Spanish)> TripleSPlans = new()
+        {
+            ("Óptimo Plus (PPO)", "Óptimo Plus (PPO)"),
+            ("Brillante (HMO-POS)", "Brillante (HMO-POS)"),
+            ("Enlace Plus (HMO)", "Enlace Plus (HMO)"),
+            ("Ahorro Plus (HMO)", "Ahorro Plus (HMO)"),
+            ("ContigoEnMente (HMO-SNP)", "ContigoEnMente (HMO-SNP)"),
+            ("Contigo Plus (HMO-SNP)", "Contigo Plus (HMO-SNP)"),
+            ("Platino Plus (HMO-SNP)", "Platino Plus (HMO-SNP)"),
+            ("Platino Advance (HMO-SNP)", "Platino Advance (HMO-SNP)"),
+            ("Platino Blindao (HMO-SNP)", "Platino Blindao (HMO-SNP)"),
+            ("Platino Enlace (HMO-SNP)", "Platino Enlace (HMO-SNP)")
+        };
+        private void InitializeEmergencyRelationshipCombo()
+        {
+            EmergencyRelationshipCombo.Items.Clear();
+            EmergencyRelationshipCombo.Items.Add("Spouse");
+            EmergencyRelationshipCombo.Items.Add("Child");
+            EmergencyRelationshipCombo.Items.Add("Parent");
+            EmergencyRelationshipCombo.Items.Add("Sibling");
+            EmergencyRelationshipCombo.Items.Add("Friend");
+            EmergencyRelationshipCombo.Items.Add("Other");
+        }
+        private int currentStep = 1;
+        private readonly List<StackLayout> stepPanels;
+
+        private List<DependentEntry> dependents;
+
+        public EnrollmentWizardPage()
+        {
+            InitializeComponent();
+            stepPanels = new List<StackLayout>
+            {
+                Step1Panel,
+                Step2Panel,
+                Step3Panel,
+                Step4Panel,
+                Step5Panel,
+                Step6Panel,
+                Step7Panel,
+                Step8Panel,
+                Step9Panel
+            };
+            SetStep(1);
+            BackButton.Clicked += BackButton_Click;
+            NextButton.Clicked += NextButton_Click;
+            CancelButton.Clicked += CancelButton_Click;
+            InitializeLanguagePicker();
+            InitializePlanNamePicker();
+            InitializeGenderCombo();
+            InitializeContactMethodPicker();
+            InitializeEmergencyRelationshipCombo();
+            InitializePremiumPaymentMethodPicker();
+            InitializeSEPReasonPicker();
+            InitializeSNPTypePicker();
+            InitializeGoodCauseStatusPicker();
+            dependents = new List<DependentEntry>();
+            AddDependentButton.Clicked += AddDependentButton_Click;
+            // Wire mailing address checkbox
+            DifferentMailingCheckbox.CheckedChanged += (s, e) => {
+                MailingAddressPanel.IsVisible = DifferentMailingCheckbox.IsChecked;
+            };
+
+            // Preload page 1 fields from CSV if available
+            PreloadPage1FieldsFromCsv();
+
+            // Refresh SOA dropdown from SOANumberService
+            RefreshSOADropdown();
+            SOANumberPicker.SelectedIndexChanged += SOANumberPicker_SelectedIndexChanged;
+        }
+
+        private readonly string soaFirstPageCsvPath = Path.Combine(FileSystem.Current.AppDataDirectory, "soa_firstpage_records.csv");
+
+        private void PreloadPage1FieldsFromCsv()
+        {
+            var records = TripleS.Utilities.CsvDataUtility.LoadCsv(soaFirstPageCsvPath, TripleSPOC.Models.SOAFirstPageRecord.FromCsv);
+            if (records.Count > 0)
+            {
+                var rec = records.Last(); // Use the most recent
+                FirstNameBox.Text = rec.FirstName;
+                LastNameBox.Text = rec.LastName;
+                DOBPicker.Date = rec.DateOfBirth != DateTime.MinValue ? rec.DateOfBirth : DateTime.Today;
+                GenderCombo.SelectedItem = rec.Gender;
+                PrimaryPhoneBox.Text = rec.PrimaryPhone;
+                MedicareBox.Text = rec.MedicareNumber;
+            }
+        }
+
+
+
+        // Only one RefreshSOADropdown method, inside the class
+        public void RefreshSOADropdown()
+        {
+            SOANumberPicker.ItemsSource = null;
+            SOANumberPicker.ItemsSource = TripleS.SOA.AEP.UI.Services.SOANumberService.ActiveSOARecords
+                .Select(r => $"{r.SOANumber} - {r.BeneficiaryName}").ToList();
+        }
+    
+ 
+        private void SOANumberPicker_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (SOANumberPicker.SelectedIndex >= 0)
+            {
+                var selectedSOA = SOANumberPicker.SelectedItem as string;
+                if (BindingContext is EnrollmentWizardViewModel vm)
+                {
+                    vm.SOANumber = selectedSOA;
+                }
+            }
+        }
+
+        private void InitializeSEPReasonPicker()
+        {
+            SEPReasonPicker.Items.Clear();
+            var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+            if (lang == "es-PR")
+            {
+                SEPReasonPicker.Items.Add("Pérdida de cobertura");
+                SEPReasonPicker.Items.Add("Cambio de residencia");
+                SEPReasonPicker.Items.Add("Medicaid/Ayuda adicional");
+                SEPReasonPicker.Items.Add("Condición crónica");
+                SEPReasonPicker.Items.Add("Otro");
+            }
+            else
+            {
+                SEPReasonPicker.Items.Add("Loss of Coverage");
+                SEPReasonPicker.Items.Add("Change of Residence");
+                SEPReasonPicker.Items.Add("Medicaid/Extra Help");
+                SEPReasonPicker.Items.Add("Chronic Condition");
+                SEPReasonPicker.Items.Add("Other");
+            }
+            SEPReasonPicker.SelectedIndex = 0;
+        }
+
+        private void InitializeSNPTypePicker()
+        {
+            SNPTypePicker.Items.Clear();
+            var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+            if (lang == "es-PR")
+            {
+                SNPTypePicker.Items.Add("C-SNP (Condición crónica)");
+                SNPTypePicker.Items.Add("D-SNP (Doble elegibilidad)");
+                SNPTypePicker.Items.Add("I-SNP (Institucional)");
+            }
+            else
+            {
+                SNPTypePicker.Items.Add("C-SNP (Chronic Condition)");
+                SNPTypePicker.Items.Add("D-SNP (Dual Eligible)");
+                SNPTypePicker.Items.Add("I-SNP (Institutional)");
+            }
+            SNPTypePicker.SelectedIndex = 0;
+        }
+        private void AddDependentButton_Click(object? sender, EventArgs e)
+        {
+            var entry = new DependentEntry();
+            dependents.Add(entry);
+            DependentsListPanel.Children.Add(entry.GetView(RemoveDependent));
+        }
+
+        private void RemoveDependent(DependentEntry entry)
+        {
+            dependents.Remove(entry);
+            DependentsListPanel.Children.Remove(entry.View);
+        }
+        private void InitializePremiumPaymentMethodPicker()
+        {
+            PremiumPaymentMethodPicker.Items.Clear();
+            PremiumPaymentMethodPicker.Items.Add("Bank Account");
+            PremiumPaymentMethodPicker.Items.Add("Credit Card");
+            PremiumPaymentMethodPicker.Items.Add("Check");
+            PremiumPaymentMethodPicker.Items.Add("Social Security Deduction");
+            PremiumPaymentMethodPicker.Items.Add("Other");
+            PremiumPaymentMethodPicker.SelectedIndex = 0;
+}
+        public class DependentEntry
+        {
+            public StackLayout View { get; private set; }
+            public Entry NameBox { get; private set; }
+            public Picker RelationshipPicker { get; private set; }
+            public DatePicker DOBPicker { get; private set; }
+            public CheckBox EnrolledCheckBox { get; private set; }
+            public Button RemoveButton { get; private set; }
+
+            public DependentEntry()
+            {
+                NameBox = new Entry { Placeholder = "Name" };
+                RelationshipPicker = new Picker();
+                RelationshipPicker.Items.Add("Spouse");
+                RelationshipPicker.Items.Add("Child");
+                RelationshipPicker.Items.Add("Parent");
+                RelationshipPicker.Items.Add("Sibling");
+                RelationshipPicker.Items.Add("Friend");
+                RelationshipPicker.Items.Add("Other");
+                DOBPicker = new DatePicker { Format = "MM/dd/yyyy" };
+                EnrolledCheckBox = new CheckBox();
+                RemoveButton = new Button { Text = "Remove" };
+                View = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    Children = { NameBox, RelationshipPicker, DOBPicker, EnrolledCheckBox, RemoveButton }
+                };
+            }
+
+            public StackLayout GetView(Action<DependentEntry> removeAction)
+            {
+                RemoveButton.Clicked += (s, e) => removeAction(this);
+                return View;
+            }
+        }
+        
+
+        private void InitializeContactMethodPicker()
+        {
+            ContactMethodPicker.Items.Clear();
+            ContactMethodPicker.Items.Add("Phone");
+            ContactMethodPicker.Items.Add("Email");
+            ContactMethodPicker.Items.Add("Mail");
+            ContactMethodPicker.Items.Add("In-Person");
+            ContactMethodPicker.SelectedIndex = 0; // Default to Phone
+        }
+
+        private static readonly List<(string English, string Spanish)> GenderOptions = new()
+        {
+            ("Male", "Masculino"),
+            ("Female", "Femenino"),
+            ("Non-Binary", "No binario"),
+            ("Prefer Not to Answer", "Prefiero no responder")
+        };
+
+        private void InitializeGenderCombo()
+        {
+            GenderCombo.Items.Clear();
+            // Default to English on load
+            foreach (var gender in GenderOptions)
+                GenderCombo.Items.Add(gender.English);
+            LanguagePicker.SelectedIndexChanged += (s, e) => UpdateGenderComboLanguage();
+        }
+
+        private void UpdateGenderComboLanguage()
+        {
+            var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+            GenderCombo.Items.Clear();
+            foreach (var gender in GenderOptions)
+                GenderCombo.Items.Add(lang == "es-PR" ? gender.Spanish : gender.English);
+        }
+
+        private void SetStep(int step)
+        {
+            currentStep = step;
+            for (int i = 0; i < stepPanels.Count; i++)
+                stepPanels[i].IsVisible = (i == step - 1);
+            BackButton.IsEnabled = (step > 1);
+            NextButton.Text = (step == stepPanels.Count) ? "Submit" : "Next";
+        }
+
+        private void BackButton_Click(object? sender, EventArgs e)
+        {
+            if (currentStep > 1)
+                SetStep(currentStep - 1);
+        }
+
+        private async void NextButton_Click(object? sender, EventArgs e)
+        {
+            if (currentStep == 1)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                var firstName = FirstNameBox.Text?.Trim() ?? "";
+                var middleInitial = MiddleInitialBox.Text?.Trim() ?? "";
+                var lastName = LastNameBox.Text?.Trim() ?? "";
+                var dob = DOBPicker.Date;
+                var gender = GenderCombo.SelectedItem?.ToString() ?? "";
+                var phone = PrimaryPhoneBox.Text?.Trim() ?? "";
+                var medicare = MedicareBox.Text?.Trim() ?? "";
+                bool isPrimaryMobile = PrimaryPhoneIsMobileCheckbox?.IsChecked ?? false;
+                var secondaryPhone = SecondaryPhoneBox.Text?.Trim() ?? "";
+                bool isSecondaryMobile = SecondaryPhoneIsMobileCheckbox?.IsChecked ?? false;
+                var email = EmailBox.Text?.Trim() ?? "";
+                var ssn = SSNBox.Text?.Trim() ?? "";
+                var contactMethod = ContactMethodPicker.SelectedItem?.ToString() ?? "";
+                // Validation
+                if (string.IsNullOrWhiteSpace(firstName))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Nombre requerido" : "First Name Required", lang == "es-PR" ? "Por favor ingrese el nombre." : "Please enter the first name.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(lastName))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Apellido requerido" : "Last Name Required", lang == "es-PR" ? "Por favor ingrese el apellido." : "Please enter the last name.", "OK");
+                    return;
+                }
+                if (dob.Year < 1900 || dob > DateTime.Today)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Fecha inválida" : "Invalid Date", lang == "es-PR" ? "Ingrese una fecha de nacimiento válida." : "Enter a valid date of birth.", "OK");
+                    return;
+                }
+                var age = DateTime.Today.Year - dob.Year;
+                if (dob > DateTime.Today.AddYears(-age)) age--;
+                if (age < 18)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Edad mínima" : "Minimum Age", lang == "es-PR" ? "Debe tener al menos 18 años." : "Must be at least 18 years old.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(gender))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Sexo requerido" : "Gender Required", lang == "es-PR" ? "Seleccione el sexo/género." : "Select gender.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(phone) || phone.Length < 10)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Teléfono requerido" : "Phone Required", lang == "es-PR" ? "Ingrese un número de teléfono válido." : "Enter a valid phone number.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(medicare) || medicare.Length < 11)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Medicare requerido" : "Medicare Required", lang == "es-PR" ? "Ingrese el número de Medicare válido." : "Enter a valid Medicare number.", "OK");
+                    return;
+                }
+                // Store values in model for later use
+                personalInfo.FirstName = firstName;
+                personalInfo.MiddleInitial = middleInitial;
+                personalInfo.LastName = lastName;
+                personalInfo.DateOfBirth = dob;
+                personalInfo.Gender = gender;
+                personalInfo.PrimaryPhone = phone;
+                personalInfo.PrimaryPhoneIsMobile = isPrimaryMobile;
+                personalInfo.SecondaryPhone = secondaryPhone;
+                personalInfo.SecondaryPhoneIsMobile = isSecondaryMobile;
+                personalInfo.Email = email;
+                personalInfo.MedicareNumber = medicare;
+                personalInfo.SSN = ssn;
+                personalInfo.PreferredContactMethod = contactMethod;
+
+            }
+            else if (currentStep == 2)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                var address1 = Address1Box.Text?.Trim() ?? "";
+                var city = CityBox.Text?.Trim() ?? "";
+                var state = StateBox.Text?.Trim() ?? "";
+                var zip = ZIPBox.Text?.Trim() ?? "";
+                // Validation
+                if (string.IsNullOrWhiteSpace(address1))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Dirección requerida" : "Address Required", lang == "es-PR" ? "Ingrese la dirección permanente." : "Enter permanent address.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(city))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Ciudad requerida" : "City Required", lang == "es-PR" ? "Ingrese la ciudad." : "Enter city.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(state) || state.Length != 2)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Estado requerido" : "State Required", lang == "es-PR" ? "Ingrese el estado (2 letras)." : "Enter state (2 letters).", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(zip) || zip.Length < 5)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Código postal requerido" : "ZIP Required", lang == "es-PR" ? "Ingrese el código postal válido." : "Enter valid ZIP code.", "OK");
+                    return;
+                }
+                // Mailing address validation if enabled
+                if (DifferentMailingCheckbox.IsChecked && MailingAddressPanel.IsVisible)
+                {
+                    var mailing1 = MailingAddress1Box.Text?.Trim() ?? "";
+                    var mailingCity = MailingCityBox.Text?.Trim() ?? "";
+                    var mailingState = MailingStateBox.Text?.Trim() ?? "";
+                    var mailingZip = MailingZIPBox.Text?.Trim() ?? "";
+                    if (string.IsNullOrWhiteSpace(mailing1))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Dirección de envío requerida" : "Mailing Address Required", lang == "es-PR" ? "Ingrese la dirección de envío." : "Enter mailing address.", "OK");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(mailingCity))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Ciudad de envío requerida" : "Mailing City Required", lang == "es-PR" ? "Ingrese la ciudad de envío." : "Enter mailing city.", "OK");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(mailingState) || mailingState.Length != 2)
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Estado de envío requerido" : "Mailing State Required", lang == "es-PR" ? "Ingrese el estado de envío (2 letras)." : "Enter mailing state (2 letters).", "OK");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(mailingZip) || mailingZip.Length < 5)
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Código postal de envío requerido" : "Mailing ZIP Required", lang == "es-PR" ? "Ingrese el código postal de envío válido." : "Enter valid mailing ZIP code.", "OK");
+                        return;
+                    }
+                }
+            }
+            else if (currentStep == 3)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                var emergencyName = EmergencyNameBox.Text?.Trim() ?? "";
+                var emergencyPhone = EmergencyPhoneBox.Text?.Trim() ?? "";
+                // Validation
+                if (string.IsNullOrWhiteSpace(emergencyName))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Nombre de emergencia requerido" : "Emergency Name Required", lang == "es-PR" ? "Ingrese el nombre del contacto de emergencia." : "Enter emergency contact name.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(emergencyPhone) || emergencyPhone.Length < 10)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Teléfono de emergencia requerido" : "Emergency Phone Required", lang == "es-PR" ? "Ingrese un número de teléfono de emergencia válido." : "Enter a valid emergency phone number.", "OK");
+                    return;
+                }
+            }
+            else if (currentStep == 4)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                // TODO: Validate dependents if any are added
+                // Example: Loop through dependents and validate required fields
+                // If no dependents, skip validation
+            }
+            else if (currentStep == 5)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                var planName = PlanNamePicker.SelectedItem?.ToString() ?? "";
+                var planContract = PlanContractBox.Text?.Trim() ?? "";
+                var planID = PlanIDBox.Text?.Trim() ?? "";
+                var paymentMethod = PremiumPaymentMethodPicker.SelectedItem?.ToString() ?? "";
+                // Validation
+                if (string.IsNullOrWhiteSpace(planName))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Plan requerido" : "Plan Required", lang == "es-PR" ? "Seleccione el plan." : "Select a plan.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(planContract))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Contrato requerido" : "Contract Required", lang == "es-PR" ? "Ingrese el número de contrato." : "Enter contract number.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(planID))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "ID requerido" : "ID Required", lang == "es-PR" ? "Ingrese el ID del plan." : "Enter plan ID.", "OK");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(paymentMethod))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Método de pago requerido" : "Payment Method Required", lang == "es-PR" ? "Seleccione el método de pago." : "Select payment method.", "OK");
+                    return;
+                }
+                // TODO: Add conditional validation for bank/credit card fields
+            }
+            else if (currentStep == 6)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                // Example: Validate if other insurance or current MA plan is checked, require relevant fields
+                if (OtherInsuranceCheckbox.IsChecked)
+                {
+                    var otherType = OtherCoverageTypeBox.Text?.Trim() ?? "";
+                    var otherPolicy = OtherCoveragePolicyBox.Text?.Trim() ?? "";
+                    if (string.IsNullOrWhiteSpace(otherType))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Tipo de cobertura requerido" : "Coverage Type Required", lang == "es-PR" ? "Ingrese el tipo de cobertura." : "Enter coverage type.", "OK");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(otherPolicy))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Número de póliza requerido" : "Policy Number Required", lang == "es-PR" ? "Ingrese el número de póliza." : "Enter policy number.", "OK");
+                        return;
+                    }
+                }
+                if (CurrentMAPlanCheckbox.IsChecked)
+                {
+                    var currentPlanName = CurrentPlanNameBox.Text?.Trim() ?? "";
+                    var currentPlanContract = CurrentPlanContractBox.Text?.Trim() ?? "";
+                    var currentPlanID = CurrentPlanIDBox.Text?.Trim() ?? "";
+                    var coverageStart = CoverageStartDatePicker.Date;
+                    var reasonChange = ReasonChangeBox.Text?.Trim() ?? "";
+                    if (string.IsNullOrWhiteSpace(currentPlanName))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Nombre del plan actual requerido" : "Current Plan Name Required", lang == "es-PR" ? "Ingrese el nombre del plan actual." : "Enter current plan name.", "OK");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(currentPlanContract))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Contrato del plan actual requerido" : "Current Plan Contract Required", lang == "es-PR" ? "Ingrese el contrato del plan actual." : "Enter current plan contract.", "OK");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(currentPlanID))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "ID del plan actual requerido" : "Current Plan ID Required", lang == "es-PR" ? "Ingrese el ID del plan actual." : "Enter current plan ID.", "OK");
+                        return;
+                    }
+                    if (coverageStart.Year < 1900 || coverageStart > DateTime.Today)
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Fecha de inicio inválida" : "Invalid Start Date", lang == "es-PR" ? "Ingrese una fecha de inicio válida." : "Enter a valid coverage start date.", "OK");
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(reasonChange))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Razón de cambio requerida" : "Reason for Change Required", lang == "es-PR" ? "Ingrese la razón para cambiar de plan." : "Enter reason for changing plan.", "OK");
+                        return;
+                    }
+                }
+            }
+            else if (currentStep == 7)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                // Validate SNP (Special Needs Plan) selection
+                if (SNPIndicatorCheckbox.IsChecked)
+                {
+                    var snpType = SNPTypePicker.SelectedItem?.ToString() ?? "";
+                    if (string.IsNullOrWhiteSpace(snpType))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Tipo de SNP requerido" : "SNP Type Required", lang == "es-PR" ? "Seleccione el tipo de SNP." : "Select SNP type.", "OK");
+                        return;
+                    }
+                }
+                // Validate Chronic Condition
+                if (ChronicConditionBox != null && !string.IsNullOrWhiteSpace(ChronicConditionBox.Text))
+                {
+                    // Optionally validate chronic condition type
+                }
+                // Validate MSA (Medical Savings Account)
+                if (MSAIndicatorCheckbox.IsChecked)
+                {
+                    var msaDeposit = MSADepositBox.Text?.Trim() ?? "";
+                    if (string.IsNullOrWhiteSpace(msaDeposit))
+                    {
+                        await DisplayAlert(lang == "es-PR" ? "Monto de depósito MSA requerido" : "MSA Deposit Amount Required", lang == "es-PR" ? "Ingrese el monto de depósito MSA." : "Enter MSA deposit amount.", "OK");
+                        return;
+                    }
+                }
+                // Validate Dual Eligible
+                if (DualEligibleCheckbox.IsChecked)
+                {
+                    // Optionally require LISCheckbox or ESRDCheckbox
+                }
+                // Validate Institutional Care
+                if (InstitutionalCareCheckbox.IsChecked)
+                {
+                    // Optionally require facility info
+                }
+                // Add additional validations as needed for other checkboxes
+            }
+            else if (currentStep == 8)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                // Validate SEP Reason
+                var sepReason = SEPReasonPicker.SelectedItem?.ToString() ?? "";
+                if (string.IsNullOrWhiteSpace(sepReason))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Razón de SEP requerida" : "SEP Reason Required", lang == "es-PR" ? "Seleccione la razón de SEP." : "Select SEP reason.", "OK");
+                    return;
+                }
+                // Validate SEP Event Date
+                var sepEventDate = SEPEventDatePicker.Date;
+                if (sepEventDate.Year < 1900 || sepEventDate > DateTime.Today)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Fecha de evento SEP inválida" : "Invalid SEP Event Date", lang == "es-PR" ? "Ingrese una fecha válida para el evento SEP." : "Enter a valid SEP event date.", "OK");
+                    return;
+                }
+                // Validate SEP Event Description
+                var sepEventDesc = SEPEventDescriptionBox.Text?.Trim() ?? "";
+                if (string.IsNullOrWhiteSpace(sepEventDesc))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Descripción de evento SEP requerida" : "SEP Event Description Required", lang == "es-PR" ? "Ingrese la descripción del evento SEP." : "Enter SEP event description.", "OK");
+                    return;
+                }
+                // Validate SEP Documentation
+                var sepDoc = SEPDocumentationBox.Text?.Trim() ?? "";
+                if (string.IsNullOrWhiteSpace(sepDoc))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Documentación SEP requerida" : "SEP Documentation Required", lang == "es-PR" ? "Ingrese la documentación SEP." : "Enter SEP documentation.", "OK");
+                    return;
+                }
+                // Validate Good Cause Status
+                var goodCauseStatus = GoodCauseStatusPicker.SelectedItem?.ToString() ?? "";
+                if (string.IsNullOrWhiteSpace(goodCauseStatus))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Estado de causa válida requerido" : "Good Cause Status Required", lang == "es-PR" ? "Seleccione el estado de causa válida." : "Select good cause status.", "OK");
+                    return;
+                }
+                // Validate Good Cause Notes
+                var goodCauseNotes = GoodCauseNotesBox.Text?.Trim() ?? "";
+                if (string.IsNullOrWhiteSpace(goodCauseNotes))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Notas de causa válida requeridas" : "Good Cause Notes Required", lang == "es-PR" ? "Ingrese las notas de causa válida." : "Enter good cause notes.", "OK");
+                    return;
+                }
+            }
+            else if (currentStep == 9)
+            {
+                var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+                // Validate Enrollee Signature
+                if (EnrolleeSignaturePad.Lines == null || EnrolleeSignaturePad.Lines.Count == 0)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Firma del afiliado requerida" : "Enrollee Signature Required", lang == "es-PR" ? "Por favor firme o marque X." : "Please sign or mark X.", "OK");
+                    return;
+                }
+                // Validate Agent Signature
+                if (AgentSignaturePad.Lines == null || AgentSignaturePad.Lines.Count == 0)
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Firma del agente requerida" : "Agent Signature Required", lang == "es-PR" ? "Por favor firme como agente." : "Please sign as agent.", "OK");
+                    return;
+                }
+                // If X is marked, validate Witness Signature
+                if (XMarkCheckbox != null && XMarkCheckbox.IsChecked && (WitnessSignaturePad.Lines == null || WitnessSignaturePad.Lines.Count == 0))
+                {
+                    await DisplayAlert(lang == "es-PR" ? "Firma del testigo requerida" : "Witness Signature Required", lang == "es-PR" ? "Por favor firme como testigo." : "Please sign as witness.", "OK");
+                    return;
+                }
+            }
+            if (currentStep < stepPanels.Count)
+                SetStep(currentStep + 1);
+            else
+            {
+                SubmitEnrollment();
+                // After attestation, navigate to dashboard
+                await Navigation.PopToRootAsync();
+                await Navigation.PushAsync(new DashboardWindow());
+                return;
+            }
+        }
+
+        private void CancelButton_Click(object? sender, EventArgs e)
+        {
+            CancelEnrollmentAsync();
+        }
+
+        private async void CancelEnrollmentAsync()
+        {
+            bool confirm = await DisplayAlert("Cancel Enrollment", "Are you sure you want to cancel and return to the dashboard?", "Yes", "No");
+            if (confirm)
+            {
+                ClearEnrollmentWizard();
+                await Navigation.PushAsync(new DashboardWindow());
+            }
+        }
+
+        private void ClearEnrollmentWizard()
+        {
+            // Step 1
+            FirstNameBox.Text = "";
+            MiddleInitialBox.Text = "";
+            LastNameBox.Text = "";
+            DOBPicker.Date = DateTime.Today;
+            GenderCombo.SelectedIndex = -1;
+            PrimaryPhoneBox.Text = "";
+            PrimaryPhoneIsMobileCheckbox.IsChecked = false;
+            SecondaryPhoneBox.Text = "";
+            SecondaryPhoneIsMobileCheckbox.IsChecked = false;
+            EmailBox.Text = "";
+            MedicareBox.Text = "";
+            SSNBox.Text = "";
+            ContactMethodPicker.SelectedIndex = -1;
+            // Step 2
+            Address1Box.Text = "";
+            Address2Box.Text = "";
+            CityBox.Text = "";
+            StateBox.Text = "";
+            CountyBox.Text = "";
+            ZIPBox.Text = "";
+            DifferentMailingCheckbox.IsChecked = false;
+            MailingAddress1Box.Text = "";
+            MailingAddress2Box.Text = "";
+            MailingCityBox.Text = "";
+            MailingStateBox.Text = "";
+            MailingZIPBox.Text = "";
+            // Step 3
+            EmergencyNameBox.Text = "";
+            EmergencyPhoneBox.Text = "";
+            EmergencyRelationshipCombo.SelectedIndex = -1;
+            // Step 4
+            DependentsListPanel.Children.Clear();
+            dependents.Clear();
+            // Step 5
+            PlanNamePicker.SelectedIndex = -1;
+            PlanContractBox.Text = "";
+            PlanIDBox.Text = "";
+            PremiumPaymentMethodPicker.SelectedIndex = -1;
+            BankAccountBox.Text = "";
+            RoutingNumberBox.Text = "";
+            CreditCardBox.Text = "";
+            LTCIndicatorCheckbox.IsChecked = false;
+            LTCFacilityBox.Text = "";
+            PCPBox.Text = "";
+            PCPClinicBox.Text = "";
+            // Step 6
+            OtherInsuranceCheckbox.IsChecked = false;
+            OtherCoverageTypeBox.Text = "";
+            OtherCoveragePolicyBox.Text = "";
+            CurrentMAPlanCheckbox.IsChecked = false;
+            CurrentPlanNameBox.Text = "";
+            CurrentPlanContractBox.Text = "";
+            CurrentPlanIDBox.Text = "";
+            CoverageStartDatePicker.Date = DateTime.Today;
+            ReasonChangeBox.Text = "";
+            // Step 7
+            SNPIndicatorCheckbox.IsChecked = false;
+            SNPTypePicker.SelectedIndex = -1;
+            ChronicConditionBox.Text = "";
+            MSAIndicatorCheckbox.IsChecked = false;
+            MSADepositBox.Text = "";
+            PFFSIndicatorCheckbox.IsChecked = false;
+            DualEligibleCheckbox.IsChecked = false;
+            LISCheckbox.IsChecked = false;
+            ESRDCheckbox.IsChecked = false;
+            InstitutionalCareCheckbox.IsChecked = false;
+            // Step 8
+            SEPReasonPicker.SelectedIndex = -1;
+            SEPEventDatePicker.Date = DateTime.Today;
+            SEPEventDescriptionBox.Text = "";
+            SEPDocumentationBox.Text = "";
+            GoodCauseStatusPicker.SelectedIndex = -1;
+            GoodCauseNotesBox.Text = "";
+            // Step 9
+            EnrolleeSignaturePad.Clear();
+            XMarkCheckbox.IsChecked = false;
+            AgentSignaturePad.Clear();
+            WitnessSignaturePad.Clear();
+            DeviceInfoBox.Text = "";
+            IPAddressBox.Text = "";
+            GPSCoordinatesBox.Text = "";
+            FormVariantBox.Text = "";
+            OMBControlNumberBox.Text = "";
+            AttestationTimestampPicker.Date = DateTime.Today;
+            SubmissionLocationTypeBox.Text = "";
+            ApplicationDateBox.Text = "";
+            EnrollmentMechanismBox.Text = "";
+            FormIdentifierBox.Text = "";
+            EffectiveDatePicker.Date = DateTime.Today;
+            CreatedDatePicker.Date = DateTime.Today;
+            LastModifiedDatePicker.Date = DateTime.Today;
+        }
+        
+        private void InitializeLanguagePicker()
+        {
+            LanguagePicker.Items.Clear();
+            LanguagePicker.Items.Add("English");
+            LanguagePicker.Items.Add("Spanish");
+            LanguagePicker.SelectedIndex = 0;
+            LanguagePicker.SelectedIndexChanged += (s, e) => SetLocalizedText();
+        }
+
+        private void InitializePlanNamePicker()
+        {
+            PlanNamePicker.Items.Clear();
+            // Default to English on load
+            foreach (var plan in TripleSPlans)
+                PlanNamePicker.Items.Add(plan.English);
+            LanguagePicker.SelectedIndexChanged += (s, e) => UpdatePlanNamePickerLanguage();
+        }
+
+        private void UpdatePlanNamePickerLanguage()
+        {
+            var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+            PlanNamePicker.Items.Clear();
+            foreach (var plan in TripleSPlans)
+                PlanNamePicker.Items.Add(lang == "es-PR" ? plan.Spanish : plan.English);
+        }
+
+        private void SetLocalizedText()
+        {
+            var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+            // Step 1
+            FirstNameBox.Placeholder = lang == "es-PR" ? "Nombre *" : "First Name *";
+            MiddleInitialBox.Placeholder = lang == "es-PR" ? "Inicial del segundo nombre" : "Middle Initial";
+            LastNameBox.Placeholder = lang == "es-PR" ? "Apellido *" : "Last Name *";
+            DOBPicker.Format = lang == "es-PR" ? "dd/MM/yyyy" : "MM/dd/yyyy";
+            PrimaryPhoneBox.Placeholder = lang == "es-PR" ? "Teléfono principal *" : "Primary Phone *";
+            SecondaryPhoneBox.Placeholder = lang == "es-PR" ? "Teléfono secundario" : "Secondary Phone";
+            EmailBox.Placeholder = lang == "es-PR" ? "Correo electrónico" : "Email Address";
+            MedicareBox.Placeholder = lang == "es-PR" ? "Número de Medicare *" : "Medicare Number *";
+            SSNBox.Placeholder = lang == "es-PR" ? "Seguro Social" : "Social Security Number";
+            FirstNameLabel.Text = lang == "es-PR" ? "Nombre *" : "First Name *";
+            MiddleInitialLabel.Text = lang == "es-PR" ? "Inicial del segundo nombre" : "Middle Initial";
+            LastNameLabel.Text = lang == "es-PR" ? "Apellido *" : "Last Name *";
+            DOBLabel.Text = lang == "es-PR" ? "Fecha de nacimiento (dd/MM/yyyy) *" : "Date of Birth (MM/dd/yyyy) *";
+            GenderLabel.Text = lang == "es-PR" ? "Sexo/Género *" : "Sex/Gender *";
+            PrimaryPhoneLabel.Text = lang == "es-PR" ? "Teléfono principal *" : "Primary Phone Number *";
+            SecondaryPhoneLabel.Text = lang == "es-PR" ? "Teléfono secundario" : "Secondary Phone";
+            PrimaryPhoneIsMobileLabel.Text = lang == "es-PR" ? "¿Es móvil?" : "Is Mobile?";
+            SecondaryPhoneIsMobileLabel.Text = lang == "es-PR" ? "¿Es móvil?" : "Is Mobile?";
+            EmailLabel.Text = lang == "es-PR" ? "Correo electrónico" : "Email Address";
+            MedicareLabel.Text = lang == "es-PR" ? "Número de Medicare *" : "Medicare Number *";
+            SSNLabel.Text = lang == "es-PR" ? "Seguro Social" : "Social Security Number";
+            ContactMethodLabel.Text = lang == "es-PR" ? "Método de contacto preferido" : "Preferred Contact Method";
+            // Step 2
+            Address1Box.Placeholder = lang == "es-PR" ? "Dirección permanente *" : "Permanent Address *";
+            CityBox.Placeholder = lang == "es-PR" ? "Ciudad *" : "City *";
+            StateBox.Placeholder = lang == "es-PR" ? "Estado *" : "State *";
+            ZIPBox.Placeholder = lang == "es-PR" ? "Código postal *" : "ZIP Code *";
+            MailingAddress1Box.Placeholder = lang == "es-PR" ? "Dirección de correo *" : "Mailing Address *";
+            MailingCityBox.Placeholder = lang == "es-PR" ? "Ciudad *" : "City *";
+            MailingStateBox.Placeholder = lang == "es-PR" ? "Estado *" : "State *";
+            MailingZIPBox.Placeholder = lang == "es-PR" ? "Código postal *" : "ZIP Code *";
+            // Step 3
+            EmergencyNameBox.Placeholder = lang == "es-PR" ? "Nombre de emergencia *" : "Emergency Name *";
+            EmergencyPhoneBox.Placeholder = lang == "es-PR" ? "Teléfono de emergencia *" : "Emergency Phone *";
+             // Step 4
+            DependentsLabel.Text = lang == "es-PR" ? "Dependientes" : "Dependents";
+            AddDependentButton.Text = lang == "es-PR" ? "Agregar dependiente" : "Add Dependent";
+            // Step 5
+            PlanNameLabel.Text = lang == "es-PR" ? "Nombre del plan *" : "Plan Name *";
+            PlanContractLabel.Text = lang == "es-PR" ? "Contrato del plan *" : "Plan Contract *";
+            PlanIDLabel.Text = lang == "es-PR" ? "ID del plan *" : "Plan ID *";
+            PremiumPaymentMethodLabel.Text = lang == "es-PR" ? "Método de pago de prima *" : "Premium Payment Method *";
+            // Step 6
+            OtherInsuranceLabel.Text = lang == "es-PR" ? "Otra cobertura de seguro" : "Other Insurance Coverage";
+            OtherCoverageTypeBox.Placeholder = lang == "es-PR" ? "Tipo de cobertura" : "Coverage Type";
+            OtherCoveragePolicyBox.Placeholder = lang == "es-PR" ? "Número de póliza" : "Policy Number";
+            CurrentMAPlanLabel.Text = lang == "es-PR" ? "Plan MA actual" : "Current MA Plan";
+            CurrentPlanNameBox.Placeholder = lang == "es-PR" ? "Nombre del plan actual" : "Current Plan Name";
+            CurrentPlanContractBox.Placeholder = lang == "es-PR" ? "Contrato del plan actual" : "Current Plan Contract";
+            CurrentPlanIDBox.Placeholder = lang == "es-PR" ? "ID del plan actual" : "Current Plan ID";
+            ReasonChangeBox.Placeholder = lang == "es-PR" ? "Razón de cambio" : "Reason for Change";
+            // Step 7
+            SNPIndicatorLabel.Text = lang == "es-PR" ? "Indicador SNP" : "SNP Indicator";
+            SNPTypePicker.Title = lang == "es-PR" ? "Tipo de SNP" : "SNP Type";
+            ChronicConditionLabel.Text = lang == "es-PR" ? "Condición crónica" : "Chronic Condition";
+            MSADepositBox.Placeholder = lang == "es-PR" ? "Monto de depósito MSA" : "MSA Deposit Amount";
+            // Step 8
+            SEPReasonLabel.Text = lang == "es-PR" ? "Razón de SEP" : "SEP Reason";
+            SEPEventDescriptionBox.Placeholder = lang == "es-PR" ? "Descripción de evento SEP" : "SEP Event Description";
+            SEPDocumentationBox.Placeholder = lang == "es-PR" ? "Documentación SEP" : "SEP Documentation";
+            GoodCauseStatusLabel.Text = lang == "es-PR" ? "Estado de causa válida" : "Good Cause Status";
+            GoodCauseNotesBox.Placeholder = lang == "es-PR" ? "Notas de causa válida" : "Good Cause Notes";
+            // Step 9
+            EnrolleeSignatureLabel.Text = lang == "es-PR" ? "Firma del afiliado" : "Enrollee Signature";
+            AgentSignatureLabel.Text = lang == "es-PR" ? "Firma del agente" : "Agent Signature";
+            WitnessSignatureLabel.Text = lang == "es-PR" ? "Firma del testigo" : "Witness Signature";
+            XMarkCheckboxLabel.Text = lang == "es-PR" ? "Marque si el afiliado no puede firmar y marca X" : "Check if enrollee cannot sign and marks X";
+            // Update pickers
+            ContactMethodPicker.Items.Clear();
+            if (lang == "es-PR")
+            {
+                ContactMethodPicker.Items.Add("Teléfono");
+                ContactMethodPicker.Items.Add("Correo electrónico");
+                ContactMethodPicker.Items.Add("Correo");
+                ContactMethodPicker.Items.Add("En persona");
+            }
+            else
+            {
+                ContactMethodPicker.Items.Add("Phone");
+                ContactMethodPicker.Items.Add("Email");
+                ContactMethodPicker.Items.Add("Mail");
+                ContactMethodPicker.Items.Add("In-Person");
+            }
+
+            UpdateGenderComboLanguage();
+            UpdatePlanNamePickerLanguage();
+            InitializeSEPReasonPicker();
+            InitializeGoodCauseStatusPicker();
+        }
+
+        private void InitializeGoodCauseStatusPicker()
+        {
+            GoodCauseStatusPicker.Items.Clear();
+            var lang = LanguagePicker.SelectedIndex == 1 ? "es-PR" : "en";
+            if (lang == "es-PR")
+            {
+                GoodCauseStatusPicker.Items.Add("Retraso administrativo");
+                GoodCauseStatusPicker.Items.Add("Desastre natural");
+                GoodCauseStatusPicker.Items.Add("Enfermedad grave");
+                GoodCauseStatusPicker.Items.Add("Falta de comunicación");
+                GoodCauseStatusPicker.Items.Add("Otro");
+            }
+            else
+            {
+                GoodCauseStatusPicker.Items.Add("Administrative Delay");
+                GoodCauseStatusPicker.Items.Add("Natural Disaster");
+                GoodCauseStatusPicker.Items.Add("Serious Illness");
+                GoodCauseStatusPicker.Items.Add("Miscommunication");
+                GoodCauseStatusPicker.Items.Add("Other");
+            }
+            GoodCauseStatusPicker.SelectedIndex = 0;
+        }
+
+        private void SubmitEnrollment()
+        {
+            // TODO: Add final validation, signature checks, and export logic
+            // Generate PDF after attestation
+            try
+            {
+                var fieldData = new Dictionary<string, string>
+                {
+                    {"ScopeodAppointmentNumber", SOANumberPicker.SelectedItem?.ToString() ?? string.Empty},
+                    {"radio_group_PLAN", PlanNamePicker.SelectedItem?.ToString() ?? string.Empty},
+                    {"Coverage", PlanContractBox.Text ?? string.Empty},
+                    {"radio_group_Cov_Type", PlanIDBox.Text ?? string.Empty},
+                    {"EffectiveDate", EffectiveDatePicker.Date.ToString("MM/dd/yyyy")},
+                    {"SSN", SSNBox.Text ?? string.Empty},
+                    {"FirstName", FirstNameBox.Text ?? string.Empty},
+                    {"LastName", LastNameBox.Text ?? string.Empty},
+                    {"signature_Applicant", ""}, // Placeholder, add signature logic later
+                    {"TodaysDate", DateTime.Today.ToString("MM/dd/yyyy")},
+                    {"MonthlyPremium", BankAccountBox.Text ?? string.Empty}, // Placeholder, update as needed
+                    {"DOB", DOBPicker.Date.ToString("MM/dd/yyyy")},
+                    {"radio_group_Gender", GenderCombo.SelectedItem?.ToString() ?? string.Empty},
+                    {"HomePhone", PrimaryPhoneBox.Text ?? string.Empty},
+                    {"AltPhone", SecondaryPhoneBox.Text ?? string.Empty},
+                    {"HOMEPHONECELL", PrimaryPhoneIsMobileCheckbox.IsChecked ? "Yes" : "No"},
+                    {"ALTPHONECELL", SecondaryPhoneIsMobileCheckbox.IsChecked ? "Yes" : "No"},
+                    {"PermanentAddress1", Address1Box.Text ?? string.Empty},
+                    {"PermanentAddress2", Address2Box.Text ?? string.Empty},
+                    {"PermanentCity", CityBox.Text ?? string.Empty},
+                    {"PermanentState", StateBox.Text ?? string.Empty},
+                    {"PermanentZipCode", ZIPBox.Text ?? string.Empty},
+                    {"MailingAddress1", MailingAddress1Box.Text ?? string.Empty},
+                    {"MailingAddress2", MailingAddress2Box.Text ?? string.Empty},
+                    {"MailingCity", MailingCityBox.Text ?? string.Empty},
+                    {"MailingState", MailingStateBox.Text ?? string.Empty},
+                    {"MailingZipCode", MailingZIPBox.Text ?? string.Empty},
+                    {"MedicareNumber", MedicareBox.Text ?? string.Empty}
+                };
+                // Use the long form template path
+                string templatePath = Path.Combine(FileSystem.Current.AppDataDirectory, "CMS_Long_Form_Template.pdf");
+                string outputPath = Path.Combine(FileSystem.Current.AppDataDirectory, $"Enrollment_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
+                // If template is missing, extract from embedded MauiAsset
+                if (!File.Exists(templatePath))
+                {
+                    try
+                    {
+                        using var stream = Microsoft.Maui.Storage.FileSystem.OpenAppPackageFileAsync("#1_e Long_Digital (1).pdf").Result;
+                        using var fileStream = new FileStream(templatePath, FileMode.Create, FileAccess.Write);
+                        stream.CopyTo(fileStream);
+                    }
+                    catch (Exception assetEx)
+                    {
+                        DisplayAlert("PDF Error", $"Template PDF not found: {templatePath}\nCould not extract embedded asset: {assetEx.Message}", "OK");
+                        return;
+                    }
+                }
+                if (!File.Exists(templatePath))
+                {
+                    DisplayAlert("PDF Error", $"Template PDF not found: {templatePath}", "OK");
+                    return;
+                }
+                var signatureImages = new Dictionary<int, Stream>(); // Add signature logic later
+                try
+                {
+                    TripleS.Utilities.EnrollmentPdfGenerator.GenerateCMSPDF(templatePath, outputPath, fieldData, signatureImages);
+                }
+                catch (Exception fileEx)
+                {
+                    DisplayAlert("PDF Error", $"Failed to write PDF: {fileEx.Message}", "OK");
+                    return;
+                }
+                // Open the PDF in native viewer
+                try
+                {
+                    TripleS.SOA.AEP.UI.Services.ServiceLocator.PdfOpener.OpenPdf(outputPath);
+                }
+                catch (Exception openEx)
+                {
+                    DisplayAlert("PDF Open Error", $"PDF saved at: {outputPath}\nBut could not open: {openEx.Message}", "OK");
+                    return;
+                }
+                DisplayAlert("Success", $"Enrollment PDF generated and saved: {outputPath}", "OK");
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("PDF Error", $"Failed to generate or open enrollment PDF: {ex.Message}", "OK");
+            }
+        }
+    }
+}

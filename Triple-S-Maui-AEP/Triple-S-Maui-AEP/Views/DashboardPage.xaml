@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:Triple_S_Maui_AEP.ViewModels"
+    x:Class="Triple_S_Maui_AEP.Views.DashboardPage"
+    x:DataType="viewModels:DashboardViewModel"
+    BackgroundColor="#FAFAFA"
+    Title="Agent Dashboard">
+    <ScrollView>
+        <VerticalStackLayout Padding="24,24,24,24" Spacing="16">
+            <Border BackgroundColor="#1976D2" StrokeShape="RoundRectangle 12" Padding="24">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="PageTitle" Text="Agent Dashboard" TextColor="White" FontSize="24" FontAttributes="Bold"/>
+                    <Label Text="{Binding AgentName, StringFormat='Welcome, {0}'}" TextColor="#BBDEFB" FontSize="12"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Language Toggle -->
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Start" Margin="0,8,0,0">
+                <Label x:Name="LanguageLabel" Text="Language:" VerticalOptions="Center" FontSize="12"/>
+                <Picker x:Name="LanguagePicker" WidthRequest="120" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="StatisticsLabel" Text="Statistics" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,8,0,0"/>
+            <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="12" RowSpacing="12">
+                <Border Grid.Row="0" Grid.Column="0" BackgroundColor="White" StrokeShape="RoundRectangle 8" Padding="16" Stroke="#E0E0E0">
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="MonthlyEnrollmentsLabel" Text="Monthly Enrollments" FontSize="12" TextColor="#7F8C8D"/>
+                        <Label Text="{Binding MonthlyEnrollmentCount}" FontSize="24" FontAttributes="Bold" TextColor="#1976D2"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" BackgroundColor="White" StrokeShape="RoundRectangle 8" Padding="16" Stroke="#E0E0E0">
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="MonthlySOALabel" Text="Monthly SOAs" FontSize="12" TextColor="#7F8C8D"/>
+                        <Label Text="{Binding MonthlySOACount}" FontSize="24" FontAttributes="Bold" TextColor="#388E3C"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0" BackgroundColor="White" StrokeShape="RoundRectangle 8" Padding="16" Stroke="#E0E0E0">
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="CompletedSOALabel" Text="Completed SOAs" FontSize="12" TextColor="#7F8C8D"/>
+                        <Label Text="{Binding CompletedSOACount}" FontSize="24" FontAttributes="Bold" TextColor="#27AE60"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" BackgroundColor="White" StrokeShape="RoundRectangle 8" Padding="16" Stroke="#E0E0E0">
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="PendingSOALabel" Text="Pending SOAs" FontSize="12" TextColor="#7F8C8D"/>
+                        <Label Text="{Binding PendingSOACount}" FontSize="24" FontAttributes="Bold" TextColor="#F57C00"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- SOAs Section -->
+            <VerticalStackLayout Spacing="8" Margin="0,16,0,0">
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                    <Label Grid.Column="0" x:Name="SOAsListLabel" Text="Signature of Authority (SOAs)" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50" VerticalOptions="Center"/>
+                    <Button Grid.Column="1" x:Name="ToggleSOAsButton" Text="▼" BackgroundColor="Transparent" TextColor="#1976D2" FontAttributes="Bold" FontSize="16" Padding="8" WidthRequest="40" HeightRequest="40" Clicked="OnToggleSOAsClicked"/>
+                </Grid>
+                <VerticalStackLayout x:Name="SOAsCollectionView" Spacing="8"/>
+            </VerticalStackLayout>
+
+            <!-- Enrollments Section -->
+            <VerticalStackLayout Spacing="8" Margin="0,16,0,0">
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                    <Label Grid.Column="0" x:Name="EnrollmentsListLabel" Text="Recent Enrollments" FontSize="16" FontAttributes="Bold" TextColor="#2C3E50" VerticalOptions="Center"/>
+                    <Button Grid.Column="1" x:Name="ToggleEnrollmentsButton" Text="▼" BackgroundColor="Transparent" TextColor="#1976D2" FontAttributes="Bold" FontSize="16" Padding="8" WidthRequest="40" HeightRequest="40" Clicked="OnToggleEnrollmentsClicked"/>
+                </Grid>
+                <VerticalStackLayout x:Name="EnrollmentsCollectionView" Spacing="8"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="12" Margin="0,24,0,0">
+                <Button x:Name="NewEnrollmentButton" Text="New Enrollment" BackgroundColor="#1976D2" TextColor="White" FontAttributes="Bold" HeightRequest="48" Clicked="OnNewEnrollmentClicked"/>
+                <Button x:Name="NewTripleSEnrollmentButton" Text="New Triple-S Enrollment" BackgroundColor="#1565C0" TextColor="White" FontAttributes="Bold" HeightRequest="48" Clicked="OnNewTripleSEnrollmentClicked"/>
+                <Button x:Name="NewSOAButton" Text="New SOA" BackgroundColor="#388E3C" TextColor="White" FontAttributes="Bold" HeightRequest="48" Clicked="OnNewSOAClicked"/>
+                <Button x:Name="RefreshButton" Text="Refresh" BackgroundColor="#0288D1" TextColor="White" FontAttributes="Bold" HeightRequest="48" Clicked="OnRefreshClicked"/>
+                <Button x:Name="LogoutButton" Text="Logout" BackgroundColor="#D32F2F" TextColor="White" FontAttributes="Bold" HeightRequest="48" Clicked="OnLogoutClicked"/>
+            </VerticalStackLayout>
+            <Label x:Name="ErrorMessageLabel" TextColor="#C62828" FontSize="12" IsVisible="False"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

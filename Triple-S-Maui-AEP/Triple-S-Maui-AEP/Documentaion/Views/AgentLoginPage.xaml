@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripleSPOC.Views.AgentLoginPage"
+             BackgroundColor="#FAFAFA"
+             Title="Agent Login">
+    <ScrollView>
+        <VerticalStackLayout Padding="24,48,24,24" Spacing="16">
+            <!-- Language Toggle -->
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
+                <Label Text="Language:" VerticalOptions="Center"/>
+                <Picker x:Name="LanguagePicker" WidthRequest="120" />
+            </HorizontalStackLayout>
+            <!-- ...existing code... -->
+            <!-- Header -->
+            <Border BackgroundColor="#1976D2" StrokeShape="RoundRectangle 12" Padding="24">
+                <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                    <Label Text="Triple-S" TextColor="White" FontSize="28" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label Text="ESTAMOS CONTIGO" TextColor="#E3F2FD" FontSize="12" HorizontalTextAlignment="Center"/>
+                    <Label Text="Agent Login Portal" TextColor="#BBDEFB" FontSize="11" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Welcome Message -->
+            <Label x:Name="AgentPortalAccessLabel" Text="Agent Portal Access" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Label x:Name="EnterCredentialsLabel" Text="Enter your credentials to access SOA and enrollment tools." FontSize="12" TextColor="#7F8C8D"/>
+
+            <!-- NPN Field -->
+            <Label x:Name="NPNNumberLabel" Text="NPN Number" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Entry x:Name="NpnEntry" Placeholder="Enter NPN" Keyboard="Numeric" FontSize="14"/>
+
+            <!-- Password Field -->
+            <Label x:Name="PasswordLabel" Text="Password" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+            <Entry x:Name="PasswordEntry" Placeholder="Enter password" IsPassword="True" FontSize="14"/>
+
+            <!-- Remember Me -->
+            <CheckBox x:Name="RememberMeCheckBox"/>
+            <Label x:Name="RememberMyNPNLabel" Text="Remember my NPN" FontSize="12" TextColor="#7F8C8D"/>
+
+            <!-- Login Button -->
+            <Button Text="Sign In" x:Name="SignInButton" BackgroundColor="#1976D2" TextColor="White" FontAttributes="Bold" HeightRequest="48" Clicked="OnSignInClicked"/>
+
+            <!-- Forgot Password -->
+            <Label x:Name="ForgotPasswordLabel" Text="Forgot Password?" TextColor="#1976D2" FontSize="12" HorizontalTextAlignment="Center"/>
+
+            <!-- Info Section -->
+            <Border Stroke="#FFF3E0" BackgroundColor="#FFFDE7" StrokeShape="RoundRectangle 4" Padding="12">
+                <VerticalStackLayout>
+                    <Label x:Name="FirstTimeUserLabel" Text="First Time User?" FontSize="12" FontAttributes="Bold" TextColor="#E65100"/>
+                    <Label x:Name="ContactOfficeManagerLabel" Text="Contact your office manager for your NPN and temporary password." FontSize="11" TextColor="#BF360C"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Error Message -->
+            <Label x:Name="ErrorMessageLabel" TextColor="#C62828" FontSize="12" IsVisible="False"/>
+            <Button x:Name="ExitButton" Text="Exit" Clicked="OnExitClicked" BackgroundColor="#D32F2F" TextColor="White" FontAttributes="Bold" HeightRequest="44" Margin="0,12,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

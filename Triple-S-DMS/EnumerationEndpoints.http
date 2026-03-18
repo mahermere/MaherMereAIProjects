@@ -1,0 +1,87 @@
+### Test Simplified Enumeration Endpoints
+
+@baseUrl = http://localhost:5214/api
+
+### Get Document Status Enumeration (Names and Ordinals)
+GET {{baseUrl}}/documents/search/enums/document-status
+Accept: application/json
+
+###
+
+### Get Search Methods Enumeration (Names and Ordinals)
+GET {{baseUrl}}/documents/search/enums/search-methods
+Accept: application/json
+
+###
+
+### Get Document Retrieval Options Enumeration (Names and Ordinals)
+GET {{baseUrl}}/documents/search/enums/retrieval-options
+Accept: application/json
+
+###
+
+### Get Keyword Data Types Enumeration (Names and Ordinals)
+GET {{baseUrl}}/documents/search/enums/keyword-data-types
+Accept: application/json
+
+###
+
+### Get Search Operators Enumeration (Names and Ordinals)
+GET {{baseUrl}}/documents/search/enums/search-operators
+Accept: application/json
+
+###
+
+### Example: Using Ordinal Values in Search
+### Search using DocumentStatus ordinal value (0 = Active)
+GET {{baseUrl}}/documents?documentType=Contract&status=0&maxResults=10
+Accept: application/json
+
+###
+
+### Example: Advanced Search with Ordinal Values
+POST {{baseUrl}}/documents/search
+Content-Type: application/json
+
+{
+  "SearchMethod": 1,
+  "DocumentType": "Legal Contract",
+  "Status": 0,
+  "RetrievalOptions": 1,
+  "MaxResults": 20
+}
+
+###
+
+### Example: Custom Query Search with Ordinal Data Types and Operators
+POST {{baseUrl}}/documents/search
+Content-Type: application/json
+
+{
+  "SearchMethod": 2,
+  "CustomQueryName": "ContractSearch",
+  "Keywords": [
+    {
+      "Name": "ContractValue",
+      "DataType": 1,
+      "Value": 50000,
+      "Operator": 2
+    },
+    {
+      "Name": "Department",
+      "DataType": 0,
+      "Value": "Legal",
+      "Operator": 0
+    },
+    {
+      "Name": "ExpiryDate",
+      "DataType": 3,
+      "Value": "2026-12-31",
+      "Operator": 5
+    }
+  ],
+  "Status": 0,
+  "MaxResults": 25
+}
+
+###

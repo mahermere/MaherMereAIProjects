@@ -1,0 +1,141 @@
+### Hyland Document Management Service - API Tests
+
+@baseUrl = https://localhost:5001/api
+@devBaseUrl = http://localhost:5214/api
+@contentType = application/json
+
+### Swagger UI (Development)
+GET http://localhost:5214/swagger
+Accept: text/html
+
+### OpenAPI Specification (Development)  
+GET http://localhost:5214/openapi/v1.json
+Accept: application/json
+
+### Home Page (redirects to OpenAPI)
+GET http://localhost:5214/
+Accept: application/json
+
+### Get Query Metering Status
+GET {{devBaseUrl}}/hylanddocuments/query-metering/status
+Accept: application/json
+
+###
+
+### Configure Query Metering
+POST {{devBaseUrl}}/hylanddocuments/query-metering/configure
+Content-Type: {{contentType}}
+
+{
+  "maxQueriesPerHour": 1500,
+  "warningThreshold": 85
+}
+
+###
+
+### Get All Documents (Hyland)
+GET {{baseUrl}}/hylanddocuments
+Accept: application/json
+
+###
+
+### Get Specific Document (Hyland)
+GET {{baseUrl}}/hylanddocuments/1
+Accept: application/json
+
+###
+
+### Create New Document (Hyland)
+POST {{baseUrl}}/hylanddocuments
+Content-Type: {{contentType}}
+
+{
+  "fileName": "test-doc.pdf",
+  "fileType": "Legal Contract",
+  "fileSizeBytes": 1024768,
+  "contentType": "application/pdf",
+  "description": "Test document for Hyland integration",
+  "uploadedBy": "api-user",
+  "metadata": {
+    "Department": "Legal",
+    "Category": "Contract",
+    "Priority": "High",
+    "Confidential": "true"
+  }
+}
+
+###
+
+### Update Document (Hyland)
+PUT {{baseUrl}}/hylanddocuments/1
+Content-Type: {{contentType}}
+
+{
+  "description": "Updated description for testing",
+  "metadata": {
+    "Department": "Legal",
+    "Category": "Updated Contract",
+    "Priority": "Medium",
+    "LastReviewed": "2026-01-31"
+  },
+  "status": "InReview"
+}
+
+###
+
+### Search Documents (Hyland)
+POST {{baseUrl}}/hylanddocuments/search
+Content-Type: {{contentType}}
+
+{
+  "fileType": "Legal Contract",
+  "uploadedFrom": "2026-01-01T00:00:00Z",
+  "uploadedTo": "2026-12-31T23:59:59Z",
+  "status": "Active",
+  "metadata": {
+    "Department": "Legal",
+    "Category": "Contract"
+  }
+}
+
+###
+
+### Archive Document (Hyland)
+POST {{baseUrl}}/hylanddocuments/1/archive
+Content-Type: {{contentType}}
+
+###
+
+### Get Document Content (Hyland)
+GET {{baseUrl}}/hylanddocuments/1/content
+Accept: application/octet-stream
+
+###
+
+### Delete Document (Hyland)
+DELETE {{baseUrl}}/hylanddocuments/1
+
+###
+
+### Legacy Endpoints (for backward compatibility)
+### Get All Documents (Legacy)
+GET {{baseUrl}}/documents
+Accept: application/json
+
+###
+
+### Test Query Limit (Execute multiple requests to test metering)
+### First request
+GET {{baseUrl}}/hylanddocuments
+
+###
+
+### Second request
+GET {{baseUrl}}/hylanddocuments
+
+###
+
+### Third request
+GET {{baseUrl}}/hylanddocuments
+
+###

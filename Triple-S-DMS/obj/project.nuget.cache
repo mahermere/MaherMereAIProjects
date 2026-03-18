@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "9gLWKA9tnSo=",
+  "success": true,
+  "projectFilePath": "C:\\Triple-S\\TSS_IT_TSH_AEP\\Triple-S-DMS\\Triple-S-DMS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\maher\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.12\\microsoft.aspnetcore.openapi.9.0.12.nupkg.sha512",
+    "C:\\Users\\maher\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

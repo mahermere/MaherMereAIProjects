@@ -1,0 +1,119 @@
+{
+  "DocumentTypeId": 834,
+  "FileTypeId": 16,
+  "Base64Document": "JVBERi0xLjQKJeLjz9MKMSAwIG9iag...(Base64 encoded PDF content here)...",
+  "Keywords": [
+    {
+      "KeywordTypeId": 1254,
+      "Value": "ENR-12345678-20250115123456-Smith"
+    },
+    {
+      "KeywordTypeId": 1049,
+      "Value": "John"
+    },
+    {
+      "KeywordTypeId": 1051,
+      "Value": "Smith"
+    },
+    {
+      "KeywordTypeId": 1120,
+      "Value": "123-45-6789"
+    },
+    {
+      "KeywordTypeId": 1137,
+      "Value": "1234567890A"
+    },
+    {
+      "KeywordTypeId": 1052,
+      "Value": "787-555-0123"
+    },
+    {
+      "KeywordTypeId": 1253,
+      "Value": "787-555-0124"
+    },
+    {
+      "KeywordTypeId": 1063,
+      "Value": "john.smith@example.com"
+    },
+    {
+      "KeywordTypeId": 1053,
+      "Value": "123 Main Street"
+    },
+    {
+      "KeywordTypeId": 1054,
+      "Value": "Apt 4B"
+    },
+    {
+      "KeywordTypeId": 1055,
+      "Value": "San Juan"
+    },
+    {
+      "KeywordTypeId": 1056,
+      "Value": "PR"
+    },
+    {
+      "KeywordTypeId": 1057,
+      "Value": "00901"
+    },
+    {
+      "KeywordTypeId": 1113,
+      "Value": "123 Mailing Ave"
+    },
+    {
+      "KeywordTypeId": 1112,
+      "Value": "Suite 100"
+    },
+    {
+      "KeywordTypeId": 1114,
+      "Value": "San Juan"
+    },
+    {
+      "KeywordTypeId": 1115,
+      "Value": "PR"
+    },
+    {
+      "KeywordTypeId": 1116,
+      "Value": "00901"
+    },
+    {
+      "KeywordTypeId": 1128,
+      "Value": "Maria Smith"
+    },
+    {
+      "KeywordTypeId": 1129,
+      "Value": "787-555-0199"
+    },
+    {
+      "KeywordTypeId": 1136,
+      "Value": "Spouse"
+    },
+    {
+      "KeywordTypeId": 1110,
+      "Value": "Óptimo Plus (PPO)"
+    },
+    {
+      "KeywordTypeId": 1121,
+      "Value": "H1234"
+    },
+    {
+      "KeywordTypeId": 1122,
+      "Value": "001"
+    },
+    {
+      "KeywordTypeId": 1179,
+      "Value": "English"
+    },
+    {
+      "KeywordTypeId": 1100,
+      "Value": "Phone"
+    },
+    {
+      "KeywordTypeId": 1280,
+      "Value": "12345678"
+    },
+    {
+      "KeywordTypeId": 1082,
+      "Value": "01/15/2025"
+    }
+  ]
+}

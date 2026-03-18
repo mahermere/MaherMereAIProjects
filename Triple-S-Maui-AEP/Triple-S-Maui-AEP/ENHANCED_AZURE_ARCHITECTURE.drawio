@@ -1,0 +1,172 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.1">
+  <diagram name="Enhanced Azure Architecture" id="enhanced-main">
+    <mxGraphModel dx="1501" dy="831" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" value="Triple-S MAUI AEP - HIPAA/CMS Compliant Architecture" vertex="1">
+          <mxGeometry height="40" width="800" x="400" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=14;fontStyle=1;align=center;" value="MOBILE APPLICATION (.NET MAUI)" vertex="1">
+          <mxGeometry height="200" width="1520" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-ui" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;verticalAlign=top;fontSize=12;fontStyle=1;" value="UI Layer" vertex="1">
+          <mxGeometry height="145" width="480" x="60" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-ui-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" value="• Agent Login (AAD + MFA)&#xa;• SOA Wizard (4 Steps)&#xa;• Enrollment Wizard (9 Steps)&#xa;• Dashboard (Real-time Status)&#xa;• Offline Mode Support" vertex="1">
+          <mxGeometry height="110" width="460" x="70" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-services" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=12;fontStyle=1;" value="Local Services" vertex="1">
+          <mxGeometry height="145" width="480" x="560" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-services-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" value="• PdfService&#xa;• LocalQueueService (Offline)&#xa;• EncryptionService (AES-256)&#xa;• TokenCacheService (OAuth)&#xa;• AuditLogService" vertex="1">
+          <mxGeometry height="110" width="460" x="570" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-azure-sdk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=12;fontStyle=1;" value="Azure SDK Integration" vertex="1">
+          <mxGeometry height="145" width="480" x="1060" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-azure-sdk-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" value="• Azure Service Bus Client&#xa;• Azure App Insights SDK&#xa;• Azure MSAL (Auth)&#xa;• Push Notification SDK" vertex="1">
+          <mxGeometry height="110" width="460" x="1070" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="azure-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;verticalAlign=top;fontSize=14;fontStyle=1;align=center;" value="AZURE CLOUD SERVICES (HIPAA BAA)" vertex="1">
+          <mxGeometry height="700" width="1520" x="40" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-to-azure" edge="1" parent="1" source="mobile-container" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;fontSize=12;fontStyle=1;strokeColor=#0066CC;" target="azure-container" value="HTTPS + OAuth 2.0&#xa;(TLS 1.2+ - HIPAA)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="azure-ad" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=12;fontStyle=1;" value="Azure Active Directory" vertex="1">
+          <mxGeometry height="120" width="300" x="60" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="azure-ad-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" value="• MFA&#xa;• Conditional Access&#xa;• RBAC&#xa;• Audit Logs" vertex="1">
+          <mxGeometry height="80" width="280" x="70" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="api-mgmt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=12;fontStyle=1;" value="API Management" vertex="1">
+          <mxGeometry height="120" width="300" x="380" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="api-mgmt-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" value="• JWT Validation&#xa;• Rate Limiting&#xa;• IP Whitelisting&#xa;• PHI Masking in Logs" vertex="1">
+          <mxGeometry height="80" width="280" x="390" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="key-vault" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=12;fontStyle=1;" value="Key Vault" vertex="1">
+          <mxGeometry height="120" width="300" x="700" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="key-vault-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" value="• DMS Credentials&#xa;• API Keys&#xa;• Encryption Keys&#xa;• TLS Certificates" vertex="1">
+          <mxGeometry height="80" width="280" x="710" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="azure-monitor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=12;fontStyle=1;" value="Azure Monitor" vertex="1">
+          <mxGeometry height="120" width="300" x="1020" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="azure-monitor-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" value="• Application Insights&#xa;• Log Analytics&#xa;• Alerts&#xa;• HIPAA Audit Reports" vertex="1">
+          <mxGeometry height="80" width="280" x="1030" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="service-bus" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc99;strokeColor=#FF6600;verticalAlign=top;fontSize=14;fontStyle=1;strokeWidth=3;" value="Azure Service Bus" vertex="1">
+          <mxGeometry height="180" width="620" x="380" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="service-bus-queue" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" value="Queue: document-upload-queue" vertex="1">
+          <mxGeometry height="130" width="280" x="400" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="service-bus-queue-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="• Max: 256KB&#xa;• TTL: 14 days&#xa;• Dead Letter Queue" vertex="1">
+          <mxGeometry height="35" width="180" x="410" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="service-bus-topic" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" value="Topic: document-events" vertex="1">
+          <mxGeometry height="130" width="280" x="700" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="service-bus-topic-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="Subscriptions:&#xa;• dms-processor&#xa;• notification-service&#xa;• audit-logger" vertex="1">
+          <mxGeometry height="45" width="260" x="720" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="service-bus-features" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=1;fontColor=#FF6600;" value="✨ Async Processing | 🔄 Auto Retry | 📬 Pub/Sub | 📊 Scalable" vertex="1">
+          <mxGeometry height="30" width="260" x="710" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="blob-storage" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=12;fontStyle=1;" value="Blob Storage (Hot)" vertex="1">
+          <mxGeometry height="180" width="300" x="60" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="blob-storage-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="Container: enrollment-pdfs&#xa;• Encryption at rest&#xa;• WORM (Immutable)&#xa;• Soft delete (30d)&#xa;• Versioning enabled&#xa;• Private endpoint" vertex="1">
+          <mxGeometry height="140" width="280" x="70" y="515" as="geometry" />
+        </mxCell>
+        <mxCell id="cosmos-db" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=12;fontStyle=1;" value="Cosmos DB (NoSQL)" vertex="1">
+          <mxGeometry height="180" width="300" x="1020" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="cosmos-db-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="Container: document-metadata&#xa;• Partition: AgentID&#xa;• Encryption at rest&#xa;• Point-in-time restore&#xa;• TTL: 7 years (CMS)" vertex="1">
+          <mxGeometry height="140" width="280" x="1030" y="515" as="geometry" />
+        </mxCell>
+        <mxCell id="functions" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=12;fontStyle=1;" value="Azure Functions (Serverless)" vertex="1">
+          <mxGeometry height="120" width="1260" x="60" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="func-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;" value="DocumentUploadProcessor" vertex="1">
+          <mxGeometry height="70" width="380" x="80" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="func-1-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" value="Trigger: Service Bus Queue&#xa;• Upload to OnBase DMS&#xa;• Update Cosmos DB&#xa;• Retry: 3x exponential backoff" vertex="1">
+          <mxGeometry height="50" width="360" x="90" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="func-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;" value="NotificationProcessor" vertex="1">
+          <mxGeometry height="70" width="380" x="480" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="func-2-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" value="Trigger: Service Bus Topic&#xa;• Send push notifications&#xa;• Update dashboard cache" vertex="1">
+          <mxGeometry height="40" width="360" x="490" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="func-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;" value="AuditLogger" vertex="1">
+          <mxGeometry height="70" width="420" x="880" y="725" as="geometry" />
+        </mxCell>
+        <mxCell id="func-3-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" value="Trigger: Service Bus Topic&#xa;• Log to Log Analytics&#xa;• Immutable audit storage (CMS)" vertex="1">
+          <mxGeometry height="40" width="400" x="890" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="security-layer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;align=center;" value="Security: Azure Policy | Security Center | Defender" vertex="1">
+          <mxGeometry height="40" width="1260" x="60" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="datacenter-container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=14;fontStyle=1;align=center;" value="TRIPLE-S DATACENTER (Internal Network)" vertex="1">
+          <mxGeometry height="330" width="1520" x="40" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="azure-to-vpn" edge="1" parent="1" source="functions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;fontSize=12;fontStyle=1;strokeColor=#CC0000;dashed=1;dashPattern=8 8;" target="datacenter-container" value="VPN Tunnel (AES-256)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="810" as="sourcePoint" />
+            <mxPoint x="690" y="1030" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vpn-gateway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=12;fontStyle=1;" value="VPN Gateway" vertex="1">
+          <mxGeometry height="80" width="520" x="540" y="1065" as="geometry" />
+        </mxCell>
+        <mxCell id="vpn-gateway-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" value="• Connection from Azure VPN Gateway&#xa;• Firewall rules (Azure Function IPs only)&#xa;• IDS/IPS monitoring" vertex="1">
+          <mxGeometry height="50" width="500" x="550" y="1085" as="geometry" />
+        </mxCell>
+        <mxCell id="onbase-dms" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" value="TRIPLE-S DMS (HYLAND ONBASE)" vertex="1">
+          <mxGeometry height="175" width="1260" x="60" y="1165" as="geometry" />
+        </mxCell>
+        <mxCell id="onbase-doc-mgmt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=11;fontStyle=1;" value="Document Management" vertex="1">
+          <mxGeometry height="120" width="380" x="80" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="onbase-doc-mgmt-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="• Document Storage&#xa;• Indexing &amp; Keywords&#xa;• Version Control&#xa;• Workflow Management" vertex="1">
+          <mxGeometry height="80" width="360" x="90" y="1225" as="geometry" />
+        </mxCell>
+        <mxCell id="onbase-doc-types" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=11;fontStyle=1;" value="Document Types" vertex="1">
+          <mxGeometry height="120" width="380" x="480" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="onbase-doc-types-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="• SOA Documents (Type: 123)&#xa;• Enrollment Forms (Type: 456)" vertex="1">
+          <mxGeometry height="60" width="360" x="490" y="1230" as="geometry" />
+        </mxCell>
+        <mxCell id="onbase-keywords" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=11;fontStyle=1;" value="Keywords (Metadata)" vertex="1">
+          <mxGeometry height="120" width="420" x="880" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="onbase-keywords-text" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="• DocumentID (1) • FirstName (2)&#xa;• LastName (3) • SOANumber (4)&#xa;• EnrollmentNumber (5)&#xa;• CreatedDate (6) • AgentID (7)" vertex="1">
+          <mxGeometry height="70" width="400" x="890" y="1230" as="geometry" />
+        </mxCell>
+        <mxCell id="cost-summary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffff99;strokeColor=#666666;fontSize=12;fontStyle=1;align=center;" value="💰 Monthly Cost: ~$29.63" vertex="1">
+          <mxGeometry height="50" width="200" x="1340" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="cost-breakdown" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="Service Bus:&amp;nbsp;&lt;br&gt;Blob Storage:&amp;nbsp;&lt;br&gt;Cosmos DB:&amp;nbsp;&lt;br&gt;&lt;br&gt;Key Vault:&amp;nbsp;&lt;br&gt;Monitor:&amp;nbsp;" vertex="1">
+          <mxGeometry height="85" width="200" x="1340" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="benefits" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;align=center;" value="✅ Benefits" vertex="1">
+          <mxGeometry height="40" width="200" x="1340" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="benefits-list" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="• Async Processing&#xa;• Offline-First&#xa;• Auto Retry&#xa;• Push Notifications&#xa;• HIPAA Compliant&#xa;• CMS Compliant&#xa;• Scalable&#xa;• Cost-Effective" vertex="1">
+          <mxGeometry height="120" width="200" x="1340" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="compliance" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;align=center;" value="🔒 HIPAA/CMS" vertex="1">
+          <mxGeometry height="40" width="200" x="1340" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="compliance-list" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" value="• Encryption (rest/transit)&#xa;• 7-year retention&#xa;• Audit trail&#xa;• Access control&#xa;• MFA&#xa;• BAA signed" vertex="1">
+          <mxGeometry height="100" width="200" x="1340" y="740" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

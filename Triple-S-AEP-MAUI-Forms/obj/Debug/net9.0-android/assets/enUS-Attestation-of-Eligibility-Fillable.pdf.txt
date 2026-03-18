@@ -1,0 +1,31 @@
+Fields for C:\Users\maher\source\repos\Triple-S-AEP-MAUI-Forms\Resources\Raw\enUS-Attestation-of-Eligibility-Fillable.pdf
+Field: ATTEST_ChangetoMedicaid_Date, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_PACE_DATE, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_CHANGELONGTERM_DATE, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_LOSTDRUG_Date, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_LEAVINGEMPLOYER_DATE, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_RecentUSStatus_Date, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_Incarceration_Date, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_Moved_date, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_ReturnedUS_Date, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_EXTRAHELP_DATE, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_CHANGING_PLAN_DATE, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_DISENROLLED_SNP_DATE, Type: PdfLoadedTextBoxField, Value: 
+Field: ATTEST_NEWMEDICARE, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_AEP, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_Moved, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_Incarceration, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_ReturnedtoUS, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_RecentUSStatus, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_ChangeinMedicaid, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_EXTRAHELP, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_ChangePlans, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_CHANGELONGTERM, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_PACE, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_LOSTDRUG, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_LEAVINGEMPLOYER, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_CHANGE_STATEPHARMACEUTICAL, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_PLANNOTMEDICARE, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_CHANGING_PLAN, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_DISENROLLED_SNP, Type: PdfLoadedCheckBoxField, Value: False
+Field: ATTEST_FEMA, Type: PdfLoadedCheckBoxField, Value: False

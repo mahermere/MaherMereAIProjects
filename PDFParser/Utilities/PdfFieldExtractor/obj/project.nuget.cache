@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "z0DGIO61UqQ=",
+  "success": true,
+  "projectFilePath": "C:\\Triple-S\\TSS_IT_TSH_AEP\\PDFParser\\Utilities\\PdfFieldExtractor\\PdfFieldExtractor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\maher\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\maher\\.nuget\\packages\\syncfusion.compression.net.core\\32.2.5\\syncfusion.compression.net.core.32.2.5.nupkg.sha512",
+    "C:\\Users\\maher\\.nuget\\packages\\syncfusion.licensing\\32.2.5\\syncfusion.licensing.32.2.5.nupkg.sha512",
+    "C:\\Users\\maher\\.nuget\\packages\\syncfusion.pdf.net.core\\32.2.5\\syncfusion.pdf.net.core.32.2.5.nupkg.sha512",
+    "C:\\Users\\maher\\.nuget\\packages\\system.text.encoding.codepages\\4.4.0\\system.text.encoding.codepages.4.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

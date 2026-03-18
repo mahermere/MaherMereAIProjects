@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Triple_S_Maui_AEP.MainPage"
+             Title="Triple-S Annual Enrollment">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,20"
+            Spacing="25">
+            
+            <!-- Language Toggle -->
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Start" HorizontalOptions="End">
+                <Label Text="Language:" VerticalOptions="Center" FontSize="12"/>
+                <Picker x:Name="LanguagePicker" WidthRequest="120" />
+            </HorizontalStackLayout>
+
+            <!-- Header -->
+            <Label
+                x:Name="AnnualEnrollmentLabel"
+                Text="Annual Enrollment Portal"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                x:Name="WelcomeLabel"
+                Text="Welcome to the Triple-S Medicare Advantage Annual Enrollment Process"
+                FontSize="14"
+                TextColor="#666666" />
+
+            <!-- Agent Information Section -->
+            <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="#E0E0E0" Padding="20">
+                <VerticalStackLayout Spacing="12">
+                    <Label x:Name="AgentInfoTitleLabel" Text="Agent Information" FontSize="16" FontAttributes="Bold"/>
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="8">
+                        <Label x:Name="AgentNPNHeaderLabel" Text="Agent NPN:" Grid.Row="0" Grid.Column="0" FontAttributes="Bold"/>
+                        <Label x:Name="AgentNPNLabel" Text="Not logged in" Grid.Row="0" Grid.Column="1"/>
+                        
+                        <Label x:Name="AgentNameHeaderLabel" Text="Agent Name:" Grid.Row="1" Grid.Column="0" FontAttributes="Bold"/>
+                        <Label x:Name="AgentNameLabel" Text="N/A" Grid.Row="1" Grid.Column="1"/>
+                        
+                        <Label x:Name="SessionStatusHeaderLabel" Text="Session Status:" Grid.Row="2" Grid.Column="0" FontAttributes="Bold"/>
+                        <Label x:Name="SessionStatusLabel" Text="Active" Grid.Row="2" Grid.Column="1" TextColor="#4CAF50"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Quick Actions -->
+            <Label x:Name="QuickActionsLabel" Text="Quick Actions" FontSize="16" FontAttributes="Bold"/>
+            
+            <Button 
+                x:Name="NewEnrollmentButton"
+                Text="Create New Enrollment" 
+                BackgroundColor="#1976D2" 
+                TextColor="White"
+                HeightRequest="48"
+                Clicked="OnNewEnrollmentClicked"/>
+
+            <Button 
+                x:Name="NewTripleSEnrollmentButton"
+                Text="Create New Triple-S Enrollment" 
+                BackgroundColor="#1565C0" 
+                TextColor="White"
+                HeightRequest="48"
+                Clicked="OnNewTripleSEnrollmentClicked"/>
+
+            <Button 
+                x:Name="NewSOAButton"
+                Text="Create SOA (Signature of Authority)" 
+                BackgroundColor="#388E3C" 
+                TextColor="White"
+                HeightRequest="48"
+                Clicked="OnNewSOAClicked"/>
+
+            <Button 
+                x:Name="DashboardButton"
+                Text="View Dashboard" 
+                BackgroundColor="#7B1FA2" 
+                TextColor="White"
+                HeightRequest="48"
+                Clicked="OnViewDashboardClicked"/>
+
+            <!-- Logout -->
+            <Button 
+                x:Name="LogoutButton"
+                Text="Logout" 
+                BackgroundColor="#D32F2F" 
+                TextColor="White"
+                HeightRequest="48"
+                Clicked="OnLogoutClicked"
+                Margin="0,20,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

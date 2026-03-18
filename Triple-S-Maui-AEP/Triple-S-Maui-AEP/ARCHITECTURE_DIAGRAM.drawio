@@ -1,0 +1,166 @@
+<mxfile host="app.diagrams.net" modified="2024-01-15T12:00:00.000Z" agent="GitHub Copilot" version="22.1.16" etag="architecture-v1">
+  <diagram name="Triple-S Architecture" id="architecture-main">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Mobile Application Layer -->
+        <mxCell id="mobile-container" value="MOBILE APPLICATION&#xa;(.NET MAUI - Android/iOS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=14;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="1000" height="280" as="geometry" />
+        </mxCell>
+        
+        <!-- Mobile App Components -->
+        <mxCell id="agent-login" value="Agent Login&#xa;- Authentication&#xa;- Session Mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="120" y="80" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="soa-wizard" value="SOA Wizard&#xa;- 4 Steps&#xa;- Signatures" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="290" y="80" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="enrollment-wizard" value="Enrollment Wizard&#xa;- 9 Steps&#xa;- Signatures" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="460" y="80" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Local Services Box -->
+        <mxCell id="local-services" value="LOCAL SERVICES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="180" width="480" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="local-services-text" value="• PdfService - Generate/Fill PDF Templates&#xa;• SignaturePadView - Capture Signatures&#xa;• SOAService - Track SOA Records (CSV)&#xa;• EnrollmentService - Track Enrollments (CSV)&#xa;• AgentSessionService - Session Management&#xa;• LanguageService - English/Spanish Toggle" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="130" y="205" width="460" height="85" as="geometry" />
+        </mxCell>
+        
+        <!-- DMS Service Box -->
+        <mxCell id="dms-service" value="DMS SERVICE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="80" width="400" height="220" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="dms-service-text" value="• DMSService - Upload to Hyland OnBase&#xa;• OnBaseAuthenticationService - Authentication" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="650" y="105" width="380" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Connection from Mobile to API Gateway -->
+        <mxCell id="mobile-to-api" value="HTTPS&#xa;(JSON/REST)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=12;fontStyle=1;strokeColor=#0066CC;" edge="1" parent="1" source="mobile-container" target="api-gateway-container">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="320" as="sourcePoint" />
+            <mxPoint x="580" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Azure API Management Layer -->
+        <mxCell id="api-gateway-container" value="AZURE API MANAGEMENT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;verticalAlign=top;fontSize=14;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="380" width="1000" height="200" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api-gateway" value="API Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="420" width="440" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api-gateway-features" value="• Rate Limiting&#xa;• Authentication/Authorization&#xa;• Request/Response Transformation&#xa;• Logging &amp; Monitoring" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="130" y="445" width="420" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api-endpoints" value="Endpoints" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="420" width="440" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api-endpoints-list" value="• /api/dms/upload - Document Upload&#xa;• /api/auth/login - Authentication&#xa;• /api/documents/* - Document Operations" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="610" y="445" width="420" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Connection from API Gateway to VPN -->
+        <mxCell id="api-to-vpn" value="VPN Tunnel&#xa;(Secure Connection)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=12;fontStyle=1;strokeColor=#CC0000;dashed=1;" edge="1" parent="1" source="api-gateway-container" target="datacenter-container">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="580" as="sourcePoint" />
+            <mxPoint x="580" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Triple-S Datacenter Layer -->
+        <mxCell id="datacenter-container" value="TRIPLE-S DATACENTER&#xa;(Internal Network)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=14;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="640" width="1000" height="380" as="geometry" />
+        </mxCell>
+        
+        <!-- VPN Gateway -->
+        <mxCell id="vpn-gateway" value="VPN GATEWAY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="680" width="400" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="vpn-gateway-features" value="• Connection Termination&#xa;• Security &amp; Firewall" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="390" y="705" width="380" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Connection from VPN to DMS -->
+        <mxCell id="vpn-to-dms" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#000000;" edge="1" parent="1" source="vpn-gateway" target="onbase-dms">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Hyland OnBase DMS -->
+        <mxCell id="onbase-dms" value="TRIPLE-S DMS (HYLAND ONBASE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="120" y="790" width="920" height="210" as="geometry" />
+        </mxCell>
+        
+        <!-- Document Management -->
+        <mxCell id="doc-management" value="Document Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="830" width="270" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="doc-management-features" value="• Document Storage&#xa;• Indexing &amp; Keywords&#xa;• Version Control&#xa;• Workflow Management" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="150" y="855" width="250" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Document Types -->
+        <mxCell id="doc-types" value="Document Types" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="830" width="270" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="doc-types-list" value="• SOA Documents (Type: 123)&#xa;• Enrollment Forms (Type: 456)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="440" y="855" width="250" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Keywords Metadata -->
+        <mxCell id="keywords" value="Keywords (Metadata)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="830" width="300" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="keywords-list" value="• DocumentID (Keyword: 1)&#xa;• FirstName (Keyword: 2)&#xa;• LastName (Keyword: 3)&#xa;• SOANumber (Keyword: 4)&#xa;• EnrollmentNumber (Keyword: 5)&#xa;• CreatedDate (Keyword: 6)&#xa;• AgentID (Keyword: 7)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="730" y="855" width="280" height="105" as="geometry" />
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="legend" value="LEGEND" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="40" width="200" height="200" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-mobile" value="Mobile Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="70" width="160" height="25" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-azure" value="Azure Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="105" width="160" height="25" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-datacenter" value="Datacenter Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="140" width="160" height="25" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-https" value="HTTPS Connection" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0066CC;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1220" y="185" as="sourcePoint" />
+            <mxPoint x="1380" y="185" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="legend-vpn" value="VPN Tunnel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#CC0000;dashed=1;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1220" y="210" as="sourcePoint" />
+            <mxPoint x="1380" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

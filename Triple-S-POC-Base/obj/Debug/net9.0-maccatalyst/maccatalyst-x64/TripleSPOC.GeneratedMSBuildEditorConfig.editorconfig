@@ -1,0 +1,79 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net9.0-maccatalyst
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = TripleSPOC
+build_property.ProjectDir = C:\Triple-S\TSS_IT_TSH_AEP\Triple-S-POC-Base\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/Views/AgentLoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.Views.AgentLoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\AgentLoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\AgentLoginPage.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/Views/AgentLoginWindow.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.Views.AgentLoginWindow.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\AgentLoginWindow.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\AgentLoginWindow.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/Views/DashboardWindow.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.Views.DashboardWindow.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\DashboardWindow.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\DashboardWindow.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/Views/EnrollmentWizardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.Views.EnrollmentWizardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\EnrollmentWizardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\EnrollmentWizardPage.xaml
+
+[C:/Triple-S/TSS_IT_TSH_AEP/Triple-S-POC-Base/Views/SOAWizardWindow.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TripleSPOC.Views.SOAWizardWindow.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\SOAWizardWindow.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\SOAWizardWindow.xaml

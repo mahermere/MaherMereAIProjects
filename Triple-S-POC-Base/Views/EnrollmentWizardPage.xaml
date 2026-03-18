@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:resx="clr-namespace:TripleSPOC.Resources.Localization"
+             x:Class="TripleS.SOA.AEP.UI.Views.EnrollmentWizardPage"
+             Title="Medicare Advantage Enrollment Wizard">
+    <ScrollView VerticalScrollBarVisibility="Always">
+        <VerticalStackLayout Padding="20">
+                <!-- SOA Number Selection -->
+                <StackLayout x:Name="SOASelectionPanel" Margin="0,0,0,16">
+                    <Label x:Name="SOASelectionLabel" Text="Scope of Appointment Number (SOA)" FontAttributes="Bold" />
+                    <Picker x:Name="SOANumberPicker" />
+                </StackLayout>
+        <!-- Language Toggle -->
+        <HorizontalStackLayout Spacing="8" VerticalOptions="Start" Margin="16,8,0,0">
+            <Label x:Name="LanguageLabel" Text="Language:" VerticalOptions="Center" />
+            <Picker x:Name="LanguagePicker" WidthRequest="120" />
+        </HorizontalStackLayout>
+        <BoxView HeightRequest="2" BackgroundColor="#1976D2" Margin="0,10,0,10" />
+        <!-- Step 1: Personal Info -->
+        <StackLayout x:Name="Step1Panel">
+            <Label x:Name="PersonalInfoLabel" Text="Personal Information" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <Label x:Name="FirstNameLabel" Text="First Name *" />
+            <Entry x:Name="FirstNameBox" />
+            <Label x:Name="MiddleInitialLabel" Text="Middle Initial" />
+            <Entry x:Name="MiddleInitialBox" />
+            <Label x:Name="LastNameLabel" Text="Last Name *" />
+            <Entry x:Name="LastNameBox" />
+            <Label x:Name="DOBLabel" Text="Date of Birth (MM/DD/YYYY) *" />
+            <DatePicker x:Name="DOBPicker" Format="MM/dd/yyyy" />
+            <Label x:Name="GenderLabel" Text="Sex/Gender *" />
+            <Picker x:Name="GenderCombo" />
+            <Label x:Name="PrimaryPhoneLabel" Text="Primary Phone Number *" />
+            <HorizontalStackLayout Spacing="8">
+                <Entry x:Name="PrimaryPhoneBox" />
+                <CheckBox x:Name="PrimaryPhoneIsMobileCheckbox" />
+                <Label x:Name="PrimaryPhoneIsMobileLabel" Text="{DynamicResource IsMobile}" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <Label x:Name="SecondaryPhoneLabel" Text="Secondary Phone" />
+            <HorizontalStackLayout Spacing="8">
+                <Entry x:Name="SecondaryPhoneBox" />
+                <CheckBox x:Name="SecondaryPhoneIsMobileCheckbox" />
+                <Label x:Name="SecondaryPhoneIsMobileLabel" Text="{DynamicResource IsMobile}" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <Label x:Name="EmailLabel" Text="Email Address" />
+            <Entry x:Name="EmailBox" />
+            <Label x:Name="MedicareLabel" Text="Medicare Number *" />
+            <Entry x:Name="MedicareBox" />
+            <Label x:Name="SSNLabel" Text="Social Security Number" />
+            <Entry x:Name="SSNBox" />
+            <Label x:Name="ContactMethodLabel" Text="Preferred Contact Method" />
+            <Picker x:Name="ContactMethodPicker" />
+        </StackLayout>
+        <!-- Step 2: Address Info -->
+        <StackLayout x:Name="Step2Panel">
+            <Label x:Name="PermanentAddressLabel" Text="Permanent Residence Address" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <Label x:Name="Address1Label" Text="Street Address Line 1 *" />
+            <Entry x:Name="Address1Box" />
+            <Label x:Name="Address2Label" Text="Street Address Line 2" />
+            <Entry x:Name="Address2Box" />
+            <Label x:Name="CityLabel" Text="City *" />
+            <Entry x:Name="CityBox" />
+            <Label x:Name="StateLabel" Text="State *" />
+            <Entry x:Name="StateBox" Text="PR" />
+            <Label x:Name="CountyLabel" Text="County" />
+            <Entry x:Name="CountyBox" />
+            <Label x:Name="ZIPLabel" Text="ZIP Code *" />
+            <Entry x:Name="ZIPBox" />
+            <CheckBox x:Name="DifferentMailingCheckbox" />
+            <Label x:Name="DifferentMailingLabel" Text="Mailing address is different" />
+            <StackLayout x:Name="MailingAddressPanel" IsVisible="False">
+                <Label x:Name="MailingAddress1Label" Text="Mailing Street Address Line 1" />
+                <Entry x:Name="MailingAddress1Box" />
+                <Label x:Name="MailingAddress2Label" Text="Mailing Street Address Line 2" />
+                <Entry x:Name="MailingAddress2Box" />
+                <Label x:Name="MailingCityLabel" Text="Mailing City" />
+                <Entry x:Name="MailingCityBox" />
+                <Label x:Name="MailingStateLabel" Text="Mailing State" />
+                <Entry x:Name="MailingStateBox" />
+                <Label x:Name="MailingZIPLabel" Text="Mailing ZIP Code" />
+                <Entry x:Name="MailingZIPBox" />
+            </StackLayout>
+        </StackLayout>
+        <!-- Step 3: Emergency Contact -->
+        <StackLayout x:Name="Step3Panel">
+            <Label Text="Emergency Contact Information" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <Label Text="Emergency Contact Name *" />
+            <Entry x:Name="EmergencyNameBox" />
+            <Label Text="Emergency Contact Phone *" />
+            <Entry x:Name="EmergencyPhoneBox" />
+            <Label Text="Relationship" />
+            <Picker x:Name="EmergencyRelationshipCombo" />
+        </StackLayout>
+        <!-- Step 4: Dependents -->
+        <StackLayout x:Name="Step4Panel">
+            <Label x:Name="DependentsLabel" Text="Dependents" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <StackLayout x:Name="DependentsListPanel" />
+            <Button x:Name="AddDependentButton" Text="Add Dependent" />
+        </StackLayout>
+        <!-- Step 5: Plan Selection -->
+        <StackLayout x:Name="Step5Panel">
+            <Label x:Name="PlanSelectionLabel" Text="Plan Selection" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <Label x:Name="PlanNameLabel" Text="Plan Name" />
+            <Picker x:Name="PlanNamePicker" />
+            <Label x:Name="PlanContractLabel" Text="Plan Contract Number *" />
+            <Entry x:Name="PlanContractBox" />
+            <Label x:Name="PlanIDLabel" Text="Plan ID *" />
+            <Entry x:Name="PlanIDBox" />
+            <Label x:Name="PremiumPaymentMethodLabel" Text="Premium Payment Method" />
+            <Picker x:Name="PremiumPaymentMethodPicker" />
+            <Label x:Name="BankAccountLabel" Text="Bank Account Number" />
+            <Entry x:Name="BankAccountBox" />
+            <Label x:Name="RoutingNumberLabel" Text="Routing Number" />
+            <Entry x:Name="RoutingNumberBox" />
+            <Label x:Name="CreditCardLabel" Text="Credit Card Number" />
+            <Entry x:Name="CreditCardBox" />
+            <Label x:Name="LTCIndicatorLabel" Text="LTC Indicator" />
+            <CheckBox x:Name="LTCIndicatorCheckbox" />
+            <Label x:Name="LTCFacilityLabel" Text="LTC Facility Name" />
+            <Entry x:Name="LTCFacilityBox" />
+            <Label x:Name="PCPLabel" Text="Primary Care Provider" />
+            <Entry x:Name="PCPBox" />
+            <Label x:Name="PCPClinicLabel" Text="PCP Clinic Name" />
+            <Entry x:Name="PCPClinicBox" />
+        </StackLayout>
+        <!-- Step 6: Current Coverage -->
+        <StackLayout x:Name="Step6Panel">
+            <Label x:Name="CurrentCoverageLabel" Text="Current Coverage" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <Label x:Name="OtherInsuranceLabel" Text="Other Insurance" />
+            <CheckBox x:Name="OtherInsuranceCheckbox" />
+            <Label x:Name="OtherCoverageTypeLabel" Text="Other Coverage Type" />
+            <Entry x:Name="OtherCoverageTypeBox" />
+            <Label x:Name="OtherCoveragePolicyLabel" Text="Other Coverage Policy #" />
+            <Entry x:Name="OtherCoveragePolicyBox" />
+            <Label x:Name="CurrentMAPlanLabel" Text="Current MA Plan" />
+            <CheckBox x:Name="CurrentMAPlanCheckbox" />
+            <Label x:Name="CurrentPlanNameLabel" Text="Current Plan Name" />
+            <Entry x:Name="CurrentPlanNameBox" />
+            <Label x:Name="CurrentPlanContractLabel" Text="Current Plan Contract #" />
+            <Entry x:Name="CurrentPlanContractBox" />
+            <Label x:Name="CurrentPlanIDLabel" Text="Current Plan ID" />
+            <Entry x:Name="CurrentPlanIDBox" />
+            <Label x:Name="CoverageStartDateLabel" Text="Coverage Start Date" />
+            <DatePicker x:Name="CoverageStartDatePicker" Format="MM/dd/yyyy" />
+            <Label x:Name="ReasonChangeLabel" Text="Reason for Change" />
+            <Editor x:Name="ReasonChangeBox" />
+        </StackLayout>
+        <!-- Step 7: Special Circumstances -->
+        <StackLayout x:Name="Step7Panel">
+            <Label x:Name="SpecialCircumstancesLabel" Text="Special Circumstances" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <Label x:Name="SNPIndicatorLabel" Text="SNP Indicator" />
+            <CheckBox x:Name="SNPIndicatorCheckbox" />
+            <Label x:Name="SNPTypeLabel" Text="SNP Type" />
+            <Picker x:Name="SNPTypePicker" />
+            <Label x:Name="ChronicConditionLabel" Text="Chronic Condition Type" />
+            <Entry x:Name="ChronicConditionBox" />
+            <Label x:Name="MSAIndicatorLabel" Text="MSA Indicator" />
+            <CheckBox x:Name="MSAIndicatorCheckbox" />
+            <Label x:Name="MSADepositLabel" Text="MSA Deposit Amount" />
+            <Entry x:Name="MSADepositBox" />
+            <Label x:Name="PFFSIndicatorLabel" Text="PFFS Indicator" />
+            <CheckBox x:Name="PFFSIndicatorCheckbox" />
+            <Label x:Name="DualEligibleLabel" Text="Dual Eligible" />
+            <CheckBox x:Name="DualEligibleCheckbox" />
+            <Label x:Name="LISLabel" Text="LIS Indicator" />
+            <CheckBox x:Name="LISCheckbox" />
+            <Label x:Name="ESRDLabel" Text="ESRD Indicator" />
+            <CheckBox x:Name="ESRDCheckbox" />
+            <Label x:Name="InstitutionalCareLabel" Text="Institutional Care" />
+            <CheckBox x:Name="InstitutionalCareCheckbox" />
+        </StackLayout>
+        <!-- Step 8: SEP Information -->
+        <StackLayout x:Name="Step8Panel">
+            <Label x:Name="SEPLabel" Text="Special Enrollment Period (SEP)" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <Label x:Name="SEPReasonLabel" Text="SEP Reason" />
+            <Picker x:Name="SEPReasonPicker" />
+            <Label x:Name="SEPEventDateLabel" Text="SEP Event Date" />
+            <DatePicker x:Name="SEPEventDatePicker" Format="MM/dd/yyyy" />
+            <Label x:Name="SEPEventDescriptionLabel" Text="SEP Event Description" />
+            <Editor x:Name="SEPEventDescriptionBox" />
+            <Label x:Name="SEPDocumentationLabel" Text="SEP Documentation Path" />
+            <Entry x:Name="SEPDocumentationBox" />
+            <Label x:Name="GoodCauseStatusLabel" Text="Good Cause Status" />
+            <Picker x:Name="GoodCauseStatusPicker" />
+            <Label x:Name="GoodCauseNotesLabel" Text="Good Cause Notes" />
+            <Editor x:Name="GoodCauseNotesBox" />
+        </StackLayout>
+        <!-- Step 9: Signatures -->
+        <StackLayout x:Name="Step9Panel">
+            <Label x:Name="SignaturesLabel" Text="Signatures" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,16" />
+            <Label x:Name="EnrolleeSignatureLabel" Text="Enrollee Signature or X *" FontSize="12" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,0,0,4" />
+            <Label x:Name="EnrolleeSignatureDescLabel" Text="This is the signature or X mark of the enrollee. If the enrollee cannot sign, check the box below." FontSize="10" TextColor="#888" Margin="0,0,0,2" />
+            <toolkit:DrawingView x:Name="EnrolleeSignaturePad" HeightRequest="120" BackgroundColor="#EEE" Margin="0,5,0,0" />
+            <Label x:Name="XMarkLabel" Text="X Mark Indicator" />
+            <HorizontalStackLayout>
+                <CheckBox x:Name="XMarkCheckbox" Margin="0,0,0,5" />
+                <Label x:Name="XMarkCheckboxLabel" Text="Check if enrollee cannot sign and marks X" FontSize="10" TextColor="#888" Margin="0,0,0,8" />
+            </HorizontalStackLayout>
+            <Label x:Name="AgentSignatureLabel" Text="Agent Signature *" FontSize="12" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,16,0,4" />
+            <Label x:Name="AgentSignatureDescLabel" Text="This is the signature of the agent assisting with enrollment." FontSize="10" TextColor="#888" Margin="0,0,0,2" />
+            <toolkit:DrawingView x:Name="AgentSignaturePad" HeightRequest="120" BackgroundColor="#EEE" Margin="0,5,0,5" />
+            <Label x:Name="WitnessSignatureLabel" Text="Witness Signature (if X)" FontSize="12" FontAttributes="Bold" TextColor="#2C3E50" Margin="0,16,0,4" />
+            <Label x:Name="WitnessSignatureDescLabel" Text="If the enrollee marks X, a witness must sign here." FontSize="10" TextColor="#888" Margin="0,0,0,2" />
+            <toolkit:DrawingView x:Name="WitnessSignaturePad" HeightRequest="120" BackgroundColor="#EEE" Margin="0,5,0,5" />
+
+            <!-- Triple-S-specific fields -->
+            <Label Text="Device Information" />
+            <Entry x:Name="DeviceInfoBox" />
+            <Label Text="IP Address" />
+            <Entry x:Name="IPAddressBox" />
+            <Label Text="GPS Coordinates" />
+            <Entry x:Name="GPSCoordinatesBox" />
+            <Label Text="Form Variant" />
+            <Entry x:Name="FormVariantBox" />
+            <Label Text="OMB Control Number" />
+            <Entry x:Name="OMBControlNumberBox" />
+            <Label Text="Attestation Timestamp" />
+            <DatePicker x:Name="AttestationTimestampPicker" Format="MM/dd/yyyy" />
+            <Label Text="Submission Location Type" />
+            <Entry x:Name="SubmissionLocationTypeBox" />
+            <Label Text="Application Date" />
+            <Entry x:Name="ApplicationDateBox" />
+            <Label Text="Enrollment Mechanism" />
+            <Entry x:Name="EnrollmentMechanismBox" />
+            <Label Text="Form Identifier" />
+            <Entry x:Name="FormIdentifierBox" />
+            <Label Text="Effective Date" />
+            <DatePicker x:Name="EffectiveDatePicker" Format="MM/dd/yyyy" />
+            <Label Text="Created Date" />
+            <DatePicker x:Name="CreatedDatePicker" Format="MM/dd/yyyy" />
+            <Label Text="Last Modified Date" />
+            <DatePicker x:Name="LastModifiedDatePicker" Format="MM/dd/yyyy" />
+        </StackLayout>
+        <!-- Navigation Buttons -->
+        <HorizontalStackLayout Spacing="12" Margin="0,20,0,0">
+            <Button x:Name="BackButton" Text="Back" />
+            <Button x:Name="NextButton" Text="Next" />
+            <Button x:Name="CancelButton" Text="Cancel" />
+        </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

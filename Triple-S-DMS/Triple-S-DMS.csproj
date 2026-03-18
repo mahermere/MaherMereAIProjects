@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>TripleSService</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.12" />
+  </ItemGroup>
+
+  <!-- Hyland Unity API DLL References - Local project folder -->
+  <ItemGroup>
+    <Reference Include="Hyland.Unity">
+      <HintPath>C:\source\Triple-S-DMS\Hyland.Unity.dll</HintPath>
+      <Private>True</Private>
+      <CopyLocal>True</CopyLocal>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Hyland.Types">
+      <HintPath>C:\source\Triple-S-DMS\Hyland.Types.dll</HintPath>
+      <Private>True</Private>
+      <CopyLocal>True</CopyLocal>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Hyland.Workflow">
+      <HintPath>C:\source\Triple-S-DMS\Hyland.Workflow.dll</HintPath>
+      <Private>True</Private>
+      <CopyLocal>True</CopyLocal>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Hyland.WorkView">
+      <HintPath>C:\source\Triple-S-DMS\Hyland.WorkView.dll</HintPath>
+      <Private>True</Private>
+      <CopyLocal>True</CopyLocal>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Ensure Hyland DLLs are copied to output directory -->
+  <ItemGroup>
+    <Content Include="Hyland.Unity.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Hyland.Types.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Hyland.Workflow.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Hyland.WorkView.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- Post-build event to ensure all dependencies are copied -->
+  <Target Name="CopyHylandDlls" AfterTargets="Build">
+    <Message Text="Copying Hyland DLLs to output directory..." Importance="high" />
+    <ItemGroup>
+      <HylandFiles Include="$(ProjectDir)Hyland.*.dll" />
+    </ItemGroup>
+    <Copy 
+      SourceFiles="@(HylandFiles)" 
+      DestinationFolder="$(OutputPath)" 
+      SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<!-- Duplicate keys removed above, all <data> entries now inside <root> -->
+  <data name="IsMobile" xml:space="preserve">
+    <value>¿Es móvil?</value>
+  </data>
+  <data name="QuickActions" xml:space="preserve">
+    <value>Acciones rápidas</value>
+  </data>
+  <data name="DashboardHeaderTitle" xml:space="preserve">
+    <value>Triple-S SOA/AEP</value>
+  </data>
+  <data name="DashboardHeaderSubtitle" xml:space="preserve">
+    <value>Portal de Agentes - Ventas y Actividades de Corredores</value>
+  </data>
+  <data name="StartNewSOA" xml:space="preserve">
+    <value>Iniciar nueva SOA</value>
+  </data>
+  <data name="StartNewEnrollment" xml:space="preserve">
+    <value>Iniciar nueva inscripción</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="SOACountToday" xml:space="preserve">
+    <value>SOAs creadas hoy: {0}</value>
+  </data>
+  <data name="EnrollmentCountToday" xml:space="preserve">
+    <value>Inscripciones creadas hoy: {0}</value>
+  </data>
+  <data name="TodaysActivity" xml:space="preserve">
+    <value>Actividad de hoy</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="NPNNumber" xml:space="preserve">
+    <value>Número NPN</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="RememberMyNPN" xml:space="preserve">
+    <value>Recordar mi NPN</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>¿Olvidó su contraseña?</value>
+  </data>
+  <data name="FirstTimeUser" xml:space="preserve">
+    <value>¿Usuario por primera vez?</value>
+  </data>
+  <data name="ContactOfficeManager" xml:space="preserve">
+    <value>Contacte a su gerente de oficina para su NPN y contraseña temporal.</value>
+  </data>
+  <data name="SOAWizard_Title" xml:space="preserve">
+    <value>Asistente de Firma de Autoridad (SOA)</value>
+  </data>
+  <data name="SOAWizard_Step1" xml:space="preserve">
+    <value>Paso 1: Información del Beneficiario</value>
+  </data>
+  <data name="SOAWizard_FirstName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="SOAWizard_LastName" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="SOAWizard_DOB" xml:space="preserve">
+    <value>Fecha de Nacimiento</value>
+  </data>
+  <data name="SOAWizard_Medicare" xml:space="preserve">
+    <value>Número de Medicare</value>
+  </data>
+  <data name="SOAWizard_Phone" xml:space="preserve">
+    <value>Número de Teléfono</value>
+  </data>
+  <data name="SOAWizard_Step2" xml:space="preserve">
+    <value>Paso 2: Detalles de la Cita</value>
+  </data>
+  <data name="SOAWizard_ApptDate" xml:space="preserve">
+    <value>Fecha de la Cita</value>
+  </data>
+  <data name="SOAWizard_ApptTime" xml:space="preserve">
+    <value>Hora de la Cita</value>
+  </data>
+  <data name="SOAWizard_AgentName" xml:space="preserve">
+    <value>Nombre del Agente</value>
+  </data>
+  <data name="SOAWizard_ContactMethod" xml:space="preserve">
+    <value>Método de Contacto</value>
+  </data>
+  <data name="SOAWizard_ContactMethod_Phone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="SOAWizard_ContactMethod_InPerson" xml:space="preserve">
+    <value>En persona</value>
+  </data>
+  <data name="SOAWizard_ContactMethod_Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="SOAWizard_Step3" xml:space="preserve">
+    <value>Paso 3: Alcance de la Cita</value>
+  </data>
+  <data name="SOAWizard_SelectPlans" xml:space="preserve">
+    <value>Seleccione los tipos de planes a discutir:</value>
+  </data>
+  <data name="SOAWizard_Advantage" xml:space="preserve">
+    <value>Medicare Advantage (Parte C)</value>
+  </data>
+  <data name="SOAWizard_Drug" xml:space="preserve">
+    <value>Plan de Medicamentos Recetados (Parte D)</value>
+  </data>
+  <data name="SOAWizard_Supplement" xml:space="preserve">
+    <value>Suplemento de Medicare (Medigap)</value>
+  </data>
+  <data name="SOAWizard_Dental" xml:space="preserve">
+    <value>Dental / Visión</value>
+  </data>
+  <data name="SOAWizard_Signature" xml:space="preserve">
+    <value>Firma:</value>
+  </data>
+  <data name="SOAWizard_ClearSignature" xml:space="preserve">
+    <value>Borrar Firma</value>
+  </data>
+  <data name="SOAWizard_Step4" xml:space="preserve">
+    <value>Paso 4: Atestación / Envío</value>
+  </data>
+  <data name="SOAWizard_Attest" xml:space="preserve">
+    <value>Atestiguo que toda la información proporcionada es precisa y completa.</value>
+  </data>
+  <data name="SOAWizard_Back" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+  <data name="SOAWizard_Next" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="AgentPortalAccess" xml:space="preserve">
+    <value>Acceso al Portal de Agentes</value>
+  </data>
+  <data name="EnterCredentials" xml:space="preserve">
+    <value>Ingrese sus credenciales para acceder a SOA y herramientas de inscripción.</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Éxito</value>
+  </data>
+  <data name="LoginSuccessful" xml:space="preserve">
+    <value>¡Inicio de sesión exitoso!</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Regresar</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="Enrollment_HeaderTitle" xml:space="preserve">
+    <value>Inscripción en Medicare Advantage</value>
+  </data>
+  <data name="Enrollment_PersonalInfo" xml:space="preserve">
+    <value>Información Personal</value>
+  </data>
+  <data name="Enrollment_FirstName" xml:space="preserve">
+    <value>Nombre *</value>
+  </data>
+  <data name="Enrollment_LastName" xml:space="preserve">
+    <value>Apellido *</value>
+  </data>
+  <data name="Enrollment_DOB" xml:space="preserve">
+    <value>Fecha de Nacimiento (MM/DD/AAAA) *</value>
+  </data>
+  <data name="Enrollment_Gender" xml:space="preserve">
+    <value>Sexo/Género *</value>
+  </data>
+  <data name="Enrollment_PrimaryPhone" xml:space="preserve">
+    <value>Teléfono Principal *</value>
+  </data>
+  <data name="Enrollment_Email" xml:space="preserve">
+    <value>Correo Electrónico</value>
+  </data>
+  <data name="Enrollment_Medicare" xml:space="preserve">
+    <value>Número de Medicare *</value>
+  </data>
+  <data name="Enrollment_Validation_FirstNameRequired" xml:space="preserve">
+    <value>El nombre es obligatorio.</value>
+  </data>
+  <data name="Enrollment_Validation_LastNameRequired" xml:space="preserve">
+    <value>El apellido es obligatorio.</value>
+  </data>
+  <data name="Enrollment_Validation_DOBInvalid" xml:space="preserve">
+    <value>La fecha de nacimiento no es válida o es en el futuro.</value>
+  </data>
+  <data name="Enrollment_Validation_DOBTooYoung" xml:space="preserve">
+    <value>El solicitante debe tener al menos 18 años.</value>
+  </data>
+  <data name="Enrollment_Validation_GenderRequired" xml:space="preserve">
+    <value>El género es obligatorio.</value>
+  </data>
+  <data name="Enrollment_Validation_PhoneRequired" xml:space="preserve">
+    <value>El teléfono principal es obligatorio y debe ser válido.</value>
+  </data>
+  <data name="Enrollment_Validation_MedicareRequired" xml:space="preserve">
+    <value>El número de Medicare es obligatorio y debe ser válido.</value>
+  </data>
+    <data name="Enrollment_DeviceInfo" xml:space="preserve">
+      <value>Información del dispositivo (capturada automáticamente)</value>
+    </data>
+    <data name="Enrollment_IPAddress" xml:space="preserve">
+      <value>Dirección IP (capturada automáticamente)</value>
+    </data>
+    <data name="Enrollment_GPSCoordinates" xml:space="preserve">
+      <value>Coordenadas GPS (opcional)</value>
+    </data>
+    <data name="Enrollment_FormVariant" xml:space="preserve">
+      <value>Variante del formulario</value>
+    </data>
+    <data name="Enrollment_OMBControlNumber" xml:space="preserve">
+      <value>Número de control OMB</value>
+    </data>
+    <data name="Enrollment_AttestationTimestamp" xml:space="preserve">
+      <value>Marca de tiempo de atestación</value>
+    </data>
+    <data name="Enrollment_SubmissionLocationType" xml:space="preserve">
+      <value>Tipo de ubicación de envío</value>
+    </data>
+    <data name="Enrollment_ApplicationDate" xml:space="preserve">
+      <value>Fecha de solicitud</value>
+    </data>
+    <data name="Enrollment_EnrollmentMechanism" xml:space="preserve">
+      <value>Mecanismo de inscripción</value>
+    </data>
+    <data name="Enrollment_FormIdentifier" xml:space="preserve">
+      <value>Identificador del formulario</value>
+    </data>
+    <data name="Enrollment_EffectiveDate" xml:space="preserve">
+      <value>Fecha de vigencia</value>
+    </data>
+    <data name="Enrollment_CreatedDate" xml:space="preserve">
+      <value>Fecha de creación</value>
+    </data>
+    <data name="Enrollment_LastModifiedDate" xml:space="preserve">
+      <value>Fecha de última modificación</value>
+    </data>
+</root>

@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Triple_S_Maui_AEP.Controls"
+    xmlns:viewModels="clr-namespace:Triple_S_Maui_AEP.ViewModels"
+    x:Class="Triple_S_Maui_AEP.Views.EnrollmentWizardPage"
+    x:DataType="viewModels:EnrollmentWizardViewModel"
+    BackgroundColor="#FAFAFA"
+    Title="Enrollment Wizard">
+    <ScrollView>
+        <VerticalStackLayout Padding="24,24,24,24" Spacing="16">
+            <Border BackgroundColor="#1976D2" StrokeShape="RoundRectangle 12" Padding="24">
+                <VerticalStackLayout Spacing="8">
+                    <Label x:Name="PageTitle" Text="Enrollment Wizard" TextColor="White" FontSize="24" FontAttributes="Bold"/>
+                    <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                        <Label x:Name="StepLabel" Text="Step" TextColor="#BBDEFB" FontSize="12"/>
+                        <Label Text="{Binding CurrentStep}" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                        <Label Text="of" TextColor="#BBDEFB" FontSize="12"/>
+                        <Label Text="{Binding TotalSteps}" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Language Toggle -->
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Start" Margin="0,8,0,0">
+                <Label x:Name="LanguageLabel" Text="Language:" VerticalOptions="Center" FontSize="12"/>
+                <Picker x:Name="LanguagePicker" WidthRequest="120" />
+            </HorizontalStackLayout>
+
+            <!-- SOA Number Selection -->
+            <VerticalStackLayout Spacing="8" x:Name="SOASelectionPanel" Margin="0,0,0,8">
+                <Label x:Name="SOASelectionLabel" Text="Scope of Appointment Number (SOA)" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                <Picker x:Name="SOANumberPicker" />
+            </VerticalStackLayout>
+
+            <!-- Step 1: Personal Information -->
+            <VerticalStackLayout Spacing="12" x:Name="Step1Panel">
+                <Label x:Name="PersonalInfoLabel" Text="Personal Information" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="FirstNameLabel" Text="First Name *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="FirstNameBox" Placeholder="Enter first name" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="MiddleInitialLabel" Text="Middle Initial" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="MiddleInitialBox" Placeholder="M" FontSize="14" MaxLength="1"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="LastNameLabel" Text="Last Name *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="LastNameBox" Placeholder="Enter last name" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="DOBLabel" Text="Date of Birth (MM/DD/YYYY) *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <DatePicker x:Name="DOBPicker" Format="MM/dd/yyyy" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="GenderLabel" Text="Sex/Gender *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Picker x:Name="GenderCombo" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="PrimaryPhoneLabel" Text="Primary Phone Number *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="PrimaryPhoneBox" Placeholder="(555) 123-4567" FontSize="14" Keyboard="Telephone"/>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="PrimaryPhoneIsMobileCheckbox"/>
+                    <Label x:Name="PrimaryPhoneIsMobileLabel" Text="Is Mobile" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="SecondaryPhoneLabel" Text="Secondary Phone" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="SecondaryPhoneBox" Placeholder="(555) 123-4567" FontSize="14" Keyboard="Telephone"/>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="SecondaryPhoneIsMobileCheckbox"/>
+                    <Label x:Name="SecondaryPhoneIsMobileLabel" Text="Is Mobile" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="EmailLabel" Text="Email Address" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="EmailBox" Placeholder="email@example.com" FontSize="14" Keyboard="Email"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="MedicareLabel" Text="Medicare Number *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="MedicareBox" Placeholder="123-45-6789A" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="SSNLabel" Text="Social Security Number" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="SSNBox" Placeholder="123-45-6789" FontSize="14" Keyboard="Numeric" IsPassword="True"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="ContactMethodLabel" Text="Preferred Contact Method" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Picker x:Name="ContactMethodPicker" FontSize="14"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Step 2: Address Info -->
+            <VerticalStackLayout Spacing="12" x:Name="Step2Panel" IsVisible="False">
+                <Label x:Name="PermanentAddressLabel" Text="Permanent Residence Address" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="Address1Label" Text="Street Address Line 1 *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="Address1Box" Placeholder="Street address" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="Address2Label" Text="Street Address Line 2" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="Address2Box" Placeholder="Apt, suite, etc. (optional)" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="CityLabel" Text="City *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="CityBox" Placeholder="City" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="StateLabel" Text="State *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="StateBox" Text="PR" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="CountyLabel" Text="County" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="CountyBox" Placeholder="County" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="ZIPLabel" Text="ZIP Code *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="ZIPBox" Placeholder="00000" FontSize="14" Keyboard="Numeric" MaxLength="5"/>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="DifferentMailingCheckbox"/>
+                    <Label x:Name="DifferentMailingLabel" Text="Mailing address is different" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Spacing="12" x:Name="MailingAddressPanel" IsVisible="False">
+                    <Label Text="Mailing Address" FontSize="14" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="MailingAddress1Label" Text="Mailing Street Address Line 1" FontSize="13" TextColor="#2C3E50"/>
+                        <Entry x:Name="MailingAddress1Box" Placeholder="Mailing street address" FontSize="14"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="MailingAddress2Label" Text="Mailing Street Address Line 2" FontSize="13" TextColor="#2C3E50"/>
+                        <Entry x:Name="MailingAddress2Box" Placeholder="Apt, suite, etc." FontSize="14"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="MailingCityLabel" Text="Mailing City" FontSize="13" TextColor="#2C3E50"/>
+                        <Entry x:Name="MailingCityBox" Placeholder="City" FontSize="14"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="MailingStateLabel" Text="Mailing State" FontSize="13" TextColor="#2C3E50"/>
+                        <Entry x:Name="MailingStateBox" Placeholder="State" FontSize="14"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="MailingZIPLabel" Text="Mailing ZIP Code" FontSize="13" TextColor="#2C3E50"/>
+                        <Entry x:Name="MailingZIPBox" Placeholder="00000" FontSize="14" Keyboard="Numeric" MaxLength="5"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Step 3: Emergency Contact -->
+            <VerticalStackLayout Spacing="12" x:Name="Step3Panel" IsVisible="False">
+                <Label x:Name="EmergencyContactLabel" Text="Emergency Contact Information" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="EmergencyNameLabel" Text="Emergency Contact Name *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="EmergencyNameBox" Placeholder="Full name" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="EmergencyPhoneLabel" Text="Emergency Contact Phone *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="EmergencyPhoneBox" Placeholder="(555) 123-4567" FontSize="14" Keyboard="Telephone"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="EmergencyRelationshipLabel" Text="Relationship" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Picker x:Name="EmergencyRelationshipCombo" FontSize="14"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Step 4: Dependents -->
+            <VerticalStackLayout Spacing="12" x:Name="Step4Panel" IsVisible="False">
+                <Label x:Name="DependentsLabel" Text="Dependents" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                <VerticalStackLayout x:Name="DependentsListPanel" Spacing="8"/>
+                <Button x:Name="AddDependentButton" Text="Add Dependent" BackgroundColor="#1976D2" TextColor="White" FontSize="14" HeightRequest="44"/>
+            </VerticalStackLayout>
+
+            <!-- Step 5: Plan Selection -->
+            <VerticalStackLayout Spacing="12" x:Name="Step5Panel" IsVisible="False">
+                <Label x:Name="PlanSelectionLabel" Text="Plan Selection" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="PlanNameLabel" Text="Plan Name" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Picker x:Name="PlanNamePicker" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="PlanContractLabel" Text="Plan Contract Number *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="PlanContractBox" Placeholder="Contract number" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="PlanIDLabel" Text="Plan ID *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="PlanIDBox" Placeholder="Plan ID" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="PremiumPaymentMethodLabel" Text="Premium Payment Method" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Picker x:Name="PremiumPaymentMethodPicker" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="BankAccountLabel" Text="Bank Account Number" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="BankAccountBox" Placeholder="Account number" FontSize="14" Keyboard="Numeric"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="RoutingNumberLabel" Text="Routing Number" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="RoutingNumberBox" Placeholder="Routing number" FontSize="14" Keyboard="Numeric"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="CreditCardLabel" Text="Credit Card Number" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="CreditCardBox" Placeholder="Credit card number" FontSize="14" Keyboard="Numeric"/>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="LTCIndicatorCheckbox"/>
+                    <Label x:Name="LTCIndicatorLabel" Text="LTC Indicator" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="LTCFacilityLabel" Text="LTC Facility Name" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="LTCFacilityBox" Placeholder="Facility name" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="PCPLabel" Text="Primary Care Provider" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="PCPBox" Placeholder="Provider name" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="PCPClinicLabel" Text="PCP Clinic Name" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="PCPClinicBox" Placeholder="Clinic name" FontSize="14"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Step 6: Current Coverage -->
+            <VerticalStackLayout Spacing="12" x:Name="Step6Panel" IsVisible="False">
+                <Label x:Name="CurrentCoverageLabel" Text="Current Coverage" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="OtherInsuranceCheckbox"/>
+                    <Label x:Name="OtherInsuranceLabel" Text="Other Insurance" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="OtherCoverageTypeLabel" Text="Other Coverage Type" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="OtherCoverageTypeBox" Placeholder="Coverage type" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="OtherCoveragePolicyLabel" Text="Other Coverage Policy #" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="OtherCoveragePolicyBox" Placeholder="Policy number" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="CurrentMAPlanCheckbox"/>
+                    <Label x:Name="CurrentMAPlanLabel" Text="Current MA Plan" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="CurrentPlanNameLabel" Text="Current Plan Name" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="CurrentPlanNameBox" Placeholder="Current plan name" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="CurrentPlanContractLabel" Text="Current Plan Contract #" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="CurrentPlanContractBox" Placeholder="Contract number" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="CurrentPlanIDLabel" Text="Current Plan ID" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="CurrentPlanIDBox" Placeholder="Plan ID" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="CoverageStartDateLabel" Text="Coverage Start Date" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <DatePicker x:Name="CoverageStartDatePicker" Format="MM/dd/yyyy" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="ReasonChangeLabel" Text="Reason for Change" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Editor x:Name="ReasonChangeBox" Placeholder="Reason for change" FontSize="14" HeightRequest="100"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Step 7: Special Circumstances -->
+            <VerticalStackLayout Spacing="12" x:Name="Step7Panel" IsVisible="False">
+                <Label x:Name="SpecialCircumstancesLabel" Text="Special Circumstances" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="SNPIndicatorCheckbox"/>
+                    <Label x:Name="SNPIndicatorLabel" Text="SNP Indicator" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="SNPTypeLabel" Text="SNP Type" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Picker x:Name="SNPTypePicker" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="ChronicConditionLabel" Text="Chronic Condition Type" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="ChronicConditionBox" Placeholder="Chronic condition" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="MSAIndicatorCheckbox"/>
+                    <Label x:Name="MSAIndicatorLabel" Text="MSA Indicator" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="MSADepositLabel" Text="MSA Deposit Amount" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="MSADepositBox" Placeholder="Deposit amount" FontSize="14" Keyboard="Numeric"/>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="PFFSIndicatorCheckbox"/>
+                    <Label x:Name="PFFSIndicatorLabel" Text="PFFS Indicator" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="DualEligibleCheckbox"/>
+                    <Label x:Name="DualEligibleLabel" Text="Dual Eligible" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="LISCheckbox"/>
+                    <Label x:Name="LISLabel" Text="LIS Indicator" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="ESRDCheckbox"/>
+                    <Label x:Name="ESRDLabel" Text="ESRD Indicator" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <CheckBox x:Name="InstitutionalCareCheckbox"/>
+                    <Label x:Name="InstitutionalCareLabel" Text="Institutional Care" FontSize="12" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Step 8: SEP Information -->
+            <VerticalStackLayout Spacing="12" x:Name="Step8Panel" IsVisible="False">
+                <Label x:Name="SEPLabel" Text="Special Enrollment Period (SEP)" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="SEPReasonLabel" Text="SEP Reason" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Picker x:Name="SEPReasonPicker" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="SEPEventDateLabel" Text="SEP Event Date" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <DatePicker x:Name="SEPEventDatePicker" Format="MM/dd/yyyy" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="SEPEventDescriptionLabel" Text="SEP Event Description" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Editor x:Name="SEPEventDescriptionBox" Placeholder="Describe event" FontSize="14" HeightRequest="100"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="SEPDocumentationLabel" Text="SEP Documentation Path" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Entry x:Name="SEPDocumentationBox" Placeholder="Documentation path" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="GoodCauseStatusLabel" Text="Good Cause Status" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Picker x:Name="GoodCauseStatusPicker" FontSize="14"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="GoodCauseNotesLabel" Text="Good Cause Notes" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                    <Editor x:Name="GoodCauseNotesBox" Placeholder="Notes" FontSize="14" HeightRequest="100"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Step 9: Signatures -->
+            <VerticalStackLayout Spacing="12" x:Name="Step9Panel" IsVisible="False">
+                <Label x:Name="SignaturesLabel" Text="Signatures" FontSize="18" FontAttributes="Bold" TextColor="#1976D2"/>
+                
+                <!-- Enrollee Signature Section -->
+                <Frame BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="8" Padding="16" HasShadow="False">
+                    <VerticalStackLayout Spacing="10">
+                        <Label x:Name="EnrolleeSignatureLabel" Text="Enrollee Signature or X *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        <Label x:Name="EnrolleeSignatureDescLabel" Text="Tap button to capture signature" FontSize="11" TextColor="#888"/>
+                        
+                        <!-- Signature Capture Button -->
+                        <Button Text="📝 Capture Enrollee Signature"
+                                Clicked="OnCaptureEnrolleeSignatureClicked"
+                                BackgroundColor="#1976D2"
+                                TextColor="White"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                HeightRequest="50"
+                                CornerRadius="8"
+                                Margin="0,8,0,0"/>
+                        
+                        <!-- Signature Status -->
+                        <HorizontalStackLayout Spacing="8" Margin="0,8,0,0">
+                            <Label x:Name="EnrolleeSignatureStatus" 
+                                   Text="❌ Not Captured" 
+                                   FontSize="13"
+                                   TextColor="#C62828"
+                                   VerticalOptions="Center"/>
+                            <CheckBox x:Name="XMarkCheckbox" VerticalOptions="Center"/>
+                            <Label x:Name="XMarkCheckboxLabel" Text="Use X Mark" FontSize="11" TextColor="#888" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        
+                        <!-- Signature Preview -->
+                        <Border BackgroundColor="#F5F5F5" StrokeShape="RoundRectangle 8" Stroke="#E0E0E0" Padding="8" IsVisible="False" x:Name="EnrolleeSignaturePreviewBorder">
+                            <Image x:Name="EnrolleeSignaturePreview" 
+                                   HeightRequest="100"
+                                   Aspect="AspectFit"
+                                   BackgroundColor="White"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Agent Signature Section -->
+                <Frame BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="8" Padding="16" HasShadow="False" Margin="0,8,0,0">
+                    <VerticalStackLayout Spacing="10">
+                        <Label x:Name="AgentSignatureLabel" Text="Agent Signature *" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        <Label x:Name="AgentSignatureDescLabel" Text="Tap button to capture signature" FontSize="11" TextColor="#888"/>
+                        
+                        <!-- Signature Capture Button -->
+                        <Button Text="📝 Capture Agent Signature"
+                                Clicked="OnCaptureAgentSignatureClicked"
+                                BackgroundColor="#388E3C"
+                                TextColor="White"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                HeightRequest="50"
+                                CornerRadius="8"
+                                Margin="0,8,0,0"/>
+                        
+                        <!-- Signature Status -->
+                        <Label x:Name="AgentSignatureStatus" 
+                               Text="❌ Not Captured" 
+                               FontSize="13"
+                               TextColor="#C62828"
+                               Margin="0,8,0,0"/>
+                        
+                        <!-- Signature Preview -->
+                        <Border BackgroundColor="#F5F5F5" StrokeShape="RoundRectangle 8" Stroke="#E0E0E0" Padding="8" IsVisible="False" x:Name="AgentSignaturePreviewBorder">
+                            <Image x:Name="AgentSignaturePreview" 
+                                   HeightRequest="100"
+                                   Aspect="AspectFit"
+                                   BackgroundColor="White"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Witness Signature Section (if X mark used) -->
+                <Frame BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="8" Padding="16" HasShadow="False" Margin="0,8,0,0">
+                    <VerticalStackLayout Spacing="10">
+                        <Label x:Name="WitnessSignatureLabel" Text="Witness Signature (if X)" FontSize="13" FontAttributes="Bold" TextColor="#2C3E50"/>
+                        <Label x:Name="WitnessSignatureDescLabel" Text="Required if enrollee uses X mark" FontSize="11" TextColor="#888"/>
+                        
+                        <!-- Signature Capture Button -->
+                        <Button Text="📝 Capture Witness Signature"
+                                Clicked="OnCaptureWitnessSignatureClicked"
+                                BackgroundColor="#FFA726"
+                                TextColor="White"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                HeightRequest="50"
+                                CornerRadius="8"
+                                Margin="0,8,0,0"/>
+                        
+                        <!-- Signature Status -->
+                        <Label x:Name="WitnessSignatureStatus" 
+                               Text="❌ Not Captured" 
+                               FontSize="13"
+                               TextColor="#C62828"
+                               Margin="0,8,0,0"/>
+                        
+                        <!-- Signature Preview -->
+                        <Border BackgroundColor="#F5F5F5" StrokeShape="RoundRectangle 8" Stroke="#E0E0E0" Padding="8" IsVisible="False" x:Name="WitnessSignaturePreviewBorder">
+                            <Image x:Name="WitnessSignaturePreview" 
+                                   HeightRequest="100"
+                                   Aspect="AspectFit"
+                                   BackgroundColor="White"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Error Message -->
+            <Label x:Name="ErrorMessageLabel" TextColor="#C62828" FontSize="12" IsVisible="False"/>
+
+            <!-- Navigation Buttons -->
+            <HorizontalStackLayout Spacing="12" Margin="0,24,0,0">
+                <Button x:Name="BackButton" Text="Back" BackgroundColor="#9E9E9E" TextColor="White" FontAttributes="Bold" HeightRequest="48" HorizontalOptions="FillAndExpand"/>
+                <Button x:Name="NextButton" Text="Next" BackgroundColor="#1976D2" TextColor="White" FontAttributes="Bold" HeightRequest="48" HorizontalOptions="FillAndExpand"/>
+            </HorizontalStackLayout>
+            <Button x:Name="CancelButton" Text="Cancel" BackgroundColor="#D32F2F" TextColor="White" FontAttributes="Bold" HeightRequest="44" Margin="0,8,0,0"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

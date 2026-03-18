@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Triple_S_Maui_AEP.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Triple_S_Maui_AEP.Views"
+    xmlns:local="clr-namespace:Triple_S_Maui_AEP"
+    Title="Triple-S AEP">
+
+    <ShellContent
+        Title="Agent Login"
+        ContentTemplate="{DataTemplate views:AgentLoginPage}"
+        Route="AgentLoginPage" />
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Dashboard"
+        ContentTemplate="{DataTemplate views:DashboardPage}"
+        Route="DashboardPage" />
+
+    <ShellContent
+        Title="Enrollment Wizard"
+        ContentTemplate="{DataTemplate views:EnrollmentWizardPage}"
+        Route="EnrollmentWizardPage" />
+
+    <ShellContent
+        Title="Triple-S Enrollment Wizard"
+        ContentTemplate="{DataTemplate views:TripleSEnrollmentWizardPage}"
+        Route="TripleSEnrollmentWizardPage" />
+
+    <ShellContent
+        Title="SOA Wizard"
+        ContentTemplate="{DataTemplate views:SOAWizardPage}"
+        Route="SOAWizardPage" />
+
+</Shell>

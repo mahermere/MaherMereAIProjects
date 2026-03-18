@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Triple_S_AEP_MAUI_Forms.Models"
+             x:Class="Triple_S_AEP_MAUI_Forms.SoaSelectorPage"
+             Title="Select Scope of Authority">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+        <Label Text="Select or Create SOA"
+               FontSize="22"
+               FontAttributes="Bold"
+               TextColor="#0057A3" />
+
+        <Label Text="Search existing SOA records or create a new one"
+               FontSize="13"
+               TextColor="#4A5568" />
+
+        <Entry x:Name="SoaSearchEntry"
+               Placeholder="Search by SOA Number"
+               TextChanged="OnSoaSearchTextChanged" />
+
+        <Label Text="Available SOA Records:"
+               FontSize="14"
+               FontAttributes="Bold"
+               Margin="0,8,0,0" />
+
+        <CollectionView x:Name="SoaRecordsCollectionView"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:EnrollmentRecord">
+                    <Frame BorderColor="#0057A3" CornerRadius="8" Padding="12" Margin="0,6,0,0">
+                        <VerticalStackLayout Spacing="4">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="{Binding SOANumber, StringFormat='SOA: {0}'}"
+                                       FontAttributes="Bold"
+                                       FontSize="14"
+                                       HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding CreatedDate, StringFormat='{0:M/d/yyyy}'}"
+                                       FontSize="12"
+                                       TextColor="#718096" />
+                            </HorizontalStackLayout>
+
+                            <Label Text="{Binding DisplayName, StringFormat='Beneficiary: {0}'}"
+                                   FontSize="12"
+                                   TextColor="#4A5568" />
+
+                            <Button Text="Select this SOA"
+                                    Clicked="OnSelectSoaClicked"
+                                    FontSize="11"
+                                    Padding="8,4"
+                                    HorizontalOptions="Start"
+                                    BackgroundColor="#0057A3"
+                                    TextColor="White" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout Spacing="10" Margin="0,12,0,0">
+            <Button Text="Skip / Create New SOA"
+                    Clicked="OnSkipClicked"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="#718096"
+                    TextColor="White" />
+
+            <Button Text="Cancel"
+                    Clicked="OnCancelClicked"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="#E53E3E"
+                    TextColor="White" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -1,0 +1,39 @@
+{
+  "DocumentTypeId": 650,
+  "FileTypeId": 16,
+  "Base64Document": "JVBERi0xLjQKJeLjz9MKMSAwIG9iag...(Base64 encoded PDF content here)...",
+  "Keywords": [
+    {
+      "KeywordTypeId": 1067,
+      "Value": "SOA-12345678-20250115123456"
+    },
+    {
+      "KeywordTypeId": 1049,
+      "Value": "Maria"
+    },
+    {
+      "KeywordTypeId": 1051,
+      "Value": "Garcia"
+    },
+    {
+      "KeywordTypeId": 1107,
+      "Value": "03/20/1955"
+    },
+    {
+      "KeywordTypeId": 1137,
+      "Value": "9876543210B"
+    },
+    {
+      "KeywordTypeId": 1052,
+      "Value": "787-555-0150"
+    },
+    {
+      "KeywordTypeId": 1280,
+      "Value": "12345678"
+    },
+    {
+      "KeywordTypeId": 1082,
+      "Value": "01/15/2025"
+    }
+  ]
+}

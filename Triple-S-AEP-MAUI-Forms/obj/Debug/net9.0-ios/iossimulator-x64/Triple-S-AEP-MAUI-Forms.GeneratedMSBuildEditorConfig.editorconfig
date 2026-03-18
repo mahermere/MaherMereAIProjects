@@ -1,0 +1,99 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net9.0-ios
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Triple_S_AEP_MAUI_Forms
+build_property.ProjectDir = C:\Users\maher\source\repos\Triple-S-AEP-MAUI-Forms\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/AepFormWizardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.AepFormWizardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = AepFormWizardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = AepFormWizardPage.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/AgentLoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.AgentLoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = AgentLoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = AgentLoginPage.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/DashboardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.DashboardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = DashboardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = DashboardPage.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/InstructionsViewerPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.InstructionsViewerPage.xaml
+build_metadata.AdditionalFiles.TargetPath = InstructionsViewerPage.xaml
+build_metadata.AdditionalFiles.RelativePath = InstructionsViewerPage.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/SignatureCapturePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.SignatureCapturePage.xaml
+build_metadata.AdditionalFiles.TargetPath = SignatureCapturePage.xaml
+build_metadata.AdditionalFiles.RelativePath = SignatureCapturePage.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/SoaFormWizardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.SoaFormWizardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = SoaFormWizardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = SoaFormWizardPage.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/SoaSelectorPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.SoaSelectorPage.xaml
+build_metadata.AdditionalFiles.TargetPath = SoaSelectorPage.xaml
+build_metadata.AdditionalFiles.RelativePath = SoaSelectorPage.xaml
+
+[C:/Users/maher/source/repos/Triple-S-AEP-MAUI-Forms/WorkingAgedSurveyPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Triple_S_AEP_MAUI_Forms.WorkingAgedSurveyPage.xaml
+build_metadata.AdditionalFiles.TargetPath = WorkingAgedSurveyPage.xaml
+build_metadata.AdditionalFiles.RelativePath = WorkingAgedSurveyPage.xaml

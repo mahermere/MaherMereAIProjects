@@ -1,0 +1,33 @@
+Unity Installation Instructions
+Unity is installed as part of the OnBase Application Server. For information about installing the Application please reference the Application Server manual reference guide (MRG).
+
+Validation
+Before you begin using the OnBase Application Server there are a few post-installation operations to perform to ensure that the Application Server is accessible.
+
+IIS Access
+To ensure that Application Server is accessible, it is common to attempt to access the URL where the Application server is installed. This can be done by typing in the URL of the Application Server which is typically formatted as http://[SERVER_NAME]/[VIRTUAL_DIR]/Service.asmx. This pattern may vary depending on your specific configuration. If this pattern does not work please contact your OnBase/Web Server administrator for installation specifics.
+
+  Important
+
+It is import to understand that successfully accessing the Service page does not guarantee that the Application Server is properly configured. Access to this page will ensure that the web server, IIS, and the web site the Application Server are install within are accessible.
+
+Unity Installation
+Required Files
+Microsoft .NET Framework Applications
+Hyland.Unity.dll and Hyland.Types.dll are required when building any external .NET based application.
+
+  Note
+
+If writing Unity scripts within the OnBase Configuration Module or via the OnBase Studio there are no required DLLs as they are part of the OnBase script editors.
+
+Oracle Java Platform
+Hyland.Unity-[VERSION].jar, Hyland.Types.jar and dom4j-2.1.4.jar are required when building any external Java-based application.
+
+  Note
+
+Java is not supported for internal OnBase scripting.
+
+In This Article
+
+Validation
+IIS Access

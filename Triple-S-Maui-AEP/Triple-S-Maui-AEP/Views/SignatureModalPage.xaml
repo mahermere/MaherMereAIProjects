@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Triple_S_Maui_AEP.Controls"
+             x:Class="Triple_S_Maui_AEP.Views.SignatureModalPage"
+             Title="Signature"
+             BackgroundColor="{StaticResource Gray900}"
+             Shell.PresentationMode="Modal">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
+        
+        <!-- Header -->
+        <Grid Grid.Row="0" 
+              BackgroundColor="{StaticResource Primary}"
+              Padding="20,15"
+              RowDefinitions="Auto,Auto">
+            
+            <Label Grid.Row="0"
+                   x:Name="TitleLabel"
+                   Text="Beneficiary Signature"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+            
+            <Label Grid.Row="1"
+                   x:Name="InstructionLabel"
+                   Text="Please sign in the box below"
+                   FontSize="14"
+                   TextColor="White"
+                   Opacity="0.9"
+                   HorizontalOptions="Center"
+                   Margin="0,5,0,0"/>
+        </Grid>
+
+        <!-- Signature Pad Container -->
+        <Frame Grid.Row="1"
+               Margin="20"
+               Padding="0"
+               CornerRadius="12"
+               BackgroundColor="White"
+               HasShadow="True"
+               BorderColor="{StaticResource Gray300}">
+            
+            <Grid RowDefinitions="*,Auto">
+                
+                <!-- Signature Canvas -->
+                <controls:SignaturePadView x:Name="SignaturePad"
+                                          Grid.Row="0"
+                                          StrokeColor="Black"
+                                          StrokeWidth="3"
+                                          BackgroundColor="White"
+                                          HeightRequest="300"
+                                          InputTransparent="False"/>
+
+                <!-- Signature Line -->
+                <BoxView Grid.Row="1"
+                         HeightRequest="2"
+                         Color="{StaticResource Gray400}"
+                         Margin="20,0"
+                         VerticalOptions="End"/>
+                
+                <!-- Placeholder text when empty -->
+                <Label Grid.Row="0"
+                       x:Name="PlaceholderLabel"
+                       Text="Sign here"
+                       FontSize="18"
+                       TextColor="{StaticResource Gray400}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       IsVisible="True"
+                       InputTransparent="True"
+                       Opacity="0.5"/>
+            </Grid>
+        </Frame>
+
+        <!-- Action Buttons -->
+        <Grid Grid.Row="2" 
+              Padding="20,0,20,20"
+              ColumnDefinitions="*,*"
+              ColumnSpacing="10">
+            
+            <!-- Clear Button -->
+            <Button Grid.Column="0"
+                    Text="Clear"
+                    Clicked="OnClearClicked"
+                    BackgroundColor="{StaticResource Gray600}"
+                    TextColor="White"
+                    HeightRequest="50"
+                    CornerRadius="8"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+            
+            <!-- Save Button -->
+            <Button Grid.Column="1"
+                    Text="Save Signature"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="{StaticResource Success}"
+                    TextColor="White"
+                    HeightRequest="50"
+                    CornerRadius="8"
+                    FontSize="16"
+                    FontAttributes="Bold"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>

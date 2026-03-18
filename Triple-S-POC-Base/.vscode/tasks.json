@@ -1,0 +1,56 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Windows MAUI App",
+			"type": "shell",
+			"command": "dotnet build TripleSPOC.csproj -f:net9.0-windows10.0.19041.0",
+			"isBackground": false,
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build Android MAUI App",
+			"type": "shell",
+			"command": "dotnet build TripleSPOC.csproj -f:net9.0-android",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Publish Windows MAUI App Release",
+			"type": "shell",
+			"command": "dotnet publish TripleSPOC.csproj -c Release -f:net9.0-windows10.0.19041.0 -o ./bin/Release/net9.0-windows10.0.19041.0/publish",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Publish Windows MAUI App Release",
+			"type": "shell",
+			"command": "dotnet publish TripleSPOC.csproj -c Release -f:net9.0-windows10.0.19041.0 -o ./bin/Release/net9.0-windows10.0.19041.0/publish",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"type": "msbuild",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build",
+			"label": "Build: solution",
+			"detail": "Build the POC.sln solution using dotnet build"
+		},
+		{
+			"label": "Build Windows Release",
+			"type": "shell",
+			"command": "dotnet build TripleSPOC.csproj -c Release -f net9.0-windows10.0.19041.0",
+			"args": [],
+			"isBackground": false,
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		}
+	]
+}

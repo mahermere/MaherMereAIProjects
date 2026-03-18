@@ -1,0 +1,75 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "PdfFieldExtractor/1.0.0": {
+        "dependencies": {
+          "Syncfusion.Pdf.Net.Core": "32.2.5"
+        },
+        "runtime": {
+          "PdfFieldExtractor.dll": {}
+        }
+      },
+      "Syncfusion.Compression.Net.Core/32.2.5": {
+        "runtime": {
+          "lib/net8.0/Syncfusion.Compression.Portable.dll": {
+            "assemblyVersion": "32.2.5.0",
+            "fileVersion": "32.2.5.0"
+          }
+        }
+      },
+      "Syncfusion.Licensing/32.2.5": {
+        "runtime": {
+          "lib/net8.0/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "32.2.5.0",
+            "fileVersion": "32.2.5.0"
+          }
+        }
+      },
+      "Syncfusion.Pdf.Net.Core/32.2.5": {
+        "dependencies": {
+          "Syncfusion.Compression.Net.Core": "32.2.5",
+          "Syncfusion.Licensing": "32.2.5"
+        },
+        "runtime": {
+          "lib/net8.0/Syncfusion.Pdf.Portable.dll": {
+            "assemblyVersion": "32.2.5.0",
+            "fileVersion": "32.2.5.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PdfFieldExtractor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Syncfusion.Compression.Net.Core/32.2.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YaNBIu73U6s41heL4HB+1v5qf5FufoGNCQRn6kDoClsCAiFVtL06JsoX3f5nEWtp1z08p3BLWE63lSM/w8gBQw==",
+      "path": "syncfusion.compression.net.core/32.2.5",
+      "hashPath": "syncfusion.compression.net.core.32.2.5.nupkg.sha512"
+    },
+    "Syncfusion.Licensing/32.2.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4aNqKeYr2CM74tHL3J8TPYZxBt2RacMrg8SDUd9uxWpJkqzBy7b5eCoohHvA1+PA/cwW5w0gITzl6CsyvWJB4Q==",
+      "path": "syncfusion.licensing/32.2.5",
+      "hashPath": "syncfusion.licensing.32.2.5.nupkg.sha512"
+    },
+    "Syncfusion.Pdf.Net.Core/32.2.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4iZ3zzvgF7RMW//bQYk/vjbGPI8UCRl0Ft0/Rr26bTYtARf/18YalGa4cx69jV+n6LXo08gnZYBqY+fcME2sRg==",
+      "path": "syncfusion.pdf.net.core/32.2.5",
+      "hashPath": "syncfusion.pdf.net.core.32.2.5.nupkg.sha512"
+    }
+  }
+}

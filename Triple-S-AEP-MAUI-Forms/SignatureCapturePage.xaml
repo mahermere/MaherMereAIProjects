@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Triple_S_AEP_MAUI_Forms.SignatureCapturePage"
+             Title="Capture Signature">
+
+    <Grid Padding="24" RowDefinitions="Auto,*,Auto" RowSpacing="16">
+        <VerticalStackLayout Spacing="6">
+            <Label x:Name="HeaderLabel"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#0057A3" />
+            <Label Text="Sign inside the box below, then tap Save."
+                   FontSize="13"
+                   TextColor="#4A5568" />
+            <Label Text="You can sign across multiple lines."
+                   FontSize="12"
+                   TextColor="#718096" />
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1"
+                BackgroundColor="White"
+                Stroke="#D0D7DE"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 8"
+                MinimumHeightRequest="320">
+            <toolkit:DrawingView x:Name="SignatureDrawingView"
+                                 BackgroundColor="White"
+                                 LineColor="Black"
+                                 LineWidth="3"
+                                 IsMultiLineModeEnabled="True"
+                                 ShouldClearOnFinish="False" />
+        </Border>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,*,*" ColumnSpacing="12">
+            <Button Text="Cancel"
+                    Clicked="OnCancelClicked" />
+            <Button Grid.Column="1"
+                    Text="Clear"
+                    Clicked="OnClearClicked" />
+            <Button Grid.Column="2"
+                    Text="Save"
+                    BackgroundColor="#0057A3"
+                    TextColor="White"
+                    Clicked="OnSaveClicked" />
+        </Grid>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,325 @@
+<!-- Document Archival
+Archiving a document is defined by the process in which a file or data stream is ingested into the OnBase system.
+
+Document Archival
+Document archival can be done with as much or as little metadata as needed by the organizational requirement.
+
+There are only two required elements in order to archive a document.
+
+DocumentType
+
+FileType
+
+This section contains the following subsections:
+
+Simple Archival
+Archival with metadata
+Simple Archival
+The following example demonstrates a basic archival process. This example performs an archive without any metadata.
+
+C#
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+using System;
+using Hyland.Unity;
+
+namespace UnityAPISample
+{
+  class Program
+  {
+    private static string _url = "http://myserver/appserver/service.asmx";
+    private static string _datasource = "ONBASE";
+    private static string _username = "jsmith";
+    private static string _password = "pa55w0rd";
+
+    static void Main(string[] args)
+    {
+      try
+      {
+        OnBaseAuthenticationProperties authProperties = Hyland.Unity.Application.CreateOnBaseAuthenticationProperties(_url, _username, _password, _datasource);
+        using (Hyland.Unity.Application application = Hyland.Unity.Application.Connect(authProperties))
+        {
+          DocumentType documentType = application.Core.DocumentTypes.Find(DOCUMENTTYPEID);
+          if(documentType == null)
+          {
+            throw new Exception($"DocumentType is not valid");
+          }
+
+          FileType fileType = application.Core.FileTypes.Find(FILETYPEID);
+          if(fileType == null)
+          {
+            throw new Exception($"FileType is not valid");
+          }
+
+          if(documentType.CanI(DocumentTypePrivileges.DocumentCreation))
+          {
+            Storage storage = application.Core.Storage;
+            StoreNewDocumentProperties storeNewDocumentProperties = storage.CreateStoreNewDocumentProperties(documentType, fileType);
+
+            PageData pageData = storage.CreatePageData(FILEPATH);
+
+            Document newDocument = storage.StoreNewDocument(pageData, storeNewDocumentProperties);
+          }
+          else
+          {
+            Console.WriteLine($"The current user [{application.CurrentUser.Name}] does not have access to archive new documents.");
+          }
+
+          application.Disconnect();
+          Console.ReadKey();
+        }
+      }
+      catch(Execption ex)
+      {
+        Console.WriteLine(ex);
+        Console.Read();
+      }
+    }
+  }
+}
+Archival with metadata
+The following example demonstrates the archival process. This example performs an archive including metadata.
+
+C#
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+using System;
+using Hyland.Unity;
+
+namespace UnityAPISample
+{
+  class Program
+  {
+    private static string _url = "http://myserver/appserver/service.asmx";
+    private static string _datasource = "ONBASE";
+    private static string _username = "jsmith";
+    private static string _password = "pa55w0rd";
+
+    static void Main(string[] args)
+    {
+      try
+      {
+        OnBaseAuthenticationProperties authProperties = Hyland.Unity.Application.CreateOnBaseAuthenticationProperties(_url, _username, _password, _datasource);
+        using (Hyland.Unity.Application application = Hyland.Unity.Application.Connect(authProperties))
+        {
+          DocumentType documentType = application.Core.DocumentTypes.Find(DOCUMENTTYPENAME);
+          if (documentType == null)
+          {
+            throw new Exception($"DocumentType is not valid");
+          }
+
+          FileType fileType = application.Core.FileTypes.Find(FILETYPENAME);
+          if (fileType == null)
+          {
+            throw new Exception($"FileType is not valid");
+          }
+
+          if (documentType.CanI(DocumentTypePrivileges.DocumentCreation))
+          {
+            Storage storage = application.Core.Storage;
+            StoreNewDocumentProperties storeNewDocumentProperties = storage.CreateStoreNewDocumentProperties(documentType, fileType);
+
+            #region Add Required Keywords
+              KeywordTypeList keywordTypesRequiredForArchival = documentType.KeywordTypesRequiredForArchival;
+              if (keywordTypesRequiredForArchival.Count > 0)
+              {
+                foreach (KeywordType keywordType in keywordTypesRequiredForArchival)
+                {
+                  Keyword keyword = keywordType.CreateKeyword(KEYWORDVALUE);
+                  storeNewDocumentProperties.AddKeyword(keyword);
+                }
+              }
+            #endregion
+
+            #region Add Standalone and/or Single Instance Keyword
+              storeNewDocumentProperties.AddKeyword(KEYWORDTYPENAME, KEYWORDVALUE);
+              storeNewDocumentProperties.AddKeyword(KEYWORDTYPENAME, KEYWORDVALUE);
+            #endregion
+
+            #region Add Multi-Instance Keyword Group
+              KeywordRecordType keywordRecordType = application.Core.KeywordRecordTypes.Find(KEYWORDRECORDTYPENAME);
+              EditableKeywordRecord editableKeywordRecord = keywordRecordType.CreateEditableKeywordRecord();
+              editableKeywordRecord.AddKeyword(KEYWORDTYPENAME, KEYWORDVALUE);
+              editableKeywordRecord.AddKeyword(KEYWORDTYPENAME, KEYWORDVALUE);
+              editableKeywordRecord.AddKeyword(KEYWORDTYPENAME, KEYWORDVALUE);
+
+              storeNewDocumentProperties.AddKeywordRecord(editableKeywordRecord);
+            #endregion
+
+            using (PageData pageData = storage.CreatePageData(FILEPATH))
+            {
+              Hyland.Unity.Document newDocument = storage.StoreNewDocument(pageData, storeNewDocumentProperties);
+            }
+          }
+          else
+          {
+            Console.WriteLine($"The current user [{application.CurrentUser.Name}] does not have access to archive new documents.");
+          }
+
+          application.Disconnect();
+          Console.ReadKey();
+        }
+      }
+      catch(Execption ex)
+      {
+        Console.WriteLine(ex);
+        Console.Read();
+      }
+    }
+  }
+}
+Remarks
+In the above examples there are several additional checks in which an API development should be using. These checks exists because the API does not necessarily respect all OnBase permissions. This is done to provide additional flexibility when designing a robust solution.
+
+It is very important to ensure that all OnBase objects (e.g., DocumentType, FileType, Document, etc...) are validated before moving forward. It is best practice to perform a NULL check before attempting to use or access the object. The OnBase API will not fail in the case of items not be found. Instead the API will return a NULL object. If an object is not found or validated it is possible to encounter a Object not set to an instance of an object.
+
+Being that the API is designed for flexibility, developers should adopt the practice of ensuring a user's permission before performing allowing actions to be performed. The DocumentType.CanI method is a special method that return a boolean indicating a user's ability to perform specific actions within OnBase. In this case, if a user does not have access to create a new document the developer may catch this and redirect the user and denying the ability to archive the document.
+
+Keywords are the metadata identifying a document. Keywords provide information about a document that are used in order to perform searches. Configuration of documents may include a set of Keywords that must be populated in order to perform a successful archival. The DocumentType.KeywordTypesRequiredForArchival property returns a KeywordTypeList of all KeywordTypes that are configured on the DocumentType to which the Document is being archive.
+
+There are multiple ways to configure Keywords on a DocumentType. Not all KeywordType are required. After the required Keywords have been addressed non-required Keywords can be added in the same manner. The process for adding new Keywords of KeywordRecordType Standalone or Single Instance is the same.
+
+In addition to Standalone and Single Instance Keyword types, Multi-Instance Keyword Groups can also be added to the Document during the archival process. Although similar to adding Standalone and Single Instance Keyword the Multi-Instance Keyword Group requires the use of the EditableKeywordRecord class. This class allows for the creation of a new Multi-Instance Keyword Group to which the group will be added to they Document during archival.
+
+Keyword Considerations
+KeywordTypesRequiredForArchival contains all the Keyword Types that are marked as required for archival in OnBase. It is up to the developer to enforce this as the Unity API does not enforce this automatically.
+
+The Unity API will produce an error if a value for an encrypted Keyword is supplied by a user who does not have the Access Security Masked Keywords privilege. To determine if a Keyword Type is encrypted, review the User Group Privileges for the associated user in the OnBase Configuration module. For more information about configuring user permissions please see the OnBase System Administrators manual reference guide. -->

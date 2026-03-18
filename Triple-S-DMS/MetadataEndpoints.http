@@ -1,0 +1,54 @@
+### Test Metadata Endpoints for Developer Help
+
+@baseUrl = http://localhost:5214/api
+
+### Get Available Document Types
+GET {{baseUrl}}/documents/metadata/document-types
+Accept: application/json
+
+###
+
+### Get Available Document Statuses
+GET {{baseUrl}}/documents/metadata/statuses
+Accept: application/json
+
+###
+
+### Get Search Fields Information
+GET {{baseUrl}}/documents/metadata/search-fields
+Accept: application/json
+
+###
+
+### Get Search Examples
+GET {{baseUrl}}/documents/metadata/search-examples
+Accept: application/json
+
+###
+
+### Get Document Model Information
+GET {{baseUrl}}/documents/metadata/document-model
+Accept: application/json
+
+###
+
+### Test Simple Search (using metadata info)
+GET {{baseUrl}}/documents?documentType=Legal Contract&status=Active&maxResults=10
+Accept: application/json
+
+###
+
+### Test Advanced Search (using examples)
+POST {{baseUrl}}/documents/search
+Content-Type: application/json
+
+{
+  "SearchMethod": "DocumentTypeAndDateRange",
+  "DocumentType": "Contract",
+  "DateStoredFrom": "2026-01-01T00:00:00Z",
+  "DateStoredTo": "2026-12-31T23:59:59Z",
+  "Status": "Active",
+  "MaxResults": 25
+}
+
+###

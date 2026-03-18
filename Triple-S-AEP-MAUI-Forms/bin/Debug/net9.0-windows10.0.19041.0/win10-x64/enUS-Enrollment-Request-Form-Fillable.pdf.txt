@@ -1,0 +1,175 @@
+Fields for C:\Users\maher\source\repos\Triple-S-AEP-MAUI-Forms\Resources\Raw\enUS-Enrollment-Request-Form-Fillable.pdf
+Field: ScopeOfAppointment, Type: PdfLoadedTextBoxField, Value: 
+Field: GroupCoverage, Type: PdfLoadedTextBoxField, Value: 
+Field: GroupMonthlyPremium, Type: PdfLoadedTextBoxField, Value: 
+Field: GroupEffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: GroupSSN, Type: PdfLoadedTextBoxField, Value: 
+Field: MailingAddressLine1, Type: PdfLoadedTextBoxField, Value: 
+Field: MailingAddressLine2, Type: PdfLoadedTextBoxField, Value: 
+Field: MailingCity, Type: PdfLoadedTextBoxField, Value: 
+Field: MailingState, Type: PdfLoadedTextBoxField, Value: 
+Field: MailingZipCode, Type: PdfLoadedTextBoxField, Value: 
+Field: MedicareNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: OtherRxCoverage, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: OtherCoverageName, Type: PdfLoadedTextBoxField, Value: 
+Field: OtherCoverageMemberNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: OtherCoverageGroupNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: MedicaidProgram, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: MedicaidNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: ContigoPlusCondition, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Value_eagr
+  Option 1: Value = Value_zzjw
+  Option 2: Value = Value_tlqd
+Field: ContigoEnMenteDementia, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: ApplicantSignature, Type: PdfLoadedSignatureField, Value: 
+Field: ApplicantSignatureDate, Type: PdfLoadedTextBoxField, Value: 
+Field: PhoneEnrollmentUCID, Type: PdfLoadedTextBoxField, Value: 
+Field: PhoneEnrollmentUCIDDate, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepSignatureDate, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepName, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepAddress, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: AuthorizedRepRelationship, Type: PdfLoadedTextBoxField, Value: 
+Field: InfoLanguage_Other, Type: PdfLoadedTextBoxField, Value: 
+Field: InfoAcccessibleFormat, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Braille
+  Option 1: Value = Large_Print
+  Option 2: Value = Audio_CD
+  Option 3: Value = Data_CD
+Field: WorkStatus, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: SpouseWorkStatus, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: PCPName, Type: PdfLoadedTextBoxField, Value: 
+Field: PcpPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: ContactTextMessage, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: ContactEmail, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: ContactTextPhoneNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: ContactEmailAddress, Type: PdfLoadedTextBoxField, Value: 
+Field: EmergencyContactName, Type: PdfLoadedTextBoxField, Value: 
+Field: EmergencyContactPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: EmergencyContactRelationship, Type: PdfLoadedTextBoxField, Value: 
+Field: RetireeIsSelf, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: RetirementDate, Type: PdfLoadedTextBoxField, Value: 
+Field: RetireeName, Type: PdfLoadedTextBoxField, Value: 
+Field: DependantsCovered, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+  Option 2: Value = Not_applicable
+Field: SpouseName, Type: PdfLoadedTextBoxField, Value: 
+Field: DependentsName1, Type: PdfLoadedTextBoxField, Value: 
+Field: DependentName2, Type: PdfLoadedTextBoxField, Value: 
+Field: DependentName3, Type: PdfLoadedTextBoxField, Value: 
+Field: DependentName4, Type: PdfLoadedTextBoxField, Value: 
+Field: LongtermcareResident, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Yes
+  Option 1: Value = No
+Field: LongtermcareResidentInstitution, Type: PdfLoadedTextBoxField, Value: 
+Field: LongtermcareResidentAdministrator, Type: PdfLoadedTextBoxField, Value: 
+Field: LongtermcareResidentPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: CurrentHealthPlan, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Humana
+  Option 1: Value = MCS
+  Option 2: Value = Other
+  Option 3: Value = MMM
+  Option 4: Value = Medicare_Original
+  Option 5: Value = USA_Plan
+Field: CurrentHealthPlanOther, Type: PdfLoadedTextBoxField, Value: 
+Field: PaymentOption, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Get_a_coupon_book
+  Option 1: Value = EFT
+  Option 2: Value = Credit_Card
+  Option 3: Value = SSorRRB
+Field: EFT_AccountHolderName, Type: PdfLoadedTextBoxField, Value: 
+Field: EFT_BankRoutingNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: EFT_BankAccountNumber, Type: PdfLoadedTextBoxField, Value: 
+Field: EFT_AccountType, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Checking
+  Option 1: Value = Savings
+Field: CreditCardType, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Visa
+  Option 1: Value = Master_Card
+Field: CreditCard_AccountHolderName, Type: PdfLoadedTextBoxField, Value: 
+Field: CreditCard_Number, Type: PdfLoadedTextBoxField, Value: 
+Field: CreditCard_ExpirationDate, Type: PdfLoadedTextBoxField, Value: 
+Field: MonthlyBenefitsFrom, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = SS
+  Option 1: Value = RRB
+Field: AuthorizedRepNPN, Type: PdfLoadedTextBoxField, Value: 
+Field: OfficialUseReceiptDate, Type: PdfLoadedTextBoxField, Value: 
+Field: OfficialUsePlanID, Type: PdfLoadedTextBoxField, Value: 
+Field: OfficialUseEffectiveDate, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryFirstName, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryLastName, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryMiddleInitial, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryDOB, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiarySex, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = F
+  Option 1: Value = M
+Field: BeneficiaryPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryAltPhone, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryPermanentAddress1, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryAddress2, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryCity, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryState, Type: PdfLoadedTextBoxField, Value: 
+Field: BeneficiaryZip, Type: PdfLoadedTextBoxField, Value: 
+Field: EnrollNowDate, Type: PdfLoadedTextBoxField, Value: 
+Field: HomePhoneIsCell, Type: PdfLoadedCheckBoxField, Value: False
+Field: AlternatePhoneIsCell, Type: PdfLoadedCheckBoxField, Value: False
+Field: BeneficiaryMailingAddressDifferent, Type: PdfLoadedCheckBoxField, Value: False
+Field: AckPartAandB, Type: PdfLoadedCheckBoxField, Value: False
+Field: AckShareInfoMedicare, Type: PdfLoadedCheckBoxField, Value: False
+Field: AckSingleMAPlan, Type: PdfLoadedCheckBoxField, Value: False
+Field: AckTripleSServicesandBenifits, Type: PdfLoadedCheckBoxField, Value: False
+Field: AckInfoCorrect, Type: PdfLoadedCheckBoxField, Value: False
+Field: AckSignature, Type: PdfLoadedCheckBoxField, Value: False
+Field: EnrollNowChecked, Type: PdfLoadedCheckBoxField, Value: False
+Field: InfoLanguage_Spanish, Type: PdfLoadedCheckBoxField, Value: False
+Field: InfoViaEmail_ProviderDirectory, Type: PdfLoadedCheckBoxField, Value: False
+Field: InfoViaEmail_AnnualNoticeofChange, Type: PdfLoadedCheckBoxField, Value: False
+Field: InfoViaEmail_EvidenceofCoverage, Type: PdfLoadedCheckBoxField, Value: False
+Field: InfoViaEmail_SummaryofBenifits, Type: PdfLoadedCheckBoxField, Value: False
+Field: InfoViaEmail_PrescriptionDrugFormulary, Type: PdfLoadedCheckBoxField, Value: False
+Field: InfoViaEmail_PromotionalMaterial, Type: PdfLoadedCheckBoxField, Value: False
+Field: InfoViaEmail_ElectronicEnrollmentConfirm, Type: PdfLoadedCheckBoxField, Value: False
+Field: DocsInitialPackage, Type: PdfLoadedCheckBoxField, Value: False
+Field: DocsMedicareStarRating, Type: PdfLoadedCheckBoxField, Value: False
+Field: DocsNoticeofWeb, Type: PdfLoadedCheckBoxField, Value: False
+Field: DocsEnrollmentConfirmation, Type: PdfLoadedCheckBoxField, Value: False
+Field: DocsEnrollmentFormCopy, Type: PdfLoadedCheckBoxField, Value: False
+Field: DocsAttestationEligibility, Type: PdfLoadedCheckBoxField, Value: False
+Field: DocsPrecertificationofChronic, Type: PdfLoadedCheckBoxField, Value: False
+Field: DocsAuthorizationToSharePHI, Type: PdfLoadedCheckBoxField, Value: False
+Field: CheckEvidenceDME, Type: PdfLoadedCheckBoxField, Value: False
+Field: CheckProviderandPharmacy, Type: PdfLoadedCheckBoxField, Value: False
+Field: CheckDrugFormulary, Type: PdfLoadedCheckBoxField, Value: False
+Field: WitnessSignature, Type: PdfLoadedSignatureField, Value: 
+Field: AgentSignature, Type: PdfLoadedSignatureField, Value: 
+Field: SelectedPlan_Radio, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = Ãptimo Plus (PPO)
+  Option 1: Value = Platino Plus (HMO-SNP)
+  Option 2: Value = Brillante (HMO-POS)
+  Option 3: Value = Platino Advance (HMO-SNP)
+  Option 4: Value = Enlace Plus (HMO)
+  Option 5: Value = Platino Blindao (HMO-SNP)
+  Option 6: Value = Ahorro Plus (HMO)
+  Option 7: Value = Platino Enlace (HMO-SNP)
+  Option 8: Value = ContigoEnMente (HMO-SNP)
+  Option 9: Value = Contigo Plus (HMO-SNP)
+Field: GroupPlanType, Type: PdfLoadedRadioButtonListField, Selected Value: (none)
+  Option 0: Value = HMO
+  Option 1: Value = PPO
